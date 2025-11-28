@@ -21,29 +21,29 @@ pai.config.set({
     
 })
 
-def pandasai_test(query) -> str:
-    """
-    Test tool for PandasAI functionality.
-    Args:
-        query (str): The question to test.
+# def pandasai_test(query) -> str:
+#     """
+#     Test tool for PandasAI functionality.
+#     Args:
+#         query (str): The question to test.
         
         
-    Returns:
-        str: The result of the query.
-    """
+#     Returns:
+#         str: The result of the query.
+#     """
     
 
-    file_df = pd.read_csv("/home/aiadmin/WasteVision/GAD2/device_fill_level/device_fill_level_export_edit.csv")
+#     file_df = pd.read_csv("/home/aiadmin/WasteVision/GAD2/device_fill_level/device_fill_level_export_edit.csv")
 
-    df = SmartDataframe(
-        file_df,
-        config{
-            "llm": pandasai_llm,
-        }
-    )
+#     df = SmartDataframe(
+#         file_df,
+#         config{
+#             "llm": pandasai_llm,
+#         }
+#     )
 
-    answer = df.chat(query)
-    return answer
+#     answer = df.chat(query)
+#     return answer
 
 
 @tool

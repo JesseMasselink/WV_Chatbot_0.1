@@ -1,0 +1,19 @@
+# Ignore virtual environments
+WVenv/
+
+# Ignore CSV data exports
+*.csv
+GAD2/
+device_fill_level/
+tardif_data/
+
+# Ignore large files
+*.so
+*.db
+*.sqlite
+*.bin
+*.pkl
+*.parquet
+
+# Ignore vector store
+chroma_location_embeddings/
