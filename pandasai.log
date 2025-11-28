@@ -1,0 +1,2159 @@
+2025-11-25 13:54:37 [INFO] Question: What is the fill level of id:25350124?
+2025-11-25 13:54:37 [INFO] Running PandasAI with litellm LLM...
+2025-11-25 13:54:37 [INFO] Prompt ID: d6e78ac4-251c-4ea4-bb12-337758d4416a
+2025-11-25 13:54:37 [INFO] Generating new code...
+2025-11-25 13:54:37 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_device_fill_level_export_edit" columns="[{"name": "Id,\"UnitId\",\"FillLevel\",\"ReceivedDate\",\"ExportDate\",\"RetryCount\",\"FillLevelStatus\"", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="293x1">
+"Id,""UnitId"",""FillLevel"",""ReceivedDate"",""ExportDate"",""RetryCount"",""FillLevelStatus"""
+"25350124,""1062428"",""1410"",""9/24/2024 1:47:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350125,""1017871"",""71"",""9/24/2024 1:48:10 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350126,""1034624"",""79"",""9/24/2024 1:52:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350134,""1017243"",""0"",""9/24/2024 2:00:00 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+"25350141,""1017287"",""0"",""9/24/2024 1:48:10 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the fill level of id:25350124?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-25 13:56:48 [INFO] Code Generated:
+import pandas as pd
+from datetime import datetime
+
+def get_fill_level(id):
+    # TODO: Write your database connection code here. Replace the "TABLE_NAME" with the actual table name in your database.
+    db = execute_sql_query("SELECT * FROM TABLE_NAME WHERE Id = %s", (id,))
+    
+    # TODO: Extract the fill level from the dataframe
+    fill_level = db['FillLevel'].iloc[0]
+    
+    return fill_level
+
+# Declare result var: 
+result = { "type": "number", "value": get_fill_level(25350124) }
+2025-11-25 13:56:48 [INFO] Validating code requirements...
+2025-11-25 13:56:48 [INFO] Code validation successful.
+2025-11-25 13:56:48 [INFO] Cleaning the generated code...
+2025-11-25 13:56:48 [INFO] Executing code: import pandas as pd
+from datetime import datetime
+
+
+def get_fill_level(id):
+    db = execute_sql_query('SELECT * FROM TABLE_NAME WHERE Id = %s', (id,))
+    fill_level = db['FillLevel'].iloc[0]
+    return fill_level
+
+
+result = {'type': 'number', 'value': get_fill_level(25350124)}
+2025-11-25 13:56:49 [INFO] generated new fontManager
+2025-11-25 13:56:50 [INFO] Retrying execution (1/3)...
+2025-11-25 13:56:50 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 11, in <module>
+  File "<string>", line 6, in get_fill_level
+TypeError: Agent._execute_sql_query() takes 2 positional arguments but 3 were given
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-11-25 13:56:50 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_device_fill_level_export_edit" columns="[{"name": "Id,\"UnitId\",\"FillLevel\",\"ReceivedDate\",\"ExportDate\",\"RetryCount\",\"FillLevelStatus\"", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="293x1">
+"Id,""UnitId"",""FillLevel"",""ReceivedDate"",""ExportDate"",""RetryCount"",""FillLevelStatus"""
+"25350124,""1062428"",""1410"",""9/24/2024 1:47:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350125,""1017871"",""71"",""9/24/2024 1:48:10 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350126,""1034624"",""79"",""9/24/2024 1:52:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350134,""1017243"",""0"",""9/24/2024 2:00:00 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+"25350141,""1017287"",""0"",""9/24/2024 1:48:10 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ What is the fill level of id:25350124?
+
+You generated the following Python code:
+import pandas as pd
+from datetime import datetime
+
+
+def get_fill_level(id):
+    db = execute_sql_query('SELECT * FROM TABLE_NAME WHERE Id = %s', (id,))
+    fill_level = db['FillLevel'].iloc[0]
+    return fill_level
+
+
+result = {'type': 'number', 'value': get_fill_level(25350124)}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 11, in <module>
+  File "<string>", line 6, in get_fill_level
+TypeError: Agent._execute_sql_query() takes 2 positional arguments but 3 were given
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-25 13:58:40 [INFO] Code Generated:
+db = execute_sql_query('SELECT * FROM TABLE_NAME WHERE Id = %s', (id,))
+2025-11-25 13:58:40 [INFO] Validating code requirements...
+2025-11-25 13:58:40 [INFO] Code validation successful.
+2025-11-25 13:58:40 [INFO] Cleaning the generated code...
+2025-11-25 13:58:40 [INFO] Executing code: db = execute_sql_query('SELECT * FROM TABLE_NAME WHERE Id = %s', (id,))
+2025-11-25 13:58:40 [INFO] Retrying execution (2/3)...
+2025-11-25 13:58:40 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 1, in <module>
+TypeError: Agent._execute_sql_query() takes 2 positional arguments but 3 were given
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-11-25 13:58:40 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_device_fill_level_export_edit" columns="[{"name": "Id,\"UnitId\",\"FillLevel\",\"ReceivedDate\",\"ExportDate\",\"RetryCount\",\"FillLevelStatus\"", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="293x1">
+"Id,""UnitId"",""FillLevel"",""ReceivedDate"",""ExportDate"",""RetryCount"",""FillLevelStatus"""
+"25350124,""1062428"",""1410"",""9/24/2024 1:47:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350125,""1017871"",""71"",""9/24/2024 1:48:10 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350126,""1034624"",""79"",""9/24/2024 1:52:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350134,""1017243"",""0"",""9/24/2024 2:00:00 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+"25350141,""1017287"",""0"",""9/24/2024 1:48:10 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ What is the fill level of id:25350124?
+
+You generated the following Python code:
+db = execute_sql_query('SELECT * FROM TABLE_NAME WHERE Id = %s', (id,))
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 1, in <module>
+TypeError: Agent._execute_sql_query() takes 2 positional arguments but 3 were given
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-25 13:59:34 [INFO] Code Generated:
+db = execute_sql_query('SELECT * FROM TABLE_NAME WHERE Id = %s', (id,))
+2025-11-25 13:59:34 [INFO] Validating code requirements...
+2025-11-25 13:59:34 [INFO] Code validation successful.
+2025-11-25 13:59:34 [INFO] Cleaning the generated code...
+2025-11-25 13:59:34 [INFO] Executing code: db = execute_sql_query('SELECT * FROM TABLE_NAME WHERE Id = %s', (id,))
+2025-11-25 13:59:34 [INFO] Retrying execution (3/3)...
+2025-11-25 13:59:34 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 1, in <module>
+TypeError: Agent._execute_sql_query() takes 2 positional arguments but 3 were given
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-11-25 13:59:34 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_device_fill_level_export_edit" columns="[{"name": "Id,\"UnitId\",\"FillLevel\",\"ReceivedDate\",\"ExportDate\",\"RetryCount\",\"FillLevelStatus\"", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="293x1">
+"Id,""UnitId"",""FillLevel"",""ReceivedDate"",""ExportDate"",""RetryCount"",""FillLevelStatus"""
+"25350124,""1062428"",""1410"",""9/24/2024 1:47:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350125,""1017871"",""71"",""9/24/2024 1:48:10 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350126,""1034624"",""79"",""9/24/2024 1:52:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350134,""1017243"",""0"",""9/24/2024 2:00:00 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+"25350141,""1017287"",""0"",""9/24/2024 1:48:10 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ What is the fill level of id:25350124?
+
+You generated the following Python code:
+db = execute_sql_query('SELECT * FROM TABLE_NAME WHERE Id = %s', (id,))
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 1, in <module>
+TypeError: Agent._execute_sql_query() takes 2 positional arguments but 3 were given
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-25 13:59:55 [INFO] Code Generated:
+db = execute_sql_query('SELECT * FROM TABLE_NAME WHERE Id = %s', (id,))
+2025-11-25 13:59:55 [INFO] Validating code requirements...
+2025-11-25 13:59:55 [INFO] Code validation successful.
+2025-11-25 13:59:55 [INFO] Cleaning the generated code...
+2025-11-25 13:59:55 [INFO] Executing code: db = execute_sql_query('SELECT * FROM TABLE_NAME WHERE Id = %s', (id,))
+2025-11-25 13:59:55 [INFO] Max retries reached. Error: Code execution failed
+2025-11-25 13:59:55 [INFO] Processing failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 1, in <module>
+TypeError: Agent._execute_sql_query() takes 2 positional arguments but 3 were given
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 287, in _process_query
+    result = self.execute_with_retries(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-11-25 14:05:31 [INFO] Question: What is the fill level of id:25350124?
+2025-11-25 14:05:31 [INFO] Running PandasAI with litellm LLM...
+2025-11-25 14:05:31 [INFO] Prompt ID: a98bfd01-577f-4be0-b660-eb2ae8e6d0e4
+2025-11-25 14:05:31 [INFO] Generating new code...
+2025-11-25 14:05:31 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_device_fill_level_export_edit" columns="[{"name": "Id,\"UnitId\",\"FillLevel\",\"ReceivedDate\",\"ExportDate\",\"RetryCount\",\"FillLevelStatus\"", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="293x1">
+"Id,""UnitId"",""FillLevel"",""ReceivedDate"",""ExportDate"",""RetryCount"",""FillLevelStatus"""
+"25350124,""1062428"",""1410"",""9/24/2024 1:47:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350125,""1017871"",""71"",""9/24/2024 1:48:10 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350126,""1034624"",""79"",""9/24/2024 1:52:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350134,""1017243"",""0"",""9/24/2024 2:00:00 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+"25350141,""1017287"",""0"",""9/24/2024 1:48:10 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the fill level of id:25350124?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-25 14:07:30 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Execute SQL to retrieve the fill level for id 25350124
+sql_query = """
+SELECT CAST(FillLevel AS INTEGER) AS FillLevel
+FROM table_device_fill_level_export_edit
+WHERE Id = '25350124'
+LIMIT 1
+"""
+
+# Get the result as a DataFrame
+df = execute_sql_query(sql_query)
+
+# Extract the fill level (if present)
+if not df.empty:
+    fill_level = int(df.iloc[0]['FillLevel'])
+else:
+    fill_level = None
+
+# Declare result var
+result = {"type": "number", "value": fill_level}
+2025-11-25 14:07:30 [INFO] Validating code requirements...
+2025-11-25 14:07:30 [INFO] Code validation successful.
+2025-11-25 14:07:30 [INFO] Cleaning the generated code...
+2025-11-25 14:07:30 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT CAST(FillLevel AS INTEGER) AS FillLevel
+FROM table_device_fill_level_export_edit
+WHERE Id = '25350124'
+LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+if not df.empty:
+    fill_level = int(df.iloc[0]['FillLevel'])
+else:
+    fill_level = None
+result = {'type': 'number', 'value': fill_level}
+2025-11-25 14:07:30 [INFO] Retrying execution (1/3)...
+2025-11-25 14:07:30 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 8, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/data_loader/duck_db_connection_manager.py", line 32, in sql
+    return self.connection.sql(query, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.BinderException: Binder Error: Referenced column "Id" not found in FROM clause!
+Candidate bindings: "Id"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-11-25 14:07:30 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_device_fill_level_export_edit" columns="[{"name": "Id,\"UnitId\",\"FillLevel\",\"ReceivedDate\",\"ExportDate\",\"RetryCount\",\"FillLevelStatus\"", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="293x1">
+"Id,""UnitId"",""FillLevel"",""ReceivedDate"",""ExportDate"",""RetryCount"",""FillLevelStatus"""
+"25350124,""1062428"",""1410"",""9/24/2024 1:47:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350125,""1017871"",""71"",""9/24/2024 1:48:10 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350126,""1034624"",""79"",""9/24/2024 1:52:00 AM"",""9/24/2024 1:53:09 AM"",""1"","""""
+"25350134,""1017243"",""0"",""9/24/2024 2:00:00 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+"25350141,""1017287"",""0"",""9/24/2024 1:48:10 AM"",""9/24/2024 2:03:10 AM"",""1"","""""
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ What is the fill level of id:25350124?
+
+You generated the following Python code:
+import pandas as pd
+sql_query = """
+SELECT CAST(FillLevel AS INTEGER) AS FillLevel
+FROM table_device_fill_level_export_edit
+WHERE Id = '25350124'
+LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+if not df.empty:
+    fill_level = int(df.iloc[0]['FillLevel'])
+else:
+    fill_level = None
+result = {'type': 'number', 'value': fill_level}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 8, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/data_loader/duck_db_connection_manager.py", line 32, in sql
+    return self.connection.sql(query, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.BinderException: Binder Error: Referenced column "Id" not found in FROM clause!
+Candidate bindings: "Id"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-25 14:13:10 [INFO] An error occurred during code generation: No code found in the response
+2025-11-25 14:13:10 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 8, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/data_loader/duck_db_connection_manager.py", line 32, in sql
+    return self.connection.sql(query, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.BinderException: Binder Error: Referenced column "Id" not found in FROM clause!
+Candidate bindings: "Id"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 33, in generate_code
+    code = self._context.config.llm.generate_code(prompt, self._context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/llm/base.py", line 174, in generate_code
+    return self._extract_code(response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/llm/base.py", line 118, in _extract_code
+    raise NoCodeFoundError("No code found in the response")
+pandasai.exceptions.NoCodeFoundError: No code found in the response
+
+2025-11-26 12:39:12 [INFO] Question: How many times were containers changed or updated in total?
+2025-11-26 12:39:12 [INFO] Running PandasAI with litellm LLM...
+2025-11-26 12:39:12 [INFO] Prompt ID: f979904a-3a24-49cf-a91f-47ed3abc795a
+2025-11-26 12:39:12 [INFO] Generating new code...
+2025-11-26 12:39:12 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_designatedlocation_export" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many times were containers changed or updated in total?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-26 12:43:12 [INFO] Code Generated:
+import pandas as pd
+
+# Define the SQL query to retrieve the desired information
+sql_query = """
+SELECT COUNT(*) AS containers_changed
+FROM designatedlocation_export
+WHERE WasteContainerChangedTimeStamp IS NOT NULL;
+"""
+
+# Execute the SQL query using the `execute_sql_query` function and save the results in a pandas DataFrame
+df = execute_sql_query(sql_query)
+
+# Extract the number of containers changed from the DataFrame
+containers_changed = df['containers_changed'].sum()
+
+# Print the result
+print(f"The total number of containers changed is {containers_changed}.")
+
+# Declare the "result" variable as a dictionary with the type and value
+result = {
+    'type': 'number',
+    'value': containers_changed
+}
+2025-11-26 12:43:12 [INFO] Validating code requirements...
+2025-11-26 12:43:12 [INFO] Code validation successful.
+2025-11-26 12:43:12 [INFO] Cleaning the generated code...
+2025-11-26 12:43:12 [INFO] An error occurred during code generation: Query uses unauthorized table: designatedlocation_export.
+2025-11-26 12:43:12 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+2025-11-26 12:43:12 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+2025-11-26 12:43:12 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_designatedlocation_export" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ How many times were containers changed or updated in total?
+
+You generated the following Python code:
+import pandas as pd
+
+# Define the SQL query to retrieve the desired information
+sql_query = """
+SELECT COUNT(*) AS containers_changed
+FROM designatedlocation_export
+WHERE WasteContainerChangedTimeStamp IS NOT NULL;
+"""
+
+# Execute the SQL query using the `execute_sql_query` function and save the results in a pandas DataFrame
+df = execute_sql_query(sql_query)
+
+# Extract the number of containers changed from the DataFrame
+containers_changed = df['containers_changed'].sum()
+
+# Print the result
+print(f"The total number of containers changed is {containers_changed}.")
+
+# Declare the "result" variable as a dictionary with the type and value
+result = {
+    'type': 'number',
+    'value': containers_changed
+}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-26 12:48:03 [INFO] Code Generated:
+import pandas as pd
+
+# Define the SQL query using a parameterized query that uses the execute_sql_query function
+sql_query = "SELECT COUNT(*) AS containers_changed FROM {table_name} WHERE WasteContainerChangedTimeStamp IS NOT NULL;"
+
+# Execute the SQL query using the `execute_sql_query` function and save the results in a pandas DataFrame
+df = execute_sql_query(sql_query, table_name="designatedlocation_export")
+
+# Extract the number of containers changed from the DataFrame
+containers_changed = df['containers_changed'].sum()
+
+# Print the result
+print(f"The total number of containers changed is {containers_changed}.")
+
+# Declare the "result" variable as a dictionary with the type and value
+result = {
+    'type': 'number',
+    'value': containers_changed
+}
+2025-11-26 12:48:03 [INFO] Validating code requirements...
+2025-11-26 12:48:03 [INFO] Code validation successful.
+2025-11-26 12:48:03 [INFO] Cleaning the generated code...
+2025-11-26 12:48:03 [INFO] An error occurred during code generation: Expected table name but got <Token token_type: TokenType.L_BRACE, text: {, line: 1, col: 44, start: 43, end: 43, comments: []>. Line 1, Col: 44.
+  SELECT COUNT(*) AS containers_changed FROM [4m{[0mtable_name} WHERE WasteContainerChangedTimeStamp IS NOT NULL
+2025-11-26 12:48:03 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 68, in _clean_sql_query
+    table_names = SQLParser.extract_table_names(sql_query, dialect)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/query_builders/sql_parser.py", line 78, in extract_table_names
+    parsed = sqlglot.parse(sql_query, dialect=dialect)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/__init__.py", line 102, in parse
+    return Dialect.get_or_raise(read or dialect).parse(sql, **opts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/dialects/dialect.py", line 931, in parse
+    return self.parser(**opts).parse(self.tokenize(sql), sql)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 1432, in parse
+    return self._parse(
+           ^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 1501, in _parse
+    expressions.append(parse_method(self))
+                       ^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 1742, in _parse_statement
+    expression = self._parse_set_operations(expression) if expression else self._parse_select()
+                                                                           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 3045, in _parse_select
+    from_ = self._parse_from()
+            ^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 3307, in _parse_from
+    exp.From, comments=self._prev_comments, this=self._parse_table(joins=joins)
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 3758, in _parse_table
+    self._parse_table_parts(schema=schema, is_db_reference=is_db_reference)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 3690, in _parse_table_parts
+    self.raise_error(f"Expected table name but got {self._curr}")
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 1545, in raise_error
+    raise error
+sqlglot.errors.ParseError: Expected table name but got <Token token_type: TokenType.L_BRACE, text: {, line: 1, col: 44, start: 43, end: 43, comments: []>. Line 1, Col: 44.
+  SELECT COUNT(*) AS containers_changed FROM [4m{[0mtable_name} WHERE WasteContainerChangedTimeStamp IS NOT NULL
+
+2025-11-26 12:48:03 [INFO] Retrying Code Generation (1/3)...
+2025-11-26 12:48:03 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+2025-11-26 12:48:03 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_designatedlocation_export" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ How many times were containers changed or updated in total?
+
+You generated the following Python code:
+import pandas as pd
+
+# Define the SQL query using a parameterized query that uses the execute_sql_query function
+sql_query = "SELECT COUNT(*) AS containers_changed FROM {table_name} WHERE WasteContainerChangedTimeStamp IS NOT NULL;"
+
+# Execute the SQL query using the `execute_sql_query` function and save the results in a pandas DataFrame
+df = execute_sql_query(sql_query, table_name="designatedlocation_export")
+
+# Extract the number of containers changed from the DataFrame
+containers_changed = df['containers_changed'].sum()
+
+# Print the result
+print(f"The total number of containers changed is {containers_changed}.")
+
+# Declare the "result" variable as a dictionary with the type and value
+result = {
+    'type': 'number',
+    'value': containers_changed
+}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-26 12:50:33 [INFO] Code Generated:
+import pandas as pd
+from pandasai import execute_sql_query
+
+# Define the SQL query using a parameterized query that uses the execute_sql_query function
+sql_query = "SELECT COUNT(*) AS containers_changed FROM {table_name} WHERE WasteContainerChangedTimeStamp IS NOT NULL;"
+
+# Execute the SQL query using the `execute_sql_query` function and save the results in a pandas DataFrame
+df = execute_sql_query(sql_query, table_name="designatedlocation_export")
+
+# Extract the number of containers changed from the DataFrame
+containers_changed = df['containers_changed'].sum()
+
+# Print the result
+print(f"The total number of containers changed is {containers_changed}.")
+
+# Declare the "result" variable as a dictionary with the type and value
+result = {
+    'type': 'number',
+    'value': containers_changed
+}
+2025-11-26 12:50:33 [INFO] Validating code requirements...
+2025-11-26 12:50:33 [INFO] Code validation successful.
+2025-11-26 12:50:33 [INFO] Cleaning the generated code...
+2025-11-26 12:50:33 [INFO] An error occurred during code generation: Expected table name but got <Token token_type: TokenType.L_BRACE, text: {, line: 1, col: 44, start: 43, end: 43, comments: []>. Line 1, Col: 44.
+  SELECT COUNT(*) AS containers_changed FROM [4m{[0mtable_name} WHERE WasteContainerChangedTimeStamp IS NOT NULL
+2025-11-26 12:50:33 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 68, in _clean_sql_query
+    table_names = SQLParser.extract_table_names(sql_query, dialect)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/query_builders/sql_parser.py", line 78, in extract_table_names
+    parsed = sqlglot.parse(sql_query, dialect=dialect)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/__init__.py", line 102, in parse
+    return Dialect.get_or_raise(read or dialect).parse(sql, **opts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/dialects/dialect.py", line 931, in parse
+    return self.parser(**opts).parse(self.tokenize(sql), sql)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 1432, in parse
+    return self._parse(
+           ^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 1501, in _parse
+    expressions.append(parse_method(self))
+                       ^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 1742, in _parse_statement
+    expression = self._parse_set_operations(expression) if expression else self._parse_select()
+                                                                           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 3045, in _parse_select
+    from_ = self._parse_from()
+            ^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 3307, in _parse_from
+    exp.From, comments=self._prev_comments, this=self._parse_table(joins=joins)
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 3758, in _parse_table
+    self._parse_table_parts(schema=schema, is_db_reference=is_db_reference)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 3690, in _parse_table_parts
+    self.raise_error(f"Expected table name but got {self._curr}")
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/sqlglot/parser.py", line 1545, in raise_error
+    raise error
+sqlglot.errors.ParseError: Expected table name but got <Token token_type: TokenType.L_BRACE, text: {, line: 1, col: 44, start: 43, end: 43, comments: []>. Line 1, Col: 44.
+  SELECT COUNT(*) AS containers_changed FROM [4m{[0mtable_name} WHERE WasteContainerChangedTimeStamp IS NOT NULL
+
+2025-11-26 12:50:33 [INFO] Retrying Code Generation (2/3)...
+2025-11-26 12:50:33 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+2025-11-26 12:50:33 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_designatedlocation_export" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ How many times were containers changed or updated in total?
+
+You generated the following Python code:
+import pandas as pd
+from pandasai import execute_sql_query
+
+# Define the SQL query using a parameterized query that uses the execute_sql_query function
+sql_query = "SELECT COUNT(*) AS containers_changed FROM {table_name} WHERE WasteContainerChangedTimeStamp IS NOT NULL;"
+
+# Execute the SQL query using the `execute_sql_query` function and save the results in a pandas DataFrame
+df = execute_sql_query(sql_query, table_name="designatedlocation_export")
+
+# Extract the number of containers changed from the DataFrame
+containers_changed = df['containers_changed'].sum()
+
+# Print the result
+print(f"The total number of containers changed is {containers_changed}.")
+
+# Declare the "result" variable as a dictionary with the type and value
+result = {
+    'type': 'number',
+    'value': containers_changed
+}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-26 12:52:35 [INFO] Code Generated:
+import pandas as pd
+from pandasai import execute_sql_query
+
+# Define the SQL query using a parameterized query that uses the execute_sql_query function
+sql_query = "SELECT COUNT(*) AS containers_changed FROM designatedlocation_export WHERE WasteContainerChangedTimeStamp IS NOT NULL;"
+
+# Execute the SQL query using the `execute_sql_query` function and save the results in a pandas DataFrame
+df = execute_sql_query(sql_query)
+
+# Extract the number of containers changed from the DataFrame
+containers_changed = df['containers_changed'].sum()
+
+# Print the result
+print(f"The total number of containers changed is {containers_changed}.")
+
+# Declare the "result" variable as a dictionary with the type and value
+result = {
+    'type': 'number',
+    'value': containers_changed
+}
+2025-11-26 12:52:35 [INFO] Validating code requirements...
+2025-11-26 12:52:35 [INFO] Code validation successful.
+2025-11-26 12:52:35 [INFO] Cleaning the generated code...
+2025-11-26 12:52:35 [INFO] An error occurred during code generation: Query uses unauthorized table: designatedlocation_export.
+2025-11-26 12:52:35 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+2025-11-26 12:52:35 [INFO] Retrying Code Generation (3/3)...
+2025-11-26 12:52:35 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+2025-11-26 12:52:35 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_designatedlocation_export" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ How many times were containers changed or updated in total?
+
+You generated the following Python code:
+import pandas as pd
+from pandasai import execute_sql_query
+
+# Define the SQL query using a parameterized query that uses the execute_sql_query function
+sql_query = "SELECT COUNT(*) AS containers_changed FROM designatedlocation_export WHERE WasteContainerChangedTimeStamp IS NOT NULL;"
+
+# Execute the SQL query using the `execute_sql_query` function and save the results in a pandas DataFrame
+df = execute_sql_query(sql_query)
+
+# Extract the number of containers changed from the DataFrame
+containers_changed = df['containers_changed'].sum()
+
+# Print the result
+print(f"The total number of containers changed is {containers_changed}.")
+
+# Declare the "result" variable as a dictionary with the type and value
+result = {
+    'type': 'number',
+    'value': containers_changed
+}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-26 12:54:58 [INFO] Code Generated:
+import pandas as pd
+from pandasai import execute_sql_query
+
+# Define the SQL query using a parameterized query that uses the execute_sql_query function
+sql_query = "SELECT COUNT(*) AS containers_changed FROM designatedlocation_export WHERE WasteContainerChangedTimeStamp IS NOT NULL;"
+
+# Execute the SQL query using the `execute_sql_query` function and save the results in a pandas DataFrame
+df = execute_sql_query(sql_query)
+
+# Extract the number of containers changed from the DataFrame
+containers_changed = df['containers_changed'].sum()
+
+# Print the result
+print(f"The total number of containers changed is {containers_changed}.")
+
+# Declare the "result" variable as a dictionary with the type and value
+result = {
+    'type': 'number',
+    'value': containers_changed
+}
+2025-11-26 12:54:58 [INFO] Validating code requirements...
+2025-11-26 12:54:58 [INFO] Code validation successful.
+2025-11-26 12:54:58 [INFO] Cleaning the generated code...
+2025-11-26 12:54:58 [INFO] An error occurred during code generation: Query uses unauthorized table: designatedlocation_export.
+2025-11-26 12:54:58 [INFO] Stack Trace:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 176, in generate_code_with_retries
+    return self.generate_code(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 119, in generate_code
+    code = self._code_generator.generate_code(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 52, in generate_code
+    raise e
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 39, in generate_code
+    cleaned_code = self.validate_and_clean_code(code)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/base.py", line 63, in validate_and_clean_code
+    return self._code_cleaner.clean_code(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 164, in clean_code
+    node = self._validate_and_make_table_name_case_sensitive(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 86, in _validate_and_make_table_name_case_sensitive
+    sql_query = self._clean_sql_query(node.value.value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 73, in _clean_sql_query
+    return self._replace_table_names(sql_query, table_names, allowed_table_names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_generation/code_cleaning.py", line 57, in _replace_table_names
+    raise MaliciousQueryError(
+pandasai.exceptions.MaliciousQueryError: Query uses unauthorized table: designatedlocation_export.
+
+2025-11-26 12:54:58 [INFO] Maximum retry attempts exceeded. Last error: Query uses unauthorized table: designatedlocation_export.
+2025-11-26 13:34:24 [INFO] Question: how many containers are in the dataframe?
+2025-11-26 13:34:24 [INFO] Running PandasAI with litellm LLM...
+2025-11-26 13:34:24 [INFO] Prompt ID: 62938038-4621-4d93-b7c3-03d121ecff4c
+2025-11-26 13:34:24 [INFO] Generating new code...
+2025-11-26 13:34:24 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ how many containers are in the dataframe?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-26 13:37:59 [INFO] Code Generated:
+import pandas as pd
+
+def execute_sql_query(sql_query: str) -> pd.DataFrame:
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+    return pd.read_csv("table_from_bytes")
+
+# Write code here
+df = execute_sql_query("SELECT COUNT(*) as num_containers FROM table_from_bytes;")
+result = { "type": "number", "value": df["num_containers"].sum() }
+2025-11-26 13:37:59 [INFO] Validating code requirements...
+2025-11-26 13:37:59 [INFO] Code validation successful.
+2025-11-26 13:37:59 [INFO] Cleaning the generated code...
+2025-11-26 13:37:59 [INFO] Executing code: import pandas as pd
+df = execute_sql_query('SELECT COUNT(*) as num_containers FROM table_from_bytes')
+result = {'type': 'number', 'value': df['num_containers'].sum()}
+2025-11-26 13:37:59 [INFO] Response generated successfully.
+2025-11-26 13:39:33 [INFO] Question: how many containers are in the dataframe?
+2025-11-26 13:39:33 [INFO] Running PandasAI with litellm LLM...
+2025-11-26 13:39:33 [INFO] Prompt ID: bd1608a9-e98e-42ac-81c1-880e212c349d
+2025-11-26 13:39:33 [INFO] Generating new code...
+2025-11-26 13:39:33 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ how many containers are in the dataframe?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-26 13:40:29 [INFO] Code Generated:
+import pandas as pd
+
+def execute_sql_query(sql_query: str) -> pd.DataFrame:
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+    return pd.read_sql_query(sql_query, con=conn)
+
+# TODO: import the required dependencies
+import pandas as pd
+from typing import Any, Dict
+
+# Write code here
+table = "table_from_bytes"
+
+result = {
+    "type": "number",
+    "value": execute_sql_query(f"SELECT COUNT(*) FROM {table}").iloc[0][0]
+}
+
+print(result)
+2025-11-26 13:40:29 [INFO] Validating code requirements...
+2025-11-26 13:40:29 [INFO] Code validation successful.
+2025-11-26 13:40:29 [INFO] Cleaning the generated code...
+2025-11-26 13:40:29 [INFO] Executing code: import pandas as pd
+import pandas as pd
+from typing import Any, Dict
+table = 'table_from_bytes'
+result = {'type': 'number', 'value': execute_sql_query(f'SELECT COUNT(*) FROM {table}').iloc[0][0]}
+print(result)
+2025-11-26 13:40:29 [INFO] Response generated successfully.
+2025-11-26 13:48:00 [INFO] Question: What location number belongs to the instance created at 6/10/2020 8:22:18 AM?
+2025-11-26 13:48:00 [INFO] Running PandasAI with litellm LLM...
+2025-11-26 13:48:00 [INFO] Prompt ID: cdad5ed8-71cb-43e3-a5cb-5a980d0a7ea9
+2025-11-26 13:48:00 [INFO] Generating new code...
+2025-11-26 13:48:00 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What location number belongs to the instance created at 6/10/2020 8:22:18 AM?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-26 13:51:25 [INFO] Code Generated:
+import pandas as pd
+
+# define the SQL query
+sql_query = """
+SELECT LocationNumber 
+FROM table_from_bytes 
+WHERE WasteContainerIsleChangedTimestamp = '6/10/2020 8:22:18 AM'
+"""
+
+# execute the SQL query using the execute_sql_query function
+result = execute_sql_query(sql_query)
+
+# extract the result from the dataframe
+location_number = result['LocationNumber']
+
+print(f"The location number is {location_number}.")
+2025-11-26 13:51:25 [INFO] Validating code requirements...
+2025-11-26 13:51:25 [INFO] Code validation successful.
+2025-11-26 13:51:25 [INFO] Cleaning the generated code...
+2025-11-26 13:51:25 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT LocationNumber 
+FROM table_from_bytes 
+WHERE WasteContainerIsleChangedTimestamp = '6/10/2020 8:22:18 AM'
+"""
+result = execute_sql_query(sql_query)
+location_number = result['LocationNumber']
+print(f'The location number is {location_number}.')
+2025-11-26 13:51:25 [INFO] Retrying execution (1/2)...
+2025-11-26 13:51:25 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 205, in execute_with_retries
+    return self._response_parser.parse(result, code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/response/parser.py", line 17, in parse
+    self._validate_response(result)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/response/parser.py", line 38, in _validate_response
+    raise InvalidOutputValueMismatch(
+pandasai.exceptions.InvalidOutputValueMismatch: Result must be in the format of dictionary of type and value like `result = {"type": ..., "value": ... }`
+
+2025-11-26 13:51:25 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ What location number belongs to the instance created at 6/10/2020 8:22:18 AM?
+
+You generated the following Python code:
+import pandas as pd
+sql_query = """
+SELECT LocationNumber 
+FROM table_from_bytes 
+WHERE WasteContainerIsleChangedTimestamp = '6/10/2020 8:22:18 AM'
+"""
+result = execute_sql_query(sql_query)
+location_number = result['LocationNumber']
+print(f'The location number is {location_number}.')
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 205, in execute_with_retries
+    return self._response_parser.parse(result, code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/response/parser.py", line 17, in parse
+    self._validate_response(result)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/response/parser.py", line 38, in _validate_response
+    raise InvalidOutputValueMismatch(
+pandasai.exceptions.InvalidOutputValueMismatch: Result must be in the format of dictionary of type and value like `result = {"type": ..., "value": ... }`
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-26 13:54:44 [INFO] Code Generated:
+import pandas as pd
+sql_query = """
+SELECT LocationNumber 
+FROM table_from_bytes 
+WHERE WasteContainerIsleChangedTimestamp = '6/10/2020 8:22:18 AM'
+"""
+result = execute_sql_query(sql_query)
+location_number = result['LocationNumber']
+print(f'The location number is {location_number}.')
+2025-11-26 13:54:44 [INFO] Validating code requirements...
+2025-11-26 13:54:44 [INFO] Code validation successful.
+2025-11-26 13:54:44 [INFO] Cleaning the generated code...
+2025-11-26 13:54:44 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT LocationNumber 
+FROM table_from_bytes 
+WHERE WasteContainerIsleChangedTimestamp = '6/10/2020 8:22:18 AM'
+"""
+result = execute_sql_query(sql_query)
+location_number = result['LocationNumber']
+print(f'The location number is {location_number}.')
+2025-11-26 13:54:44 [INFO] Retrying execution (2/2)...
+2025-11-26 13:54:44 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 205, in execute_with_retries
+    return self._response_parser.parse(result, code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/response/parser.py", line 17, in parse
+    self._validate_response(result)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/response/parser.py", line 38, in _validate_response
+    raise InvalidOutputValueMismatch(
+pandasai.exceptions.InvalidOutputValueMismatch: Result must be in the format of dictionary of type and value like `result = {"type": ..., "value": ... }`
+
+2025-11-26 13:54:44 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ What location number belongs to the instance created at 6/10/2020 8:22:18 AM?
+
+You generated the following Python code:
+import pandas as pd
+sql_query = """
+SELECT LocationNumber 
+FROM table_from_bytes 
+WHERE WasteContainerIsleChangedTimestamp = '6/10/2020 8:22:18 AM'
+"""
+result = execute_sql_query(sql_query)
+location_number = result['LocationNumber']
+print(f'The location number is {location_number}.')
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 205, in execute_with_retries
+    return self._response_parser.parse(result, code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/response/parser.py", line 17, in parse
+    self._validate_response(result)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/response/parser.py", line 38, in _validate_response
+    raise InvalidOutputValueMismatch(
+pandasai.exceptions.InvalidOutputValueMismatch: Result must be in the format of dictionary of type and value like `result = {"type": ..., "value": ... }`
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-26 13:55:21 [INFO] Code Generated:
+import pandas as pd
+from pandasai import execute_sql_query
+
+# Define the SQL query
+sql_query = """
+SELECT LocationNumber 
+FROM table_from_bytes 
+WHERE WasteContainerIsleChangedTimestamp = '6/10/2020 8:22:18 AM'
+"""
+
+# Execute the SQL query using the execute_sql_query function
+result = execute_sql_query(sql_query)
+
+# Extract the location number from the result
+location_number = result['LocationNumber']
+print(f'The location number is {location_number}.')
+2025-11-26 13:55:21 [INFO] Validating code requirements...
+2025-11-26 13:55:21 [INFO] Code validation successful.
+2025-11-26 13:55:21 [INFO] Cleaning the generated code...
+2025-11-26 13:55:21 [INFO] Executing code: import pandas as pd
+from pandasai import execute_sql_query
+sql_query = """
+SELECT LocationNumber 
+FROM table_from_bytes 
+WHERE WasteContainerIsleChangedTimestamp = '6/10/2020 8:22:18 AM'
+"""
+result = execute_sql_query(sql_query)
+location_number = result['LocationNumber']
+print(f'The location number is {location_number}.')
+2025-11-26 13:55:21 [INFO] Max retries reached. Error: Code execution failed
+2025-11-26 13:55:21 [INFO] Processing failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 2, in <module>
+ImportError: cannot import name 'execute_sql_query' from 'pandasai' (/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 287, in _process_query
+    result = self.execute_with_retries(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-11-26 14:04:27 [INFO] Question: How many different hook types are there?
+2025-11-26 14:04:27 [INFO] Running PandasAI with litellm LLM...
+2025-11-26 14:04:27 [INFO] Prompt ID: e9b2944a-1ca8-47f9-b298-4f69434cca2d
+2025-11-26 14:04:27 [INFO] Generating new code...
+2025-11-26 14:04:27 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "AlternateName", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "BrandName", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Capacity", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Category", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CompliantWith", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "DataProvider", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Depth", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Description", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Features", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Height", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "InsertHolesNumber", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "MadeOf", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "ManufacturerName", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "MaximumLoad", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "ModelName", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Owner", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "RecommendedLoad", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Source", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Weight", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Width", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "DimensionUnit", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "SensorOffset", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CapacityBags", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CapacityDrumLitres", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "HookType", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "PitType", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RowVersion", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="30x34">
+Id,OrganisationId,AlternateName,BrandName,Capacity,Category,CompliantWith,DataProvider,Depth,Description,Features,Height,InsertHolesNumber,MadeOf,ManufacturerName,MaximumLoad,ModelName,Name,Owner,RecommendedLoad,Source,Weight,Width,DimensionUnit,SensorOffset,CapacityBags,CapacityDrumLitres,HookType,PitType,RowVersion,DateCreated,CreatedBy,DateModified,ModifiedBy
+f20776eb-1bdc-4420-816c-04399803e196,83f9417c-6184-4063-a61a-e3a997433a5c,,Bammens,1.6,other,,Waste Vision,125,,,,,,Bammens,,,VCR1600,,,,,,CMT,0,32,0,GEC,0,System.Byte[],11/17/2021 10:42:30 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 7:11:47 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5
+98310992-ce4b-4987-87dd-052119f5b60f,83f9417c-6184-4063-a61a-e3a997433a5c,,MCB Milieutechniek,1.0,other,,,100,,,,,,MCB Milieutechniek,,,MCB GLAS,,,,,,CMT,0,25,100,3-haak,2,System.Byte[],3/26/2025 10:36:49 AM,sp-rovi-prod-wastevision-api@wastevision.com,3/26/2025 10:36:49 AM,sp-rovi-prod-wastevision-api@wastevision.com
+b7920f35-d108-4aa5-a1e0-10bd4e4f2127,83f9417c-6184-4063-a61a-e3a997433a5c,,Ecoplast,3.0,other,,Waste Vision,160,,,,,,Ecoplast,,,ECOBOV,,,,,,CMT,0,60,0,3-haak,0,System.Byte[],1/5/2023 8:42:42 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,1/29/2024 9:18:17 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5
+2dd371c0-7197-4373-bb8b-11f78127ce73,83f9417c-6184-4063-a61a-e3a997433a5c,,HMI,2.5,other,,Waste Vision,260,,,,,,HMI,,,HMIDUO,,,,,,CMT,0,50,60,3-haak,0,System.Byte[],6/9/2020 7:31:03 AM,17557C3B-CB44-4F4F-B085-9A3F1A197A42,7/20/2023 7:11:47 AM,17557C3B-CB44-4F4F-B085-9A3F1A197A42
+905cd393-4943-49a9-b4de-177ea9ae605c,83f9417c-6184-4063-a61a-e3a997433a5c,,Contrade,3.0,other,,Waste Vision,150,,,,,,Contrade,,,CONTR_HUUR,,,,,,CMT,0,60,60,3-haak,0,System.Byte[],7/21/2021 6:51:22 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 7:11:47 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many different hook types are there?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-26 14:08:25 [INFO] Code Generated:
+import pandas as pd
+
+# Connect to the database
+df = execute_sql_query("SELECT DISTINCT HookType FROM table_from_bytes")
+
+# Count the number of unique hook types
+num_unique_hook_types = len(df["HookType"].unique())
+
+# Declare result var: 
+result = {"type": "number", "value": num_unique_hook_types}
+
+return result
+2025-11-26 14:08:25 [INFO] Validating code requirements...
+2025-11-26 14:08:25 [INFO] Code validation successful.
+2025-11-26 14:08:25 [INFO] Cleaning the generated code...
+2025-11-26 14:08:25 [INFO] Executing code: import pandas as pd
+df = execute_sql_query('SELECT DISTINCT HookType FROM table_from_bytes')
+num_unique_hook_types = len(df['HookType'].unique())
+result = {'type': 'number', 'value': num_unique_hook_types}
+return result
+2025-11-26 14:08:25 [INFO] Retrying execution (1/2)...
+2025-11-26 14:08:25 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 5
+SyntaxError: 'return' outside function
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-11-26 14:08:25 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "AlternateName", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "BrandName", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Capacity", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Category", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CompliantWith", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "DataProvider", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Depth", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Description", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Features", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Height", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "InsertHolesNumber", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "MadeOf", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "ManufacturerName", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "MaximumLoad", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "ModelName", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Owner", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "RecommendedLoad", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Source", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Weight", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Width", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "DimensionUnit", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "SensorOffset", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CapacityBags", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CapacityDrumLitres", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "HookType", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "PitType", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RowVersion", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="30x34">
+Id,OrganisationId,AlternateName,BrandName,Capacity,Category,CompliantWith,DataProvider,Depth,Description,Features,Height,InsertHolesNumber,MadeOf,ManufacturerName,MaximumLoad,ModelName,Name,Owner,RecommendedLoad,Source,Weight,Width,DimensionUnit,SensorOffset,CapacityBags,CapacityDrumLitres,HookType,PitType,RowVersion,DateCreated,CreatedBy,DateModified,ModifiedBy
+f20776eb-1bdc-4420-816c-04399803e196,83f9417c-6184-4063-a61a-e3a997433a5c,,Bammens,1.6,other,,Waste Vision,125,,,,,,Bammens,,,VCR1600,,,,,,CMT,0,32,0,GEC,0,System.Byte[],11/17/2021 10:42:30 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 7:11:47 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5
+98310992-ce4b-4987-87dd-052119f5b60f,83f9417c-6184-4063-a61a-e3a997433a5c,,MCB Milieutechniek,1.0,other,,,100,,,,,,MCB Milieutechniek,,,MCB GLAS,,,,,,CMT,0,25,100,3-haak,2,System.Byte[],3/26/2025 10:36:49 AM,sp-rovi-prod-wastevision-api@wastevision.com,3/26/2025 10:36:49 AM,sp-rovi-prod-wastevision-api@wastevision.com
+b7920f35-d108-4aa5-a1e0-10bd4e4f2127,83f9417c-6184-4063-a61a-e3a997433a5c,,Ecoplast,3.0,other,,Waste Vision,160,,,,,,Ecoplast,,,ECOBOV,,,,,,CMT,0,60,0,3-haak,0,System.Byte[],1/5/2023 8:42:42 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,1/29/2024 9:18:17 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5
+2dd371c0-7197-4373-bb8b-11f78127ce73,83f9417c-6184-4063-a61a-e3a997433a5c,,HMI,2.5,other,,Waste Vision,260,,,,,,HMI,,,HMIDUO,,,,,,CMT,0,50,60,3-haak,0,System.Byte[],6/9/2020 7:31:03 AM,17557C3B-CB44-4F4F-B085-9A3F1A197A42,7/20/2023 7:11:47 AM,17557C3B-CB44-4F4F-B085-9A3F1A197A42
+905cd393-4943-49a9-b4de-177ea9ae605c,83f9417c-6184-4063-a61a-e3a997433a5c,,Contrade,3.0,other,,Waste Vision,150,,,,,,Contrade,,,CONTR_HUUR,,,,,,CMT,0,60,60,3-haak,0,System.Byte[],7/21/2021 6:51:22 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 7:11:47 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ How many different hook types are there?
+
+You generated the following Python code:
+import pandas as pd
+df = execute_sql_query('SELECT DISTINCT HookType FROM table_from_bytes')
+num_unique_hook_types = len(df['HookType'].unique())
+result = {'type': 'number', 'value': num_unique_hook_types}
+return result
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 5
+SyntaxError: 'return' outside function
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-26 14:12:11 [INFO] Code Generated:
+import pandas as pd
+from pandasai import execute_sql_query
+
+df = execute_sql_query('SELECT DISTINCT HookType FROM table_from_bytes')
+num_unique_hook_types = len(df['HookType'].unique())
+result = {'type': 'number', 'value': num_unique_hook_types}
+return result
+2025-11-26 14:12:11 [INFO] Validating code requirements...
+2025-11-26 14:12:11 [INFO] Code validation successful.
+2025-11-26 14:12:11 [INFO] Cleaning the generated code...
+2025-11-26 14:12:11 [INFO] Executing code: import pandas as pd
+from pandasai import execute_sql_query
+df = execute_sql_query('SELECT DISTINCT HookType FROM table_from_bytes')
+num_unique_hook_types = len(df['HookType'].unique())
+result = {'type': 'number', 'value': num_unique_hook_types}
+return result
+2025-11-26 14:12:11 [INFO] Retrying execution (2/2)...
+2025-11-26 14:12:11 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 6
+SyntaxError: 'return' outside function
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-11-26 14:12:11 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "AlternateName", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "BrandName", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Capacity", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Category", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CompliantWith", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "DataProvider", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Depth", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Description", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Features", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Height", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "InsertHolesNumber", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "MadeOf", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "ManufacturerName", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "MaximumLoad", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "ModelName", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Owner", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "RecommendedLoad", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Source", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Weight", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Width", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "DimensionUnit", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "SensorOffset", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CapacityBags", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CapacityDrumLitres", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "HookType", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "PitType", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "RowVersion", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="30x34">
+Id,OrganisationId,AlternateName,BrandName,Capacity,Category,CompliantWith,DataProvider,Depth,Description,Features,Height,InsertHolesNumber,MadeOf,ManufacturerName,MaximumLoad,ModelName,Name,Owner,RecommendedLoad,Source,Weight,Width,DimensionUnit,SensorOffset,CapacityBags,CapacityDrumLitres,HookType,PitType,RowVersion,DateCreated,CreatedBy,DateModified,ModifiedBy
+f20776eb-1bdc-4420-816c-04399803e196,83f9417c-6184-4063-a61a-e3a997433a5c,,Bammens,1.6,other,,Waste Vision,125,,,,,,Bammens,,,VCR1600,,,,,,CMT,0,32,0,GEC,0,System.Byte[],11/17/2021 10:42:30 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 7:11:47 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5
+98310992-ce4b-4987-87dd-052119f5b60f,83f9417c-6184-4063-a61a-e3a997433a5c,,MCB Milieutechniek,1.0,other,,,100,,,,,,MCB Milieutechniek,,,MCB GLAS,,,,,,CMT,0,25,100,3-haak,2,System.Byte[],3/26/2025 10:36:49 AM,sp-rovi-prod-wastevision-api@wastevision.com,3/26/2025 10:36:49 AM,sp-rovi-prod-wastevision-api@wastevision.com
+b7920f35-d108-4aa5-a1e0-10bd4e4f2127,83f9417c-6184-4063-a61a-e3a997433a5c,,Ecoplast,3.0,other,,Waste Vision,160,,,,,,Ecoplast,,,ECOBOV,,,,,,CMT,0,60,0,3-haak,0,System.Byte[],1/5/2023 8:42:42 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,1/29/2024 9:18:17 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5
+2dd371c0-7197-4373-bb8b-11f78127ce73,83f9417c-6184-4063-a61a-e3a997433a5c,,HMI,2.5,other,,Waste Vision,260,,,,,,HMI,,,HMIDUO,,,,,,CMT,0,50,60,3-haak,0,System.Byte[],6/9/2020 7:31:03 AM,17557C3B-CB44-4F4F-B085-9A3F1A197A42,7/20/2023 7:11:47 AM,17557C3B-CB44-4F4F-B085-9A3F1A197A42
+905cd393-4943-49a9-b4de-177ea9ae605c,83f9417c-6184-4063-a61a-e3a997433a5c,,Contrade,3.0,other,,Waste Vision,150,,,,,,Contrade,,,CONTR_HUUR,,,,,,CMT,0,60,60,3-haak,0,System.Byte[],7/21/2021 6:51:22 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 7:11:47 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ How many different hook types are there?
+
+You generated the following Python code:
+import pandas as pd
+from pandasai import execute_sql_query
+df = execute_sql_query('SELECT DISTINCT HookType FROM table_from_bytes')
+num_unique_hook_types = len(df['HookType'].unique())
+result = {'type': 'number', 'value': num_unique_hook_types}
+return result
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 6
+SyntaxError: 'return' outside function
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-11-26 14:13:40 [INFO] Code Generated:
+import pandas as pd
+from pandasai import execute_sql_query
+
+def get_number_of_unique_hook_types():
+    df = execute_sql_query('SELECT DISTINCT HookType FROM table_from_bytes')
+    num_unique_hook_types = len(df['HookType'].unique())
+    return num_unique_hook_types
+2025-11-26 14:13:40 [INFO] Validating code requirements...
+2025-11-26 14:13:40 [INFO] Code validation successful.
+2025-11-26 14:13:40 [INFO] Cleaning the generated code...
+2025-11-26 14:13:40 [INFO] Executing code: import pandas as pd
+from pandasai import execute_sql_query
+
+
+def get_number_of_unique_hook_types():
+    df = execute_sql_query('SELECT DISTINCT HookType FROM table_from_bytes')
+    num_unique_hook_types = len(df['HookType'].unique())
+    return num_unique_hook_types
+2025-11-26 14:13:40 [INFO] Max retries reached. Error: Code execution failed
+2025-11-26 14:13:40 [INFO] Processing failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 2, in <module>
+ImportError: cannot import name 'execute_sql_query' from 'pandasai' (/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 287, in _process_query
+    result = self.execute_with_retries(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+

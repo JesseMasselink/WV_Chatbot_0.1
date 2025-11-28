@@ -1,0 +1,2 @@
+VECTOR_STORE = None
+RETRIEVER = None
