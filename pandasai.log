@@ -2157,3 +2157,603 @@ Traceback (most recent call last):
     raise CodeExecutionError("Code execution failed") from e
 pandasai.exceptions.CodeExecutionError: Code execution failed
 
+2025-11-28 14:52:04 [INFO] Question: How many containers are in Hilversum?
+2025-11-28 14:52:04 [INFO] Running PandasAI with litellm LLM...
+2025-11-28 14:52:04 [INFO] Prompt ID: c591e374-48a3-4b94-b955-9fb18c15b4a2
+2025-11-28 14:52:04 [INFO] Generating new code...
+2025-11-28 14:52:04 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_91c1de58ef2cc70057480a91dadac8cc" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "HandlingTime", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "FillingPercentage", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Weight", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "OrderId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ContainerId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CollectionDirection", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedOn", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedOn", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="106539x13">
+Id,OrganisationId,Name,HandlingTime,FillingPercentage,Weight,OrderId,ContainerId,CollectionDirection,CreatedBy,CreatedOn,ModifiedBy,ModifiedOn
+6fe1e303-59b4-4ad3-a845-00003c2034a6,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0383 Prins Bernhardstraat 41,60,28.53894666666667,5.8219451200000005,a56e51f2-c017-4cc5-96e8-58f03bf89dbc,77b678e9-c2e2-4c3a-a03d-a84aa9f10ef0,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,11/14/2024 2:03:02 AM,,
+5ce1ef86-36b8-47d7-9b1f-00004f4098a7,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0297 Kerkelandenlaan 7A,60,100.0,20.4,dc00a4b9-74dd-4061-8a8d-95d5ec0b7dba,e7b96db4-0590-4404-93ab-78e7e4d1ce0a,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,2/20/2025 2:04:43 AM,,
+98ddc3ff-fdb3-4012-911f-0000e5f46c98,83f9417c-6184-4063-a61a-e3a997433a5c,10500 Jacob van Campenlaan 144,60,0.0,0.0,0e481c61-cfdb-45ad-9de2-8557b4acdc16,7d4c4de9-0bec-4b58-8535-e59a19468cc7,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,11/27/2024 2:02:54 AM,,
+92871d25-da69-4c75-93ca-00011c6f2083,83f9417c-6184-4063-a61a-e3a997433a5c,PO055 *Langestraat 27,60,6.347562222222222,19.042686666666665,15daaadc-f92b-4551-80fb-8d307076097b,3efa1ec7-c0af-4507-b7aa-e99133daf310,0,66ae0361-3a88-415f-b7de-5ec2fc4bab7f,2/20/2025 2:04:43 AM,,
+7f754fff-c8d2-4d22-b659-0001222b6b81,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0060 Ambachtsweg 54,60,100.0,20.4,25e215f4-b878-496b-a6d1-1b59934b334d,a108586a-c31c-4c2f-ac96-1176cee45d0e,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,3/18/2025 2:01:55 AM,,
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many containers are in Hilversum?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-28 14:55:00 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+# Execute a SQL query to count the distinct containers in locations that contain "Hilversum" in their address
+sql_query = """
+SELECT COUNT(DISTINCT ContainerId) AS container_count
+FROM table_91c1de58ef2cc70057480a91dadac8cc
+WHERE Name LIKE '%Hilversum%'
+"""
+
+# Run the query using the provided helper
+result_df = execute_sql_query(sql_query)
+
+# Extract the count (default to 0 if no rows returned)
+if not result_df.empty:
+    container_count = int(result_df.loc[0, 'container_count'])
+else:
+    container_count = 0
+
+# Declare result var: 
+result = {"type": "number", "value": container_count}
+2025-11-28 14:55:00 [INFO] Validating code requirements...
+2025-11-28 14:55:00 [INFO] Code validation successful.
+2025-11-28 14:55:00 [INFO] Cleaning the generated code...
+2025-11-28 14:55:00 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT COUNT(DISTINCT ContainerId) AS container_count
+FROM table_91c1de58ef2cc70057480a91dadac8cc
+WHERE Name LIKE '%Hilversum%'
+"""
+result_df = execute_sql_query(sql_query)
+if not result_df.empty:
+    container_count = int(result_df.loc[0, 'container_count'])
+else:
+    container_count = 0
+result = {'type': 'number', 'value': container_count}
+2025-11-28 14:55:00 [INFO] Response generated successfully.
+2025-11-28 14:56:55 [INFO] Backing off send_request(...) for 0.6s (requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Read timed out. (read timeout=15))
+2025-11-28 15:10:23 [INFO] Question: Count containers located in Hilversum
+2025-11-28 15:10:23 [INFO] Running PandasAI with litellm LLM...
+2025-11-28 15:10:23 [INFO] Prompt ID: a4cca375-58b1-4d7b-a756-796faf7cd50a
+2025-11-28 15:10:23 [INFO] Generating new code...
+2025-11-28 15:10:23 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_91c1de58ef2cc70057480a91dadac8cc" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "HandlingTime", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "FillingPercentage", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Weight", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "OrderId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ContainerId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CollectionDirection", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedOn", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedOn", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="106539x13">
+Id,OrganisationId,Name,HandlingTime,FillingPercentage,Weight,OrderId,ContainerId,CollectionDirection,CreatedBy,CreatedOn,ModifiedBy,ModifiedOn
+6fe1e303-59b4-4ad3-a845-00003c2034a6,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0383 Prins Bernhardstraat 41,60,28.53894666666667,5.8219451200000005,a56e51f2-c017-4cc5-96e8-58f03bf89dbc,77b678e9-c2e2-4c3a-a03d-a84aa9f10ef0,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,11/14/2024 2:03:02 AM,,
+5ce1ef86-36b8-47d7-9b1f-00004f4098a7,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0297 Kerkelandenlaan 7A,60,100.0,20.4,dc00a4b9-74dd-4061-8a8d-95d5ec0b7dba,e7b96db4-0590-4404-93ab-78e7e4d1ce0a,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,2/20/2025 2:04:43 AM,,
+98ddc3ff-fdb3-4012-911f-0000e5f46c98,83f9417c-6184-4063-a61a-e3a997433a5c,10500 Jacob van Campenlaan 144,60,0.0,0.0,0e481c61-cfdb-45ad-9de2-8557b4acdc16,7d4c4de9-0bec-4b58-8535-e59a19468cc7,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,11/27/2024 2:02:54 AM,,
+92871d25-da69-4c75-93ca-00011c6f2083,83f9417c-6184-4063-a61a-e3a997433a5c,PO055 *Langestraat 27,60,6.347562222222222,19.042686666666665,15daaadc-f92b-4551-80fb-8d307076097b,3efa1ec7-c0af-4507-b7aa-e99133daf310,0,66ae0361-3a88-415f-b7de-5ec2fc4bab7f,2/20/2025 2:04:43 AM,,
+7f754fff-c8d2-4d22-b659-0001222b6b81,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0060 Ambachtsweg 54,60,100.0,20.4,25e215f4-b878-496b-a6d1-1b59934b334d,a108586a-c31c-4c2f-ac96-1176cee45d0e,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,3/18/2025 2:01:55 AM,,
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Count containers located in Hilversum
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-28 15:13:03 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+from typing import Dict, Any
+
+# Write code here
+
+# Execute the query to count containers located in Hilversum
+query = """
+    SELECT COUNT(DISTINCT ContainerId) AS container_count
+    FROM table_91c1de58ef2cc70057480a91dadac8cc
+    WHERE Name LIKE '%Hilversum%';
+"""
+df = execute_sql_query(query)
+
+# Retrieve the count value from the result dataframe
+# The dataframe will have a single row with a single column named 'container_count'
+container_count = int(df.iloc[0]['container_count']) if not df.empty else 0
+
+# Declare result var: 
+result: Dict[str, Any] = {
+    "type": "number",
+    "value": container_count
+}
+2025-11-28 15:13:03 [INFO] Validating code requirements...
+2025-11-28 15:13:03 [INFO] Code validation successful.
+2025-11-28 15:13:03 [INFO] Cleaning the generated code...
+2025-11-28 15:13:03 [INFO] Executing code: import pandas as pd
+from typing import Dict, Any
+query = """
+    SELECT COUNT(DISTINCT ContainerId) AS container_count
+    FROM table_91c1de58ef2cc70057480a91dadac8cc
+    WHERE Name LIKE '%Hilversum%';
+"""
+df = execute_sql_query(query)
+container_count = int(df.iloc[0]['container_count']) if not df.empty else 0
+result: Dict[str, Any] = {'type': 'number', 'value': container_count}
+2025-11-28 15:13:03 [INFO] Response generated successfully.
+2025-11-28 15:16:57 [INFO] Question: how many containers are in Hilversum?
+2025-11-28 15:16:57 [INFO] Running PandasAI with litellm LLM...
+2025-11-28 15:16:57 [INFO] Prompt ID: 0dfd483b-7ff0-435d-a555-31d09bfe2b83
+2025-11-28 15:16:57 [INFO] Generating new code...
+2025-11-28 15:16:57 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_91c1de58ef2cc70057480a91dadac8cc" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "HandlingTime", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "FillingPercentage", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Weight", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "OrderId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ContainerId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CollectionDirection", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedOn", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedOn", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="106539x13">
+Id,OrganisationId,Name,HandlingTime,FillingPercentage,Weight,OrderId,ContainerId,CollectionDirection,CreatedBy,CreatedOn,ModifiedBy,ModifiedOn
+6fe1e303-59b4-4ad3-a845-00003c2034a6,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0383 Prins Bernhardstraat 41,60,28.53894666666667,5.8219451200000005,a56e51f2-c017-4cc5-96e8-58f03bf89dbc,77b678e9-c2e2-4c3a-a03d-a84aa9f10ef0,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,11/14/2024 2:03:02 AM,,
+5ce1ef86-36b8-47d7-9b1f-00004f4098a7,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0297 Kerkelandenlaan 7A,60,100.0,20.4,dc00a4b9-74dd-4061-8a8d-95d5ec0b7dba,e7b96db4-0590-4404-93ab-78e7e4d1ce0a,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,2/20/2025 2:04:43 AM,,
+98ddc3ff-fdb3-4012-911f-0000e5f46c98,83f9417c-6184-4063-a61a-e3a997433a5c,10500 Jacob van Campenlaan 144,60,0.0,0.0,0e481c61-cfdb-45ad-9de2-8557b4acdc16,7d4c4de9-0bec-4b58-8535-e59a19468cc7,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,11/27/2024 2:02:54 AM,,
+92871d25-da69-4c75-93ca-00011c6f2083,83f9417c-6184-4063-a61a-e3a997433a5c,PO055 *Langestraat 27,60,6.347562222222222,19.042686666666665,15daaadc-f92b-4551-80fb-8d307076097b,3efa1ec7-c0af-4507-b7aa-e99133daf310,0,66ae0361-3a88-415f-b7de-5ec2fc4bab7f,2/20/2025 2:04:43 AM,,
+7f754fff-c8d2-4d22-b659-0001222b6b81,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0060 Ambachtsweg 54,60,100.0,20.4,25e215f4-b878-496b-a6d1-1b59934b334d,a108586a-c31c-4c2f-ac96-1176cee45d0e,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,3/18/2025 2:01:55 AM,,
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ how many containers are in Hilversum?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-28 15:19:22 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+# Query to count how many containers are in Hilversum
+sql = """
+    SELECT COUNT(*) AS container_count
+    FROM table_91c1de58ef2cc70057480a91dadac8cc
+    WHERE Name LIKE '%Hilversum%'
+"""
+
+# Execute the query
+df = execute_sql_query(sql)
+
+# Extract the count (default to 0 if no rows returned)
+container_count = df.loc[0, 'container_count'] if not df.empty else 0
+
+# Declare result var: 
+result = {"type": "number", "value": int(container_count)}
+2025-11-28 15:19:22 [INFO] Validating code requirements...
+2025-11-28 15:19:22 [INFO] Code validation successful.
+2025-11-28 15:19:22 [INFO] Cleaning the generated code...
+2025-11-28 15:19:22 [INFO] Executing code: import pandas as pd
+sql = """
+    SELECT COUNT(*) AS container_count
+    FROM table_91c1de58ef2cc70057480a91dadac8cc
+    WHERE Name LIKE '%Hilversum%'
+"""
+df = execute_sql_query(sql)
+container_count = df.loc[0, 'container_count'] if not df.empty else 0
+result = {'type': 'number', 'value': int(container_count)}
+2025-11-28 15:19:22 [INFO] Response generated successfully.
+2025-11-28 15:22:12 [INFO] Question: How many containers are in Hilversum?
+2025-11-28 15:22:12 [INFO] Running PandasAI with litellm LLM...
+2025-11-28 15:22:12 [INFO] Prompt ID: 4ab630e1-ea64-4585-896e-8f719840a81d
+2025-11-28 15:22:12 [INFO] Generating new code...
+2025-11-28 15:22:12 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_91c1de58ef2cc70057480a91dadac8cc" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "HandlingTime", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "FillingPercentage", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Weight", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "OrderId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ContainerId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CollectionDirection", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedOn", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedOn", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="106539x13">
+Id,OrganisationId,Name,HandlingTime,FillingPercentage,Weight,OrderId,ContainerId,CollectionDirection,CreatedBy,CreatedOn,ModifiedBy,ModifiedOn
+6fe1e303-59b4-4ad3-a845-00003c2034a6,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0383 Prins Bernhardstraat 41,60,28.53894666666667,5.8219451200000005,a56e51f2-c017-4cc5-96e8-58f03bf89dbc,77b678e9-c2e2-4c3a-a03d-a84aa9f10ef0,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,11/14/2024 2:03:02 AM,,
+5ce1ef86-36b8-47d7-9b1f-00004f4098a7,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0297 Kerkelandenlaan 7A,60,100.0,20.4,dc00a4b9-74dd-4061-8a8d-95d5ec0b7dba,e7b96db4-0590-4404-93ab-78e7e4d1ce0a,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,2/20/2025 2:04:43 AM,,
+98ddc3ff-fdb3-4012-911f-0000e5f46c98,83f9417c-6184-4063-a61a-e3a997433a5c,10500 Jacob van Campenlaan 144,60,0.0,0.0,0e481c61-cfdb-45ad-9de2-8557b4acdc16,7d4c4de9-0bec-4b58-8535-e59a19468cc7,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,11/27/2024 2:02:54 AM,,
+92871d25-da69-4c75-93ca-00011c6f2083,83f9417c-6184-4063-a61a-e3a997433a5c,PO055 *Langestraat 27,60,6.347562222222222,19.042686666666665,15daaadc-f92b-4551-80fb-8d307076097b,3efa1ec7-c0af-4507-b7aa-e99133daf310,0,66ae0361-3a88-415f-b7de-5ec2fc4bab7f,2/20/2025 2:04:43 AM,,
+7f754fff-c8d2-4d22-b659-0001222b6b81,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0060 Ambachtsweg 54,60,100.0,20.4,25e215f4-b878-496b-a6d1-1b59934b334d,a108586a-c31c-4c2f-ac96-1176cee45d0e,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,3/18/2025 2:01:55 AM,,
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many containers are in Hilversum?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-28 15:24:33 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+# Query the table to count the number of distinct containers in Hilversum
+sql_query = """
+SELECT COUNT(DISTINCT ContainerId) AS container_count
+FROM table_91c1de58ef2cc70057480a91dadac8cc
+WHERE Name LIKE '%Hilversum%';
+"""
+
+df = execute_sql_query(sql_query)
+
+# Extract the count and cast to integer
+container_count = int(df['container_count'].iloc[0])
+
+# Declare result var: 
+result = {"type": "number", "value": container_count}
+2025-11-28 15:24:33 [INFO] Validating code requirements...
+2025-11-28 15:24:33 [INFO] Code validation successful.
+2025-11-28 15:24:33 [INFO] Cleaning the generated code...
+2025-11-28 15:24:33 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT COUNT(DISTINCT ContainerId) AS container_count
+FROM table_91c1de58ef2cc70057480a91dadac8cc
+WHERE Name LIKE '%Hilversum%';
+"""
+df = execute_sql_query(sql_query)
+container_count = int(df['container_count'].iloc[0])
+result = {'type': 'number', 'value': container_count}
+2025-11-28 15:24:33 [INFO] Response generated successfully.
+2025-11-28 15:27:42 [INFO] Question: Number of containers in Hilversum
+2025-11-28 15:27:42 [INFO] Running PandasAI with litellm LLM...
+2025-11-28 15:27:42 [INFO] Prompt ID: 4aa71e9a-93b3-4fb1-b30a-9576345be7d8
+2025-11-28 15:27:42 [INFO] Generating new code...
+2025-11-28 15:27:42 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_91c1de58ef2cc70057480a91dadac8cc" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "HandlingTime", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "FillingPercentage", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Weight", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "OrderId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ContainerId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CollectionDirection", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedOn", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedOn", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="106539x13">
+Id,OrganisationId,Name,HandlingTime,FillingPercentage,Weight,OrderId,ContainerId,CollectionDirection,CreatedBy,CreatedOn,ModifiedBy,ModifiedOn
+6fe1e303-59b4-4ad3-a845-00003c2034a6,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0383 Prins Bernhardstraat 41,60,28.53894666666667,5.8219451200000005,a56e51f2-c017-4cc5-96e8-58f03bf89dbc,77b678e9-c2e2-4c3a-a03d-a84aa9f10ef0,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,11/14/2024 2:03:02 AM,,
+5ce1ef86-36b8-47d7-9b1f-00004f4098a7,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0297 Kerkelandenlaan 7A,60,100.0,20.4,dc00a4b9-74dd-4061-8a8d-95d5ec0b7dba,e7b96db4-0590-4404-93ab-78e7e4d1ce0a,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,2/20/2025 2:04:43 AM,,
+98ddc3ff-fdb3-4012-911f-0000e5f46c98,83f9417c-6184-4063-a61a-e3a997433a5c,10500 Jacob van Campenlaan 144,60,0.0,0.0,0e481c61-cfdb-45ad-9de2-8557b4acdc16,7d4c4de9-0bec-4b58-8535-e59a19468cc7,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,11/27/2024 2:02:54 AM,,
+92871d25-da69-4c75-93ca-00011c6f2083,83f9417c-6184-4063-a61a-e3a997433a5c,PO055 *Langestraat 27,60,6.347562222222222,19.042686666666665,15daaadc-f92b-4551-80fb-8d307076097b,3efa1ec7-c0af-4507-b7aa-e99133daf310,0,66ae0361-3a88-415f-b7de-5ec2fc4bab7f,2/20/2025 2:04:43 AM,,
+7f754fff-c8d2-4d22-b659-0001222b6b81,83f9417c-6184-4063-a61a-e3a997433a5c,GFE0060 Ambachtsweg 54,60,100.0,20.4,25e215f4-b878-496b-a6d1-1b59934b334d,a108586a-c31c-4c2f-ac96-1176cee45d0e,0,c6ad9b84-4d39-46bb-978c-fda1393324b5,3/18/2025 2:01:55 AM,,
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Number of containers in Hilversum
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-28 15:30:05 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+# Construct and execute the SQL query to count the number of unique containers located in Hilversum
+sql_query = """
+SELECT COUNT(DISTINCT ContainerId) AS num_containers
+FROM table_91c1de58ef2cc70057480a91dadac8cc
+WHERE Name LIKE '%Hilversum%'
+"""
+
+# Execute the query using the provided helper function
+df = execute_sql_query(sql_query)
+
+# Extract the count from the result dataframe (handle the case where the dataframe is empty)
+num_containers = df.iloc[0]['num_containers'] if not df.empty else 0
+
+# Declare result variable
+result = {"type": "number", "value": num_containers}
+2025-11-28 15:30:05 [INFO] Validating code requirements...
+2025-11-28 15:30:05 [INFO] Code validation successful.
+2025-11-28 15:30:05 [INFO] Cleaning the generated code...
+2025-11-28 15:30:05 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT COUNT(DISTINCT ContainerId) AS num_containers
+FROM table_91c1de58ef2cc70057480a91dadac8cc
+WHERE Name LIKE '%Hilversum%'
+"""
+df = execute_sql_query(sql_query)
+num_containers = df.iloc[0]['num_containers'] if not df.empty else 0
+result = {'type': 'number', 'value': num_containers}
+2025-11-28 15:30:05 [INFO] Response generated successfully.
+2025-11-28 15:44:23 [INFO] Question: How many container locations are listed in the designated location export?
+2025-11-28 15:44:23 [INFO] Running PandasAI with litellm LLM...
+2025-11-28 15:44:23 [INFO] Prompt ID: f16302d0-08f7-415e-9dc9-7edcb00e463d
+2025-11-28 15:44:23 [INFO] Generating new code...
+2025-11-28 15:44:23 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_fa6ef4c4c5260a181a39968c06fa9306" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many container locations are listed in the designated location export?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-28 15:46:52 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Use the helper function to run a SQL query
+sql_query = """
+    SELECT COUNT(DISTINCT LocationNumber) AS location_count
+    FROM table_fa6ef4c4c5260a181a39968c06fa9306
+"""
+df = execute_sql_query(sql_query)
+
+# Extract the count from the returned DataFrame
+location_count = df.iloc[0]['location_count']
+
+# Declare result var:
+result = {"type": "number", "value": location_count}
+2025-11-28 15:46:52 [INFO] Validating code requirements...
+2025-11-28 15:46:52 [INFO] Code validation successful.
+2025-11-28 15:46:52 [INFO] Cleaning the generated code...
+2025-11-28 15:46:52 [INFO] Executing code: import pandas as pd
+sql_query = """
+    SELECT COUNT(DISTINCT LocationNumber) AS location_count
+    FROM table_fa6ef4c4c5260a181a39968c06fa9306
+"""
+df = execute_sql_query(sql_query)
+location_count = df.iloc[0]['location_count']
+result = {'type': 'number', 'value': location_count}
+2025-11-28 15:46:52 [INFO] Response generated successfully.
+2025-11-28 15:50:57 [INFO] Question: How many container locations are listed in the designated location export?
+2025-11-28 15:50:57 [INFO] Running PandasAI with litellm LLM...
+2025-11-28 15:50:57 [INFO] Prompt ID: 78c9ea8a-54be-412a-b02f-c5a9015b1fd0
+2025-11-28 15:50:57 [INFO] Generating new code...
+2025-11-28 15:50:57 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_fa6ef4c4c5260a181a39968c06fa9306" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many container locations are listed in the designated location export?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-11-28 15:52:14 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Query the number of distinct container locations listed in the designated location export
+sql = """
+    SELECT COUNT(DISTINCT LocationNumber) AS container_location_count
+    FROM table_fa6ef4c4c5260a181a39968c06fa9306;
+"""
+# Execute the SQL query
+df = execute_sql_query(sql)
+
+# Extract the count from the result dataframe
+container_count = int(df.iloc[0]['container_location_count'])
+
+# Declare result var
+result = {
+    "type": "number",
+    "value": container_count
+}
+2025-11-28 15:52:14 [INFO] Validating code requirements...
+2025-11-28 15:52:14 [INFO] Code validation successful.
+2025-11-28 15:52:14 [INFO] Cleaning the generated code...
+2025-11-28 15:52:14 [INFO] Executing code: import pandas as pd
+sql = """
+    SELECT COUNT(DISTINCT LocationNumber) AS container_location_count
+    FROM table_fa6ef4c4c5260a181a39968c06fa9306;
+"""
+df = execute_sql_query(sql)
+container_count = int(df.iloc[0]['container_location_count'])
+result = {'type': 'number', 'value': container_count}
+2025-11-28 15:52:14 [INFO] Response generated successfully.
