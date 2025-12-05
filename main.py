@@ -10,7 +10,7 @@ from langchain_chroma import Chroma
 
 # import tools
 from rag import load_csvs_from_folder, clean_id_column, normalize_id_series, clean_dataframes_ids, load_all_csvs, build_summary_chunks, build_vector_store, get_retriever
-from tools import retrieve_context_tool, auto_analyse_question_tool, select_relevant_dataset_tool, retrieve_context, auto_analyse_question, select_relevant_dataset
+from tools import retrieve_context_tool, auto_analyse_question_tool, select_relevant_dataset_tool, retrieve_context, auto_analyse_question, select_relevant_dataset, pandasai_test, pandasai_test2, build_dataset_metadata
 
 import globals_space
 from globals_space import _VECTOR_STORE, _RETRIEVER, _DATA_FOLDER, _DATASET_METADATA
@@ -154,8 +154,17 @@ def main():
     #pandas_chatbot_run()
     #rag_chatbot_run()
     #build_dataset_metadata()
-    result = auto_analyse_question("How many container locations are listed in the designated location export?")
-    print(result)
+    # result = auto_analyse_question("How many container locations are listed in the designated location export?")
+    # print(result)
+    # pandasai_test("Which container isle had the most recent WasteContainerChangedTimeStamp?")
+     
+    # build_dataset_metadata()
+    
+    # select_relevant_dataset("what isle is container vo308 located in?")
+    
+    auto_analyse_question("How many unique containers are listed in the designated location export?")
+
+    # pandasai_test2("Which container isle had the most recent WasteContainerChangedTimeStamp?")
 
 if __name__ == "__main__":
     main()

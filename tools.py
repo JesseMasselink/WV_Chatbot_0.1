@@ -1,7 +1,7 @@
 import pandas as pd
 import pandasai as pai
-from pandasai import SmartDataframe
 from pandasai_litellm.litellm import LiteLLM
+from pandasai.smart_dataframe import SmartDataframe
 
 from langchain.tools import tool
 
@@ -19,12 +19,12 @@ from pathlib import Path
 
 pandasai_llm = LiteLLM(
     model = "ollama/gpt-oss:20b",
-    api_key = "82fe034cdb664ebb936d7121397f664d.lf_w5tGConKuske3_nfHXLDo"
+    api_base = "http://localhost:11434"
 )
 
 pai.config.set({
     "llm": pandasai_llm,
-    
+    "verbose": True,
 })
 
 
@@ -50,7 +50,7 @@ def build_dataset_metadata():
                 "preview": df.head().to_string(index=False)
             }
             _DATASET_METADATA[file.name] = meta
-            print("Dataset metadata generated.")
+            print("Dataset metadata generated of file:", file.name)
         except Exception as e:
             print(f"ERROR reading {file}: {e}")
             continue
@@ -76,6 +76,14 @@ def select_relevant_dataset(user_input: str) -> dict:
         if score > best_score:
             best_score = score
             best_match = meta
+
+    if best_match:
+        print("\nResult of select_relevant_dataset_tool:\n")
+        print(f"Filename: {best_match['filename']}")
+        print(f"Path: {best_match['path']}")
+        print(f"Columns: {best_match['columns']}")
+        print(f"Shape: {best_match['shape']}")
+        print(f"Preview: \n{best_match['preview']}\n")
     return best_match or {}
 
 
@@ -88,42 +96,20 @@ def auto_analyse_question(user_input: str) -> str:
     meta = select_relevant_dataset(user_input)
     if not meta:
         return "No relevant dataset found."
-    df = pd.read_csv(meta["path"])
+    df = pai.read_csv(meta["path"])
     summary = (
         f"Chosen dataset: {meta['filename']}\n"
         f"Columns: {', '.join(df.columns)}\n"
         f"Shape: {df.shape[0]} rows × {df.shape[1]} columns\n"
         f"Preview:\n{meta['preview']}\n"
     )
-    # use existing pandasai_llm (already defined in tools.py)
-    smart_df = SmartDataframe(df, config={"llm": pandasai_llm})
     try:
-        answer = smart_df.chat(user_input)
+        answer = df.chat(user_input)
+        print("\nResult of auto_analyse_question:\nSummary:\n", summary,"\nAnswer:\n", answer, "\n")
         return summary + "\nAnalysis Result:\n" + str(answer)
     except Exception as e:
         return summary + "\nAnalysis error: " + str(e)
 
-
-
-
-# def pandasai_test(query) -> str:
-#     """
-#     Test tool for PandasAI functionality.
-#     Args:
-#         query (str): The question to test.
-        
-        
-#     Returns:
-#         str: The result of the query.
-#     """
-    
-
-#     file_df = pd.read_csv("/home/aiadmin/WasteVision/GAD2/device_fill_level/device_fill_level_export_edit.csv")
-
-    
-
-#     answer = df.chat(query)
-#     return answer
 
 def retrieve_context(query: str):
     """
@@ -160,8 +146,6 @@ def select_relevant_dataset_tool(user_input: str) -> dict:
     Returns a dict with filename and summary metadata.
     """
     dict_result = select_relevant_dataset(user_input)
-    for d in dict_result:
-        print("\nResult of select_relevant_dataset_tool: ", d, "\n")
     return dict_result
 
 @tool

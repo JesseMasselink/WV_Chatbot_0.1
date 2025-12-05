@@ -2757,3 +2757,2406 @@ df = execute_sql_query(sql)
 container_count = int(df.iloc[0]['container_location_count'])
 result = {'type': 'number', 'value': container_count}
 2025-11-28 15:52:14 [INFO] Response generated successfully.
+2025-12-03 10:47:33 [INFO] Question: What is the sum of column A?
+2025-12-03 10:47:33 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 10:47:33 [INFO] Prompt ID: ae005a8b-3b6d-4ece-9b17-4f65f01eeca2
+2025-12-03 10:47:33 [INFO] Generating new code...
+2025-12-03 10:47:33 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_6c30b42101939c7bdf95f4c1052d615c" columns="[{"name": "A", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "B", "type": "integer", "description": null, "expression": null, "alias": null}]" dimensions="3x2">
+A,B
+1,4
+2,5
+3,6
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the sum of column A?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 10:49:57 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Query to calculate the sum of column A
+sql_query = """
+SELECT SUM(A) AS total_sum
+FROM table_6c30b42101939c7bdf95f4c1052d615c
+"""
+
+# Execute the query and obtain the result in a DataFrame
+df_result = execute_sql_query(sql_query)
+
+# Extract the sum value from the DataFrame
+total_sum = df_result.loc[0, 'total_sum']
+
+# Declare result var:
+result = {
+    "type": "number",
+    "value": total_sum
+}
+2025-12-03 10:49:57 [INFO] Validating code requirements...
+2025-12-03 10:49:57 [INFO] Code validation successful.
+2025-12-03 10:49:57 [INFO] Cleaning the generated code...
+2025-12-03 10:49:57 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT SUM(A) AS total_sum
+FROM table_6c30b42101939c7bdf95f4c1052d615c
+"""
+df_result = execute_sql_query(sql_query)
+total_sum = df_result.loc[0, 'total_sum']
+result = {'type': 'number', 'value': total_sum}
+2025-12-03 10:49:57 [INFO] Response generated successfully.
+2025-12-03 10:51:04 [INFO] Question: What is the sum of column A?
+2025-12-03 10:51:04 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 10:51:04 [INFO] Prompt ID: 60a71649-f081-4b46-b2be-5a988e64e78f
+2025-12-03 10:51:04 [INFO] Generating new code...
+2025-12-03 10:51:04 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_6c30b42101939c7bdf95f4c1052d615c" columns="[{"name": "A", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "B", "type": "integer", "description": null, "expression": null, "alias": null}]" dimensions="3x2">
+A,B
+1,4
+2,5
+3,6
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the sum of column A?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 10:51:59 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+# Calculate the sum of column A using a SQL query
+df_sum = execute_sql_query(
+    """
+    SELECT SUM(A) AS total_a
+    FROM table_6c30b42101939c7bdf95f4c1052d615c
+    """
+)
+
+# Extract the sum value from the result dataframe
+total_a = df_sum.iloc[0]["total_a"]
+
+# Declare result var
+result = {
+    "type": "number",
+    "value": int(total_a)  # convert to int for a clean numeric value
+}
+2025-12-03 10:51:59 [INFO] Validating code requirements...
+2025-12-03 10:51:59 [INFO] Code validation successful.
+2025-12-03 10:51:59 [INFO] Cleaning the generated code...
+2025-12-03 10:51:59 [INFO] Executing code: import pandas as pd
+df_sum = execute_sql_query("""
+    SELECT SUM(A) AS total_a
+    FROM table_6c30b42101939c7bdf95f4c1052d615c
+    """)
+total_a = df_sum.iloc[0]['total_a']
+result = {'type': 'number', 'value': int(total_a)}
+2025-12-03 10:51:59 [INFO] Response generated successfully.
+2025-12-03 10:52:21 [INFO] Question: What is the sum of column A?
+2025-12-03 10:52:21 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 10:52:21 [INFO] Prompt ID: bd0a31e7-d587-40b4-9c36-fbfda0e003b3
+2025-12-03 10:52:21 [INFO] Generating new code...
+2025-12-03 10:52:21 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_6c30b42101939c7bdf95f4c1052d615c" columns="[{"name": "A", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "B", "type": "integer", "description": null, "expression": null, "alias": null}]" dimensions="3x2">
+A,B
+1,4
+2,5
+3,6
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the sum of column A?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 10:52:49 [INFO] Question: What is the sum of column B?
+2025-12-03 10:52:50 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 10:52:50 [INFO] Prompt ID: 4a66da97-3f8b-4105-af08-ec03ac09849d
+2025-12-03 10:52:50 [INFO] Generating new code...
+2025-12-03 10:52:50 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_6c30b42101939c7bdf95f4c1052d615c" columns="[{"name": "A", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "B", "type": "integer", "description": null, "expression": null, "alias": null}]" dimensions="3x2">
+A,B
+1,4
+2,5
+3,6
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the sum of column B?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 10:53:51 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Execute the SQL query to sum column B
+sql_query = """
+SELECT SUM(B) AS sum_B
+FROM table_6c30b42101939c7bdf95f4c1052d615c
+"""
+
+# Run the query using the provided helper function
+df = execute_sql_query(sql_query)
+
+# Extract the sum value (the first row, first column)
+sum_b = df['sum_B'].iloc[0]
+
+# Declare result as a dictionary with type and value
+result = {"type": "number", "value": int(sum_b)}
+2025-12-03 10:53:51 [INFO] Validating code requirements...
+2025-12-03 10:53:51 [INFO] Code validation successful.
+2025-12-03 10:53:51 [INFO] Cleaning the generated code...
+2025-12-03 10:53:51 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT SUM(B) AS sum_B
+FROM table_6c30b42101939c7bdf95f4c1052d615c
+"""
+df = execute_sql_query(sql_query)
+sum_b = df['sum_B'].iloc[0]
+result = {'type': 'number', 'value': int(sum_b)}
+2025-12-03 10:53:51 [INFO] Response generated successfully.
+2025-12-03 11:08:27 [INFO] Question: What is the total frequency?
+2025-12-03 11:08:27 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 11:08:27 [INFO] Prompt ID: b3986233-0455-412a-a979-429933f420b7
+2025-12-03 11:08:27 [INFO] Generating new code...
+2025-12-03 11:08:27 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_3c1b10c4be82e130dc49b5a68aedcb3a" columns="[{"name": "Id", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Value", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="5x4">
+Id,Name,Value,Frequency
+1," ""Jesse"""," ""10"," ""5"""
+2," ""Oleksii"""," ""3"," ""8"""
+3," ""Billo"""," ""6"," ""7"""
+4," ""Collin"""," ""9"," ""2"""
+5," ""Paul"""," ""11"," ""4"""
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the total frequency?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 11:10:00 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+# Execute a SQL query that sums the Frequency column (cleaning any non‑digit characters)
+sql = """
+    SELECT 
+        SUM(CAST(regexp_replace(Frequency, '[^0-9]', '') AS INTEGER)) AS total_frequency
+    FROM 
+        table_3c1b10c4be82e130dc49b5a68aedcb3a
+"""
+df_total = execute_sql_query(sql)
+
+# Retrieve the computed total frequency
+total_frequency = int(df_total.iloc[0]['total_frequency'])
+
+# Declare result var
+result = {
+    "type": "number",
+    "value": total_frequency
+}
+2025-12-03 11:10:00 [INFO] Validating code requirements...
+2025-12-03 11:10:00 [INFO] Code validation successful.
+2025-12-03 11:10:00 [INFO] Cleaning the generated code...
+2025-12-03 11:10:00 [INFO] Executing code: import pandas as pd
+sql = """
+    SELECT 
+        SUM(CAST(regexp_replace(Frequency, '[^0-9]', '') AS INTEGER)) AS total_frequency
+    FROM 
+        table_3c1b10c4be82e130dc49b5a68aedcb3a
+"""
+df_total = execute_sql_query(sql)
+total_frequency = int(df_total.iloc[0]['total_frequency'])
+result = {'type': 'number', 'value': total_frequency}
+2025-12-03 11:10:01 [INFO] Retrying execution (1/3)...
+2025-12-03 11:10:01 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 8, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string '"5"' to INT32
+
+LINE 1: SELECT sum(CAST(regexp_replace(Frequency, '[^0-9]', '') AS INTEGER))...
+                     ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-12-03 11:10:01 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_3c1b10c4be82e130dc49b5a68aedcb3a" columns="[{"name": "Id", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Value", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="5x4">
+Id,Name,Value,Frequency
+1," ""Jesse"""," ""10"," ""5"""
+2," ""Oleksii"""," ""3"," ""8"""
+3," ""Billo"""," ""6"," ""7"""
+4," ""Collin"""," ""9"," ""2"""
+5," ""Paul"""," ""11"," ""4"""
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ What is the total frequency?
+
+You generated the following Python code:
+import pandas as pd
+sql = """
+    SELECT 
+        SUM(CAST(regexp_replace(Frequency, '[^0-9]', '') AS INTEGER)) AS total_frequency
+    FROM 
+        table_3c1b10c4be82e130dc49b5a68aedcb3a
+"""
+df_total = execute_sql_query(sql)
+total_frequency = int(df_total.iloc[0]['total_frequency'])
+result = {'type': 'number', 'value': total_frequency}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 8, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string '"5"' to INT32
+
+LINE 1: SELECT sum(CAST(regexp_replace(Frequency, '[^0-9]', '') AS INTEGER))...
+                     ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-12-03 11:12:18 [INFO] Code Generated:
+import pandas as pd
+
+# Clean the Frequency column (remove double quotes and spaces) and sum the values
+sql = """
+    SELECT
+        SUM(CAST(REPLACE(REPLACE(Frequency, '"', ''), ' ', '') AS INTEGER)) AS total_frequency
+    FROM
+        table_3c1b10c4be82e130dc49b5a68aedcb3a
+"""
+
+# Execute the query using the provided helper
+df_total = execute_sql_query(sql)
+
+# Extract the result
+total_frequency = int(df_total.iloc[0]['total_frequency'])
+result = {'type': 'number', 'value': total_frequency}
+2025-12-03 11:12:18 [INFO] Validating code requirements...
+2025-12-03 11:12:18 [INFO] Code validation successful.
+2025-12-03 11:12:18 [INFO] Cleaning the generated code...
+2025-12-03 11:12:18 [INFO] Executing code: import pandas as pd
+sql = """
+    SELECT
+        SUM(CAST(REPLACE(REPLACE(Frequency, '"', ''), ' ', '') AS INTEGER)) AS total_frequency
+    FROM
+        table_3c1b10c4be82e130dc49b5a68aedcb3a
+"""
+df_total = execute_sql_query(sql)
+total_frequency = int(df_total.iloc[0]['total_frequency'])
+result = {'type': 'number', 'value': total_frequency}
+2025-12-03 11:12:18 [INFO] Response generated successfully.
+2025-12-03 11:26:03 [INFO] Question: What is the total frequency?
+2025-12-03 11:26:03 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 11:26:03 [INFO] Prompt ID: 4bd5f88b-0318-4e59-aabb-749a94823285
+2025-12-03 11:26:03 [INFO] Generating new code...
+2025-12-03 11:26:04 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_3c1b10c4be82e130dc49b5a68aedcb3a" columns="[{"name": "Id", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Value", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="5x4">
+Id,Name,Value,Frequency
+1," ""Jesse"""," ""10"""," ""5"""
+2," ""Oleksii"""," ""3"""," ""8"""
+3," ""Billo"""," ""6"""," ""7"""
+4," ""Collin"""," ""9"""," ""2"""
+5," ""Paul"""," ""11"""," ""4"""
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the total frequency?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 11:27:48 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Define the SQL query to calculate the total frequency
+sql_query = """
+    SELECT SUM(CAST(REPLACE(Frequency, '""', '') AS INTEGER)) AS total_frequency
+    FROM table_3c1b10c4be82e130dc49b5a68aedcb3a;
+"""
+
+# Execute the query and obtain the result as a DataFrame
+result_df = execute_sql_query(sql_query)
+
+# Extract the aggregated value
+total_frequency = int(result_df.iloc[0]["total_frequency"])
+
+# Declare result variable in the required format
+result = {"type": "number", "value": total_frequency}
+2025-12-03 11:27:48 [INFO] Validating code requirements...
+2025-12-03 11:27:48 [INFO] Code validation successful.
+2025-12-03 11:27:48 [INFO] Cleaning the generated code...
+2025-12-03 11:27:48 [INFO] Executing code: import pandas as pd
+sql_query = """
+    SELECT SUM(CAST(REPLACE(Frequency, '""', '') AS INTEGER)) AS total_frequency
+    FROM table_3c1b10c4be82e130dc49b5a68aedcb3a;
+"""
+result_df = execute_sql_query(sql_query)
+total_frequency = int(result_df.iloc[0]['total_frequency'])
+result = {'type': 'number', 'value': total_frequency}
+2025-12-03 11:27:48 [INFO] Retrying execution (1/3)...
+2025-12-03 11:27:48 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 6, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string ' "5"' to INT32
+
+LINE 1: SELECT sum(CAST("replace"(Frequency, '""', '') AS INTEGER)) AS total_fre...
+                     ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-12-03 11:27:48 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_3c1b10c4be82e130dc49b5a68aedcb3a" columns="[{"name": "Id", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Value", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="5x4">
+Id,Name,Value,Frequency
+1," ""Jesse"""," ""10"""," ""5"""
+2," ""Oleksii"""," ""3"""," ""8"""
+3," ""Billo"""," ""6"""," ""7"""
+4," ""Collin"""," ""9"""," ""2"""
+5," ""Paul"""," ""11"""," ""4"""
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ What is the total frequency?
+
+You generated the following Python code:
+import pandas as pd
+sql_query = """
+    SELECT SUM(CAST(REPLACE(Frequency, '""', '') AS INTEGER)) AS total_frequency
+    FROM table_3c1b10c4be82e130dc49b5a68aedcb3a;
+"""
+result_df = execute_sql_query(sql_query)
+total_frequency = int(result_df.iloc[0]['total_frequency'])
+result = {'type': 'number', 'value': total_frequency}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 6, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: Could not convert string ' "5"' to INT32
+
+LINE 1: SELECT sum(CAST("replace"(Frequency, '""', '') AS INTEGER)) AS total_fre...
+                     ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-12-03 11:28:12 [INFO] Question: What is the total frequency?
+2025-12-03 11:28:12 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 11:28:12 [INFO] Prompt ID: c2d97b6f-15e4-4d8d-86b9-e6c0bde5de0f
+2025-12-03 11:28:12 [INFO] Generating new code...
+2025-12-03 11:28:12 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_3c1b10c4be82e130dc49b5a68aedcb3a" columns="[{"name": "Id", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Value", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}]" dimensions="5x4">
+Id,Name,Value,Frequency
+1,Jesse,10,5
+2,Oleksii,3,8
+3,Billo,6,7
+4,Collin,9,2
+5,Paul,11,4
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the total frequency?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 11:29:41 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+sql = """
+    SELECT SUM(Frequency) AS total_frequency
+    FROM table_3c1b10c4be82e130dc49b5a68aedcb3a;
+"""
+df = execute_sql_query(sql)
+total_frequency = df['total_frequency'].iloc[0] if not df.empty else 0
+
+# Declare result var: 
+result = {"type": "number", "value": total_frequency}
+2025-12-03 11:29:41 [INFO] Validating code requirements...
+2025-12-03 11:29:41 [INFO] Code validation successful.
+2025-12-03 11:29:41 [INFO] Cleaning the generated code...
+2025-12-03 11:29:41 [INFO] Executing code: import pandas as pd
+sql = """
+    SELECT SUM(Frequency) AS total_frequency
+    FROM table_3c1b10c4be82e130dc49b5a68aedcb3a;
+"""
+df = execute_sql_query(sql)
+total_frequency = df['total_frequency'].iloc[0] if not df.empty else 0
+result = {'type': 'number', 'value': total_frequency}
+2025-12-03 11:29:41 [INFO] Response generated successfully.
+2025-12-03 11:39:37 [INFO] Question: What is the total frequency?
+2025-12-03 11:39:37 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 11:39:37 [INFO] Prompt ID: 6e23bcf4-d3f5-4bc2-8734-b3911fe4bc02
+2025-12-03 11:39:37 [INFO] Generating new code...
+2025-12-03 11:39:37 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_3c1b10c4be82e130dc49b5a68aedcb3a" columns="[{"name": "Id", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Value", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}]" dimensions="5x4">
+Id,Name,Value,Frequency
+1,Jesse,10,5
+2,Oleksii,3,8
+3,Billo,6,7
+4,Collin,9,2
+5,Paul,11,4
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ What is the total frequency?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 11:40:44 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Execute SQL query to compute the total frequency
+sql_query = """
+SELECT SUM(Frequency) AS total_frequency
+FROM table_3c1b10c4be82e130dc49b5a68aedcb3a;
+"""
+df = execute_sql_query(sql_query)
+
+# Extract the numeric result
+total_frequency = df['total_frequency'].iloc[0]
+
+# Declare result var:
+result = {"type": "number", "value": total_frequency}
+2025-12-03 11:40:44 [INFO] Validating code requirements...
+2025-12-03 11:40:44 [INFO] Code validation successful.
+2025-12-03 11:40:44 [INFO] Cleaning the generated code...
+2025-12-03 11:40:44 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT SUM(Frequency) AS total_frequency
+FROM table_3c1b10c4be82e130dc49b5a68aedcb3a;
+"""
+df = execute_sql_query(sql_query)
+total_frequency = df['total_frequency'].iloc[0]
+result = {'type': 'number', 'value': total_frequency}
+2025-12-03 11:40:44 [INFO] Response generated successfully.
+2025-12-03 11:59:23 [INFO] Question: Who has the highest value?
+2025-12-03 11:59:23 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 11:59:23 [INFO] Prompt ID: cdd8084c-0748-4e86-985e-322bd71211ac
+2025-12-03 11:59:23 [INFO] Generating new code...
+2025-12-03 11:59:23 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_3c1b10c4be82e130dc49b5a68aedcb3a" columns="[{"name": "Id", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Value", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}]" dimensions="5x4">
+Id,Name,Value,Frequency
+1,Jesse,10,5
+2,Oleksii,3,8
+3,Billo,6,7
+4,Collin,9,2
+5,Paul,11,4
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Who has the highest value?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 12:00:50 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Use the helper function to execute an SQL query
+df = execute_sql_query("""
+    SELECT Name, Value
+    FROM table_3c1b10c4be82e130dc49b5a68aedcb3a
+    WHERE Value = (SELECT MAX(Value) FROM table_3c1b10c4be82e130dc49b5a68aedcb3a)
+""")
+
+# Extract the result
+if not df.empty:
+    highest_name = df.iloc[0]["Name"]
+    highest_value = df.iloc[0]["Value"]
+    result_value = f"The highest value is {highest_value} by {highest_name}."
+else:
+    result_value = "No data available."
+
+# Declare result var:
+result = { "type": "string", "value": result_value }
+2025-12-03 12:00:50 [INFO] Validating code requirements...
+2025-12-03 12:00:50 [INFO] Code validation successful.
+2025-12-03 12:00:50 [INFO] Cleaning the generated code...
+2025-12-03 12:00:50 [INFO] Executing code: import pandas as pd
+df = execute_sql_query("""
+    SELECT Name, Value
+    FROM table_3c1b10c4be82e130dc49b5a68aedcb3a
+    WHERE Value = (SELECT MAX(Value) FROM table_3c1b10c4be82e130dc49b5a68aedcb3a)
+""")
+if not df.empty:
+    highest_name = df.iloc[0]['Name']
+    highest_value = df.iloc[0]['Value']
+    result_value = f'The highest value is {highest_value} by {highest_name}.'
+else:
+    result_value = 'No data available.'
+result = {'type': 'string', 'value': result_value}
+2025-12-03 12:00:51 [INFO] Response generated successfully.
+2025-12-03 12:21:05 [INFO] Question: Who has the highest total value?
+2025-12-03 12:21:05 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 12:21:05 [INFO] Prompt ID: d2181cff-6b42-4bc3-a1b2-a091496a639d
+2025-12-03 12:21:05 [INFO] Generating new code...
+2025-12-03 12:21:05 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_3c1b10c4be82e130dc49b5a68aedcb3a" columns="[{"name": "Id", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Value", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "Frequency", "type": "integer", "description": null, "expression": null, "alias": null}]" dimensions="20x4">
+Id,Name,Value,Frequency
+1,Jesse,14,2
+2,Oleksii,7,11
+3,Billo,3,9
+4,Collin,12,6
+5,Paul,5,13
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Who has the highest total value?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 12:23:02 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Query to find the name with the highest total value (Value * Frequency)
+sql_query = """
+    SELECT 
+        Name,
+        Value,
+        Frequency,
+        (Value * Frequency) AS total_value
+    FROM 
+        table_3c1b10c4be82e130dc49b5a68aedcb3a
+    ORDER BY 
+        total_value DESC
+    LIMIT 1
+"""
+
+# Execute the query and fetch the result as a DataFrame
+df = execute_sql_query(sql_query)
+
+# Extract the single row that contains the maximum total_value
+top_row = df.iloc[0]
+
+# Declare result variable
+result = {
+    "type": "string",
+    "value": f"{top_row['Name']} has the highest total value of {top_row['total_value']}."
+}
+2025-12-03 12:23:02 [INFO] Validating code requirements...
+2025-12-03 12:23:02 [INFO] Code validation successful.
+2025-12-03 12:23:02 [INFO] Cleaning the generated code...
+2025-12-03 12:23:02 [INFO] Executing code: import pandas as pd
+sql_query = """
+    SELECT 
+        Name,
+        Value,
+        Frequency,
+        (Value * Frequency) AS total_value
+    FROM 
+        table_3c1b10c4be82e130dc49b5a68aedcb3a
+    ORDER BY 
+        total_value DESC
+    LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+top_row = df.iloc[0]
+result = {'type': 'string', 'value': f"{top_row['Name']} has the highest total value of {top_row['total_value']}."}
+2025-12-03 12:23:02 [INFO] Response generated successfully.
+2025-12-03 12:38:44 [INFO] Question: Which container isle had the most recent WasteContainerChangedTimeStamp?
+2025-12-03 12:38:44 [INFO] Running PandasAI with litellm LLM...
+2025-12-03 12:38:44 [INFO] Prompt ID: 11fed741-07d7-4e5f-91ea-5205ca90db08
+2025-12-03 12:38:44 [INFO] Generating new code...
+2025-12-03 12:38:44 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_fa6ef4c4c5260a181a39968c06fa9306" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Which container isle had the most recent WasteContainerChangedTimeStamp?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-03 12:41:55 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# The name of the table that holds the waste container data
+TABLE_NAME = "table_fa6ef4c4c5260a181a39968c06fa9306"
+
+# SQL query to find the container isle with the most recent WasteContainerChangedTimeStamp
+sql_query = f"""
+    SELECT 
+        WasteContainerIsleId,
+        MAX(CAST(WasteContainerChangedTimeStamp AS TIMESTAMP)) AS most_recent_ts
+    FROM {TABLE_NAME}
+    GROUP BY WasteContainerIsleId
+    ORDER BY most_recent_ts DESC
+    LIMIT 1
+"""
+
+# Execute the query and retrieve the result into a DataFrame
+df = execute_sql_query(sql_query)
+
+# Extract the isle ID (if any records are returned)
+if not df.empty:
+    isle_id = df.iloc[0]['WasteContainerIsleId']
+else:
+    isle_id = None
+
+# Declare the result variable in the required format
+result = {
+    "type": "string",
+    "value": (
+        f"The container isle with the most recent WasteContainerChangedTimeStamp "
+        f"is {isle_id}." if isle_id is not None else "No data found."
+    )
+}
+2025-12-03 12:41:55 [INFO] Validating code requirements...
+2025-12-03 12:41:55 [INFO] Code validation successful.
+2025-12-03 12:41:55 [INFO] Cleaning the generated code...
+2025-12-03 12:41:55 [INFO] Executing code: import pandas as pd
+TABLE_NAME = 'table_fa6ef4c4c5260a181a39968c06fa9306'
+sql_query = f"""
+    SELECT 
+        WasteContainerIsleId,
+        MAX(CAST(WasteContainerChangedTimeStamp AS TIMESTAMP)) AS most_recent_ts
+    FROM {TABLE_NAME}
+    GROUP BY WasteContainerIsleId
+    ORDER BY most_recent_ts DESC
+    LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+if not df.empty:
+    isle_id = df.iloc[0]['WasteContainerIsleId']
+else:
+    isle_id = None
+result = {'type': 'string', 'value': f'The container isle with the most recent WasteContainerChangedTimeStamp is {isle_id}.' if isle_id is not None else 'No data found.'}
+2025-12-03 12:41:55 [INFO] Retrying execution (1/3)...
+2025-12-03 12:41:55 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 12, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: invalid timestamp field format: "3/22/2022 6:32:09 PM", expected format is (YYYY-MM-DD HH:MM:SS[.US][±HH[:MM[:SS]]| ZONE]) when casting from source column WasteContainerChangedTimeStamp
+
+LINE 1: SELECT WasteContainerIsleId, max(CAST(WasteContainerChangedTimeStamp AS TIMESTAMP)) AS most_recent_ts...
+                                               ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-12-03 12:41:55 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_fa6ef4c4c5260a181a39968c06fa9306" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ Which container isle had the most recent WasteContainerChangedTimeStamp?
+
+You generated the following Python code:
+import pandas as pd
+TABLE_NAME = 'table_fa6ef4c4c5260a181a39968c06fa9306'
+sql_query = f"""
+    SELECT 
+        WasteContainerIsleId,
+        MAX(CAST(WasteContainerChangedTimeStamp AS TIMESTAMP)) AS most_recent_ts
+    FROM {TABLE_NAME}
+    GROUP BY WasteContainerIsleId
+    ORDER BY most_recent_ts DESC
+    LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+if not df.empty:
+    isle_id = df.iloc[0]['WasteContainerIsleId']
+else:
+    isle_id = None
+result = {'type': 'string', 'value': f'The container isle with the most recent WasteContainerChangedTimeStamp is {isle_id}.' if isle_id is not None else 'No data found.'}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 12, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: invalid timestamp field format: "3/22/2022 6:32:09 PM", expected format is (YYYY-MM-DD HH:MM:SS[.US][±HH[:MM[:SS]]| ZONE]) when casting from source column WasteContainerChangedTimeStamp
+
+LINE 1: SELECT WasteContainerIsleId, max(CAST(WasteContainerChangedTimeStamp AS TIMESTAMP)) AS most_recent_ts...
+                                               ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-12-03 12:45:46 [INFO] Code Generated:
+import pandas as pd
+
+TABLE_NAME = 'table_fa6ef4c4c5260a181a39968c06fa9306'
+
+# Use DuckDB's to_timestamp with an explicit format string to convert the
+# US‑style timestamp to a proper TIMESTAMP before taking the maximum.
+sql_query = f"""
+    SELECT
+        WasteContainerIsleId,
+        MAX(to_timestamp(WasteContainerChangedTimeStamp, '%m/%d/%Y %I:%M:%S %p')) AS most_recent_ts
+    FROM {TABLE_NAME}
+    GROUP BY WasteContainerIsleId
+    ORDER BY most_recent_ts DESC
+    LIMIT 1
+"""
+
+# Execute the query
+df = execute_sql_query(sql_query)
+
+# Build the answer
+if not df.empty:
+    isle_id = df.iloc[0]['WasteContainerIsleId']
+else:
+    isle_id = None
+
+result = {
+    'type': 'string',
+    'value': (
+        f'The container isle with the most recent WasteContainerChangedTimeStamp is {isle_id}.'
+        if isle_id is not None
+        else 'No data found.'
+    )
+}
+2025-12-03 12:45:46 [INFO] Validating code requirements...
+2025-12-03 12:45:46 [INFO] Code validation successful.
+2025-12-03 12:45:46 [INFO] Cleaning the generated code...
+2025-12-03 12:45:46 [INFO] Executing code: import pandas as pd
+TABLE_NAME = 'table_fa6ef4c4c5260a181a39968c06fa9306'
+sql_query = f"""
+    SELECT
+        WasteContainerIsleId,
+        MAX(to_timestamp(WasteContainerChangedTimeStamp, '%m/%d/%Y %I:%M:%S %p')) AS most_recent_ts
+    FROM {TABLE_NAME}
+    GROUP BY WasteContainerIsleId
+    ORDER BY most_recent_ts DESC
+    LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+if not df.empty:
+    isle_id = df.iloc[0]['WasteContainerIsleId']
+else:
+    isle_id = None
+result = {'type': 'string', 'value': f'The container isle with the most recent WasteContainerChangedTimeStamp is {isle_id}.' if isle_id is not None else 'No data found.'}
+2025-12-03 12:45:46 [INFO] Retrying execution (2/3)...
+2025-12-03 12:45:46 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 12, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/data_loader/duck_db_connection_manager.py", line 32, in sql
+    return self.connection.sql(query, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.BinderException: Binder Error: No function matches the given name and argument types 'to_timestamp(VARCHAR, STRING_LITERAL)'. You might need to add explicit type casts.
+	Candidate functions:
+	to_timestamp(DOUBLE) -> TIMESTAMP WITH TIME ZONE
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-12-03 12:45:46 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_fa6ef4c4c5260a181a39968c06fa9306" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ Which container isle had the most recent WasteContainerChangedTimeStamp?
+
+You generated the following Python code:
+import pandas as pd
+TABLE_NAME = 'table_fa6ef4c4c5260a181a39968c06fa9306'
+sql_query = f"""
+    SELECT
+        WasteContainerIsleId,
+        MAX(to_timestamp(WasteContainerChangedTimeStamp, '%m/%d/%Y %I:%M:%S %p')) AS most_recent_ts
+    FROM {TABLE_NAME}
+    GROUP BY WasteContainerIsleId
+    ORDER BY most_recent_ts DESC
+    LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+if not df.empty:
+    isle_id = df.iloc[0]['WasteContainerIsleId']
+else:
+    isle_id = None
+result = {'type': 'string', 'value': f'The container isle with the most recent WasteContainerChangedTimeStamp is {isle_id}.' if isle_id is not None else 'No data found.'}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 12, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/data_loader/duck_db_connection_manager.py", line 32, in sql
+    return self.connection.sql(query, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.BinderException: Binder Error: No function matches the given name and argument types 'to_timestamp(VARCHAR, STRING_LITERAL)'. You might need to add explicit type casts.
+	Candidate functions:
+	to_timestamp(DOUBLE) -> TIMESTAMP WITH TIME ZONE
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-12-03 12:48:14 [INFO] Code Generated:
+import pandas as pd
+
+TABLE_NAME = 'table_fa6ef4c4c5260a181a39968c06fa9306'
+
+# DuckDB uses `strptime` to parse a string into a timestamp when the format is non‑standard.
+sql_query = f"""
+    SELECT
+        WasteContainerIsleId,
+        MAX(strptime(WasteContainerChangedTimeStamp, '%m/%d/%Y %I:%M:%S %p')) AS most_recent_ts
+    FROM {TABLE_NAME}
+    GROUP BY WasteContainerIsleId
+    ORDER BY most_recent_ts DESC
+    LIMIT 1
+"""
+
+df = execute_sql_query(sql_query)
+
+if not df.empty:
+    isle_id = df.iloc[0]['WasteContainerIsleId']
+    result = {
+        'type': 'string',
+        'value': f'The container isle with the most recent WasteContainerChangedTimeStamp is {isle_id}.'
+    }
+else:
+    result = {
+        'type': 'string',
+        'value': 'No data found.'
+    }
+
+result
+2025-12-03 12:48:14 [INFO] Validating code requirements...
+2025-12-03 12:48:14 [INFO] Code validation successful.
+2025-12-03 12:48:14 [INFO] Cleaning the generated code...
+2025-12-03 12:48:14 [INFO] Executing code: import pandas as pd
+TABLE_NAME = 'table_fa6ef4c4c5260a181a39968c06fa9306'
+sql_query = f"""
+    SELECT
+        WasteContainerIsleId,
+        MAX(strptime(WasteContainerChangedTimeStamp, '%m/%d/%Y %I:%M:%S %p')) AS most_recent_ts
+    FROM {TABLE_NAME}
+    GROUP BY WasteContainerIsleId
+    ORDER BY most_recent_ts DESC
+    LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+if not df.empty:
+    isle_id = df.iloc[0]['WasteContainerIsleId']
+    result = {'type': 'string', 'value': f'The container isle with the most recent WasteContainerChangedTimeStamp is {isle_id}.'}
+else:
+    result = {'type': 'string', 'value': 'No data found.'}
+result
+2025-12-03 12:48:14 [INFO] Response generated successfully.
+2025-12-05 11:35:45 [INFO] Question: Which container isle had the most recent WasteContainerChangedTimeStamp?
+2025-12-05 11:35:45 [INFO] Running PandasAI with litellm LLM...
+2025-12-05 11:35:45 [INFO] Prompt ID: 62868ab0-94e3-4621-87eb-47379b116558
+2025-12-05 11:35:45 [INFO] Generating new code...
+2025-12-05 11:35:45 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_fa6ef4c4c5260a181a39968c06fa9306" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Which container isle had the most recent WasteContainerChangedTimeStamp?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-05 11:38:26 [INFO] Question: Which container isle had the most recent WasteContainerChangedTimeStamp?
+2025-12-05 11:38:26 [INFO] Running PandasAI with litellm LLM...
+2025-12-05 11:38:26 [INFO] Prompt ID: 07c71044-6fe6-4e55-a75e-5aae007fceb2
+2025-12-05 11:38:26 [INFO] Generating new code...
+2025-12-05 11:38:26 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_designatedlocation_export" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Which container isle had the most recent WasteContainerChangedTimeStamp?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-05 11:41:30 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Execute the SQL query to find the container isle with the most recent WasteContainerChangedTimeStamp
+sql_query = """
+SELECT 
+    WasteContainerIsleId, 
+    MAX(CAST(WasteContainerChangedTimeStamp AS TIMESTAMP)) AS MostRecentChange
+FROM 
+    table_designatedlocation_export
+GROUP BY 
+    WasteContainerIsleId
+ORDER BY 
+    MostRecentChange DESC
+LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+
+# Declare result var: 
+result = { "type": "dataframe", "value": df }
+2025-12-05 11:41:30 [INFO] Validating code requirements...
+2025-12-05 11:41:30 [INFO] Code validation successful.
+2025-12-05 11:41:30 [INFO] Cleaning the generated code...
+2025-12-05 11:41:30 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT 
+    WasteContainerIsleId, 
+    MAX(CAST(WasteContainerChangedTimeStamp AS TIMESTAMP)) AS MostRecentChange
+FROM 
+    table_designatedlocation_export
+GROUP BY 
+    WasteContainerIsleId
+ORDER BY 
+    MostRecentChange DESC
+LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+2025-12-05 11:41:31 [INFO] Retrying execution (1/3)...
+2025-12-05 11:41:31 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 14, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: invalid timestamp field format: "3/22/2022 6:32:09 PM", expected format is (YYYY-MM-DD HH:MM:SS[.US][±HH[:MM[:SS]]| ZONE]) when casting from source column WasteContainerChangedTimeStamp
+
+LINE 1: SELECT WasteContainerIsleId, max(CAST(WasteContainerChangedTimeStamp AS TIMESTAMP)) AS MostRecentC...
+                                               ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-12-05 11:41:31 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_designatedlocation_export" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ Which container isle had the most recent WasteContainerChangedTimeStamp?
+
+You generated the following Python code:
+import pandas as pd
+sql_query = """
+SELECT 
+    WasteContainerIsleId, 
+    MAX(CAST(WasteContainerChangedTimeStamp AS TIMESTAMP)) AS MostRecentChange
+FROM 
+    table_designatedlocation_export
+GROUP BY 
+    WasteContainerIsleId
+ORDER BY 
+    MostRecentChange DESC
+LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 14, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.ConversionException: Conversion Error: invalid timestamp field format: "3/22/2022 6:32:09 PM", expected format is (YYYY-MM-DD HH:MM:SS[.US][±HH[:MM[:SS]]| ZONE]) when casting from source column WasteContainerChangedTimeStamp
+
+LINE 1: SELECT WasteContainerIsleId, max(CAST(WasteContainerChangedTimeStamp AS TIMESTAMP)) AS MostRecentC...
+                                               ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-12-05 11:45:41 [INFO] Code Generated:
+import pandas as pd
+
+# Use DuckDB's parse_datetime with the appropriate format string
+sql_query = """
+SELECT
+    WasteContainerIsleId,
+    MAX(parse_datetime(WasteContainerChangedTimeStamp, 'M/D/YYYY H:MM:SS PM')) AS MostRecentChange
+FROM
+    table_designatedlocation_export
+GROUP BY
+    WasteContainerIsleId
+ORDER BY
+    MostRecentChange DESC
+LIMIT 1
+"""
+
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+2025-12-05 11:45:41 [INFO] Validating code requirements...
+2025-12-05 11:45:41 [INFO] Code validation successful.
+2025-12-05 11:45:41 [INFO] Cleaning the generated code...
+2025-12-05 11:45:41 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT
+    WasteContainerIsleId,
+    MAX(parse_datetime(WasteContainerChangedTimeStamp, 'M/D/YYYY H:MM:SS PM')) AS MostRecentChange
+FROM
+    table_designatedlocation_export
+GROUP BY
+    WasteContainerIsleId
+ORDER BY
+    MostRecentChange DESC
+LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+2025-12-05 11:45:41 [INFO] Retrying execution (2/3)...
+2025-12-05 11:45:41 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 14, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/data_loader/duck_db_connection_manager.py", line 32, in sql
+    return self.connection.sql(query, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.CatalogException: Catalog Error: Scalar Function with name parse_datetime does not exist!
+Did you mean "parse_filename"?
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-12-05 11:45:41 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_designatedlocation_export" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ Which container isle had the most recent WasteContainerChangedTimeStamp?
+
+You generated the following Python code:
+import pandas as pd
+sql_query = """
+SELECT
+    WasteContainerIsleId,
+    MAX(parse_datetime(WasteContainerChangedTimeStamp, 'M/D/YYYY H:MM:SS PM')) AS MostRecentChange
+FROM
+    table_designatedlocation_export
+GROUP BY
+    WasteContainerIsleId
+ORDER BY
+    MostRecentChange DESC
+LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 14, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/data_loader/duck_db_connection_manager.py", line 32, in sql
+    return self.connection.sql(query, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.CatalogException: Catalog Error: Scalar Function with name parse_datetime does not exist!
+Did you mean "parse_filename"?
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-12-05 11:48:06 [INFO] Code Generated:
+import pandas as pd
+
+# Query that finds the isle with the most recent container change
+sql_query = """
+SELECT
+    WasteContainerIsleId,
+    MAX(to_timestamp(WasteContainerChangedTimeStamp, '%m/%d/%Y %I:%M:%S %p')) AS MostRecentChange
+FROM
+    table_designatedlocation_export
+GROUP BY
+    WasteContainerIsleId
+ORDER BY
+    MostRecentChange DESC
+LIMIT 1
+"""
+
+# Execute the query via the provided helper
+df = execute_sql_query(sql_query)
+
+# Return the result as a dataframe
+result = {'type': 'dataframe', 'value': df}
+2025-12-05 11:48:06 [INFO] Validating code requirements...
+2025-12-05 11:48:06 [INFO] Code validation successful.
+2025-12-05 11:48:06 [INFO] Cleaning the generated code...
+2025-12-05 11:48:06 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT
+    WasteContainerIsleId,
+    MAX(to_timestamp(WasteContainerChangedTimeStamp, '%m/%d/%Y %I:%M:%S %p')) AS MostRecentChange
+FROM
+    table_designatedlocation_export
+GROUP BY
+    WasteContainerIsleId
+ORDER BY
+    MostRecentChange DESC
+LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+2025-12-05 11:48:06 [INFO] Retrying execution (3/3)...
+2025-12-05 11:48:06 [INFO] Execution failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 14, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/data_loader/duck_db_connection_manager.py", line 32, in sql
+    return self.connection.sql(query, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.BinderException: Binder Error: No function matches the given name and argument types 'to_timestamp(VARCHAR, STRING_LITERAL)'. You might need to add explicit type casts.
+	Candidate functions:
+	to_timestamp(DOUBLE) -> TIMESTAMP WITH TIME ZONE
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-12-05 11:48:06 [INFO] Using Prompt: <table dialect="duckdb" table_name="table_designatedlocation_export" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+The user asked the following question:
+### QUERY
+ Which container isle had the most recent WasteContainerChangedTimeStamp?
+
+You generated the following Python code:
+import pandas as pd
+sql_query = """
+SELECT
+    WasteContainerIsleId,
+    MAX(to_timestamp(WasteContainerChangedTimeStamp, '%m/%d/%Y %I:%M:%S %p')) AS MostRecentChange
+FROM
+    table_designatedlocation_export
+GROUP BY
+    WasteContainerIsleId
+ORDER BY
+    MostRecentChange DESC
+LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+
+However, it resulted in the following error:
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 14, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/data_loader/duck_db_connection_manager.py", line 32, in sql
+    return self.connection.sql(query, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.BinderException: Binder Error: No function matches the given name and argument types 'to_timestamp(VARCHAR, STRING_LITERAL)'. You might need to add explicit type casts.
+	Candidate functions:
+	to_timestamp(DOUBLE) -> TIMESTAMP WITH TIME ZONE
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+
+Fix the python code above and return the new python code but the code generated should use execute_sql_query function
+2025-12-05 11:49:50 [INFO] Code Generated:
+import pandas as pd
+
+sql_query = """
+SELECT
+    WasteContainerIsleId,
+    MAX(parse_datetime(WasteContainerChangedTimeStamp, '%m/%d/%Y %I:%M:%S %p')) AS MostRecentChange
+FROM
+    table_designatedlocation_export
+GROUP BY
+    WasteContainerIsleId
+ORDER BY
+    MostRecentChange DESC
+LIMIT 1
+"""
+
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+2025-12-05 11:49:50 [INFO] Validating code requirements...
+2025-12-05 11:49:50 [INFO] Code validation successful.
+2025-12-05 11:49:50 [INFO] Cleaning the generated code...
+2025-12-05 11:49:50 [INFO] Executing code: import pandas as pd
+sql_query = """
+SELECT
+    WasteContainerIsleId,
+    MAX(parse_datetime(WasteContainerChangedTimeStamp, '%m/%d/%Y %I:%M:%S %p')) AS MostRecentChange
+FROM
+    table_designatedlocation_export
+GROUP BY
+    WasteContainerIsleId
+ORDER BY
+    MostRecentChange DESC
+LIMIT 1
+"""
+df = execute_sql_query(sql_query)
+result = {'type': 'dataframe', 'value': df}
+2025-12-05 11:49:50 [INFO] Max retries reached. Error: Code execution failed
+2025-12-05 11:49:50 [INFO] Processing failed with error: Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 29, in execute
+    exec(code, self._environment)
+  File "<string>", line 14, in <module>
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 167, in _execute_sql_query
+    return db_manager.sql(final_query).df()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/data_loader/duck_db_connection_manager.py", line 32, in sql
+    return self.connection.sql(query, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.CatalogException: Catalog Error: Scalar Function with name parse_datetime does not exist!
+Did you mean "parse_filename"?
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 287, in _process_query
+    result = self.execute_with_retries(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 204, in execute_with_retries
+    result = self.execute_code(code)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/agent/base.py", line 135, in execute_code
+    return code_executor.execute_and_return_result(code)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 38, in execute_and_return_result
+    self.execute(code)
+  File "/home/aiadmin/WasteVision/WVenv/lib/python3.11/site-packages/pandasai/core/code_execution/code_executor.py", line 31, in execute
+    raise CodeExecutionError("Code execution failed") from e
+pandasai.exceptions.CodeExecutionError: Code execution failed
+
+2025-12-05 13:01:20 [INFO] Question: what isle is container vo308 located in?
+2025-12-05 13:01:20 [INFO] Running PandasAI with litellm LLM...
+2025-12-05 13:01:20 [INFO] Prompt ID: 2f4b1cd0-d815-42f8-aa3c-f005197bbcd3
+2025-12-05 13:01:20 [INFO] Generating new code...
+2025-12-05 13:01:20 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Address_AddressCountry", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_AddressLocality", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_AddressRegion", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_AreaServed", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_PostOfficeBoxNumber", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_PostalCode", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_StreetAddress", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "AlternateName", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "AreaServed", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DataProvider", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Description", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Location_Longitude", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Location_Latitude", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Location_Type", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "StreetName", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "HouseNumber", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "HouseNumberSuffix", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "ZipCode", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "City", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Owner", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Source", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Number", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "SubArea", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsUnderMaintenance", "type": "boolean", "description": null, "expression": null, "alias": null}, {"name": "UnavailabilityCalendarId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainersChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CalculateIsleLocation", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DisplayName", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="1170x36">
+Id,OrganisationId,Address_AddressCountry,Address_AddressLocality,Address_AddressRegion,Address_AreaServed,Address_PostOfficeBoxNumber,Address_PostalCode,Address_StreetAddress,AlternateName,AreaServed,DataProvider,Description,Location_Longitude,Location_Latitude,Location_Type,StreetName,HouseNumber,HouseNumberSuffix,ZipCode,City,Name,Owner,Source,Number,SubArea,IsUnderMaintenance,UnavailabilityCalendarId,WasteContainersChangedTimestamp,CalculateIsleLocation,DateCreated,CreatedBy,DateModified,ModifiedBy,LocationChangedTimestamp,DisplayName
+3807ca46-556e-48c5-9a8e-0083098548bd,83f9417c-6184-4063-a61a-e3a997433a5c,,,,,,,,,Hilversum,Waste Vision,,5.19413530826569,52.2331812865648,0,,,,,,Zenderstraat 80,,,1223DJ80,,False,,,,6/10/2020 7:51:17 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 7:15:04 AM,f5182e83-f24d-487a-9615-0206f2061775,,1223DJ80 - Zenderstraat 80
+933d7ec3-c719-41dc-8e56-00d700b0eb28,83f9417c-6184-4063-a61a-e3a997433a5c,,,,,,,,,Bussum,Waste Vision,,5.15920877427561,52.2761430869401,0,,,,,,Vlietlaan 6,,,1404CA6,,False,,4/7/2022 8:45:20 AM,,4/7/2022 8:44:12 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 7:15:04 AM,f5182e83-f24d-487a-9615-0206f2061775,,1404CA6 - Vlietlaan 6
+98fe082b-6b9a-46e2-99d0-00f2ef8967dc,83f9417c-6184-4063-a61a-e3a997433a5c,,,,,,,,,Huizen,Waste Vision,DI3RESTFLEX,5.24947154336166,52.297343406875,0,,,,,,Huizermaatweg 208,,,1276MH208,,False,,6/28/2022 7:01:12 PM,,6/10/2020 7:51:17 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 7:15:04 AM,F5182E83-F24D-487A-9615-0206F2061775,,1276MH208 - Huizermaatweg 208
+1a260329-ce9a-4bea-9179-015eaa35ab0b,83f9417c-6184-4063-a61a-e3a997433a5c,,,,,,,,,Huizen,Waste Vision,DI3RESTFLEX,5.2636025,52.2934233,0,,,,,,Amstenrade 15,,,1275DS15,,False,,6/28/2022 7:01:13 PM,,6/10/2020 7:51:17 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 7:15:04 AM,F5182E83-F24D-487A-9615-0206F2061775,,1275DS15 - Amstenrade 15
+e9e43f56-02d3-4a3f-908c-01aa4ecc85cb,83f9417c-6184-4063-a61a-e3a997433a5c,,,,,,,,,Hilversum,,,5.185648798942567,52.23871361323968,0,,0.0,,,,Jacob van Campenlaan 123,,,1222KD123,,False,,,,2/27/2024 11:37:17 AM,,2/27/2024 11:37:17 AM,,,1222KD123 - Jacob van Campenlaan 123
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what isle is container vo308 located in?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-05 13:05:53 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Run the query to fetch the isle for container 'vo308'
+query = """
+SELECT CalculateIsleLocation
+FROM table_from_bytes
+WHERE Number = 'vo308'
+"""
+
+df = execute_sql_query(query)
+
+# Prepare the result
+if not df.empty and pd.notna(df.iloc[0]['CalculateIsleLocation']):
+    isle = df.iloc[0]['CalculateIsleLocation']
+    result = {
+        "type": "string",
+        "value": f"The container vo308 is located in isle {isle}."
+    }
+else:
+    result = {
+        "type": "string",
+        "value": "Container vo308 not found in the dataset."
+    }
+
+# Declare result var
+result
+2025-12-05 13:05:53 [INFO] Validating code requirements...
+2025-12-05 13:05:53 [INFO] Code validation successful.
+2025-12-05 13:05:53 [INFO] Cleaning the generated code...
+2025-12-05 13:05:53 [INFO] Executing code: import pandas as pd
+query = """
+SELECT CalculateIsleLocation
+FROM table_from_bytes
+WHERE Number = 'vo308'
+"""
+df = execute_sql_query(query)
+if not df.empty and pd.notna(df.iloc[0]['CalculateIsleLocation']):
+    isle = df.iloc[0]['CalculateIsleLocation']
+    result = {'type': 'string', 'value': f'The container vo308 is located in isle {isle}.'}
+else:
+    result = {'type': 'string', 'value': 'Container vo308 not found in the dataset.'}
+result
+2025-12-05 13:05:53 [INFO] Response generated successfully.
+2025-12-05 13:12:43 [INFO] Question: what location is container vo308 located in?
+2025-12-05 13:12:43 [INFO] Running PandasAI with litellm LLM...
+2025-12-05 13:12:43 [INFO] Prompt ID: 1d66004e-4875-40b2-a5f0-1ebfabaa0e6e
+2025-12-05 13:12:43 [INFO] Generating new code...
+2025-12-05 13:12:43 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Address_AddressCountry", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_AddressLocality", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_AddressRegion", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_AreaServed", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_PostOfficeBoxNumber", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_PostalCode", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Address_StreetAddress", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "AlternateName", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "AreaServed", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DataProvider", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Description", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Location_Longitude", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Location_Latitude", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Location_Type", "type": "integer", "description": null, "expression": null, "alias": null}, {"name": "StreetName", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "HouseNumber", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "HouseNumberSuffix", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "ZipCode", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "City", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Name", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "Owner", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Source", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "Number", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "SubArea", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsUnderMaintenance", "type": "boolean", "description": null, "expression": null, "alias": null}, {"name": "UnavailabilityCalendarId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainersChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CalculateIsleLocation", "type": "float", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DisplayName", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="1170x36">
+Id,OrganisationId,Address_AddressCountry,Address_AddressLocality,Address_AddressRegion,Address_AreaServed,Address_PostOfficeBoxNumber,Address_PostalCode,Address_StreetAddress,AlternateName,AreaServed,DataProvider,Description,Location_Longitude,Location_Latitude,Location_Type,StreetName,HouseNumber,HouseNumberSuffix,ZipCode,City,Name,Owner,Source,Number,SubArea,IsUnderMaintenance,UnavailabilityCalendarId,WasteContainersChangedTimestamp,CalculateIsleLocation,DateCreated,CreatedBy,DateModified,ModifiedBy,LocationChangedTimestamp,DisplayName
+3807ca46-556e-48c5-9a8e-0083098548bd,83f9417c-6184-4063-a61a-e3a997433a5c,,,,,,,,,Hilversum,Waste Vision,,5.19413530826569,52.2331812865648,0,,,,,,Zenderstraat 80,,,1223DJ80,,False,,,,6/10/2020 7:51:17 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 7:15:04 AM,f5182e83-f24d-487a-9615-0206f2061775,,1223DJ80 - Zenderstraat 80
+933d7ec3-c719-41dc-8e56-00d700b0eb28,83f9417c-6184-4063-a61a-e3a997433a5c,,,,,,,,,Bussum,Waste Vision,,5.15920877427561,52.2761430869401,0,,,,,,Vlietlaan 6,,,1404CA6,,False,,4/7/2022 8:45:20 AM,,4/7/2022 8:44:12 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 7:15:04 AM,f5182e83-f24d-487a-9615-0206f2061775,,1404CA6 - Vlietlaan 6
+98fe082b-6b9a-46e2-99d0-00f2ef8967dc,83f9417c-6184-4063-a61a-e3a997433a5c,,,,,,,,,Huizen,Waste Vision,DI3RESTFLEX,5.24947154336166,52.297343406875,0,,,,,,Huizermaatweg 208,,,1276MH208,,False,,6/28/2022 7:01:12 PM,,6/10/2020 7:51:17 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 7:15:04 AM,F5182E83-F24D-487A-9615-0206F2061775,,1276MH208 - Huizermaatweg 208
+1a260329-ce9a-4bea-9179-015eaa35ab0b,83f9417c-6184-4063-a61a-e3a997433a5c,,,,,,,,,Huizen,Waste Vision,DI3RESTFLEX,5.2636025,52.2934233,0,,,,,,Amstenrade 15,,,1275DS15,,False,,6/28/2022 7:01:13 PM,,6/10/2020 7:51:17 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 7:15:04 AM,F5182E83-F24D-487A-9615-0206F2061775,,1275DS15 - Amstenrade 15
+e9e43f56-02d3-4a3f-908c-01aa4ecc85cb,83f9417c-6184-4063-a61a-e3a997433a5c,,,,,,,,,Hilversum,,,5.185648798942567,52.23871361323968,0,,0.0,,,,Jacob van Campenlaan 123,,,1222KD123,,False,,,,2/27/2024 11:37:17 AM,,2/27/2024 11:37:17 AM,,,1222KD123 - Jacob van Campenlaan 123
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what location is container vo308 located in?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-05 13:17:44 [INFO] Code Generated:
+import pandas as pd
+
+# Query the database for the container with number 'vo308'
+query = """
+SELECT *
+FROM table_from_bytes
+WHERE Number = 'vo308'
+"""
+
+# Execute the SQL query and retrieve the result as a DataFrame
+df_container = execute_sql_query(query)
+
+# Build the result object
+if df_container.empty:
+    # No container found with that number
+    result = {
+        "type": "string",
+        "value": "Container vo308 not found."
+    }
+else:
+    # Prefer the DisplayName column if it contains a human‑readable location
+    loc = df_container.iloc[0].get("DisplayName")
+    if pd.isna(loc) or loc == "":
+        # Fallback: build a location string from available address components
+        street = df_container.iloc[0].get("StreetName")
+        house = df_container.iloc[0].get("HouseNumber")
+        city = df_container.iloc[0].get("City")
+        zipc = df_container.iloc[0].get("ZipCode")
+
+        # Convert numeric fields to string if they exist
+        parts = []
+        for part in (street, house, city, zipc):
+            if pd.notna(part) and part != "":
+                parts.append(str(part))
+        loc = ", ".join(parts) if parts else "Unknown location"
+
+    result = {
+        "type": "string",
+        "value": f"Container vo308 is located at {loc}."
+    }
+2025-12-05 13:17:44 [INFO] Validating code requirements...
+2025-12-05 13:17:44 [INFO] Code validation successful.
+2025-12-05 13:17:44 [INFO] Cleaning the generated code...
+2025-12-05 13:17:44 [INFO] Executing code: import pandas as pd
+query = """
+SELECT *
+FROM table_from_bytes
+WHERE Number = 'vo308'
+"""
+df_container = execute_sql_query(query)
+if df_container.empty:
+    result = {'type': 'string', 'value': 'Container vo308 not found.'}
+else:
+    loc = df_container.iloc[0].get('DisplayName')
+    if pd.isna(loc) or loc == '':
+        street = df_container.iloc[0].get('StreetName')
+        house = df_container.iloc[0].get('HouseNumber')
+        city = df_container.iloc[0].get('City')
+        zipc = df_container.iloc[0].get('ZipCode')
+        parts = []
+        for part in (street, house, city, zipc):
+            if pd.notna(part) and part != '':
+                parts.append(str(part))
+        loc = ', '.join(parts) if parts else 'Unknown location'
+    result = {'type': 'string', 'value': f'Container vo308 is located at {loc}.'}
+2025-12-05 13:17:44 [INFO] Response generated successfully.
+2025-12-05 13:19:53 [INFO] Question: How many container locations are listed in the designated location export?
+2025-12-05 13:19:53 [INFO] Running PandasAI with litellm LLM...
+2025-12-05 13:19:53 [INFO] Prompt ID: 436cbdf3-78fc-4fd7-8dc8-3c850dc0017c
+2025-12-05 13:19:53 [INFO] Generating new code...
+2025-12-05 13:19:53 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many container locations are listed in the designated location export?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-05 13:22:34 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+# Execute a SQL query that counts the number of container locations in the export
+sql_query = """
+    SELECT COUNT(*) AS location_count
+    FROM table_from_bytes
+"""
+df = execute_sql_query(sql_query)
+# The count will be in the first row, first column
+location_count = int(df.loc[0, 'location_count'])
+
+# Declare result var:
+result = {"type": "number", "value": location_count}
+2025-12-05 13:22:34 [INFO] Validating code requirements...
+2025-12-05 13:22:34 [INFO] Code validation successful.
+2025-12-05 13:22:34 [INFO] Cleaning the generated code...
+2025-12-05 13:22:34 [INFO] Executing code: import pandas as pd
+sql_query = """
+    SELECT COUNT(*) AS location_count
+    FROM table_from_bytes
+"""
+df = execute_sql_query(sql_query)
+location_count = int(df.loc[0, 'location_count'])
+result = {'type': 'number', 'value': location_count}
+2025-12-05 13:22:34 [INFO] Response generated successfully.
+2025-12-05 13:31:31 [INFO] Question: How many unique containers are listed in the designated location export?
+2025-12-05 13:31:31 [INFO] Running PandasAI with litellm LLM...
+2025-12-05 13:31:31 [INFO] Prompt ID: 3dade207-97db-40d7-bdd9-06573a08a46a
+2025-12-05 13:31:31 [INFO] Generating new code...
+2025-12-05 13:31:31 [INFO] Using Prompt: <tables>
+
+<table dialect="duckdb" table_name="table_from_bytes" columns="[{"name": "Id", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "LocationNumber", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "OrganisationId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "FractionId", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerChangedTimeStamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "WasteContainerIsleChangedTimestamp", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateCreated", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "CreatedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DateModified", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "ModifiedBy", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "IsExcludedFromFractionFillLevelStatistics", "type": "string", "description": null, "expression": null, "alias": null}, {"name": "DesignatedLocationTypeId", "type": "string", "description": null, "expression": null, "alias": null}]" dimensions="3240x13">
+Id,LocationNumber,OrganisationId,WasteContainerIsleId,FractionId,WasteContainerChangedTimeStamp,WasteContainerIsleChangedTimestamp,DateCreated,CreatedBy,DateModified,ModifiedBy,IsExcludedFromFractionFillLevelStatistics,DesignatedLocationTypeId
+8669904f-66d6-4c19-a814-00047f67e605,1211LZ28-2,83f9417c-6184-4063-a61a-e3a997433a5c,228c2b1a-b225-48d2-87fc-98e501cf18ef,7874a277-8a89-4e74-87c9-996695ba1169,3/22/2022 6:32:09 PM,7/20/2023 7:57:52 AM,6/10/2020 8:20:07 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+85ea7753-fc70-4d66-bcb0-0010916206a1,1251BG81-1,83f9417c-6184-4063-a61a-e3a997433a5c,5152a9e6-a7c4-4b2a-908b-70fe2267594d,f1f46408-750d-4545-ae53-4e5ecd21161f,6/13/2022 11:16:34 AM,7/20/2023 7:20:35 AM,6/10/2020 8:22:18 AM,F5182E83-F24D-487A-9615-0206F2061775,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+8e49db99-581e-4cee-9419-0015a7f085ef,1411WZ132-4,83f9417c-6184-4063-a61a-e3a997433a5c,7ea9c836-c550-4c5f-b5d7-e02d65a18ccf,80c25a4d-fe10-44e4-abc5-60bd9cee080c,3/22/2022 6:32:15 PM,10/28/2021 8:49:37 AM,10/28/2021 8:49:37 AM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,f5182e83-f24d-487a-9615-0206f2061775,,3ea1587b-0f31-4405-a02e-def61a24b606
+4a7456f3-80da-48fb-9564-0028794727a0,1222AB8-41,83f9417c-6184-4063-a61a-e3a997433a5c,308a514c-ade6-48f7-8dd0-1ca95f9512c7,80c25a4d-fe10-44e4-abc5-60bd9cee080c,1/1/0001 12:00:00 AM,1/30/2024 12:26:37 PM,1/30/2024 12:26:37 PM,,1/30/2024 12:26:37 PM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+e546ccdd-c8f7-4ec8-aac8-00291acae191,1406KJ1-1,83f9417c-6184-4063-a61a-e3a997433a5c,16a6b8a1-9651-4a92-856b-20eb95c7bc69,80c25a4d-fe10-44e4-abc5-60bd9cee080c,5/17/2023 12:57:14 PM,5/17/2023 12:57:14 PM,5/17/2023 12:57:13 PM,C6AD9B84-4D39-46BB-978C-FDA1393324B5,7/20/2023 8:32:15 AM,,,3ea1587b-0f31-4405-a02e-def61a24b606
+</table>
+
+
+</tables>
+
+The following functions have already been provided. Please use them as needed and do not redefine them.
+<function>
+def execute_sql_query(sql_query: str) -> pd.DataFrame
+    """This method connects to the database, executes the sql query and returns the dataframe"""
+</function>
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ How many unique containers are listed in the designated location export?
+
+At the end, declare "result" variable as a dictionary of type and value in the following format:
+
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+
+
+Generate python code and return full updated code:
+
+### Note: Use only relevant table for query and do aggregation, sorting, joins and grouby through sql query
+2025-12-05 13:34:02 [INFO] Code Generated:
+# TODO: import the required dependencies
+import pandas as pd
+
+# Run the query that counts the distinct containers in the designated location export
+sql = """
+SELECT COUNT(DISTINCT WasteContainerIsleId) AS unique_containers
+FROM table_from_bytes;
+"""
+df = execute_sql_query(sql)
+
+# Extract the numeric value from the resulting DataFrame
+unique_containers = int(df['unique_containers'].iloc[0])
+
+# Declare result var
+result = {"type": "number", "value": unique_containers}
+2025-12-05 13:34:02 [INFO] Validating code requirements...
+2025-12-05 13:34:02 [INFO] Code validation successful.
+2025-12-05 13:34:02 [INFO] Cleaning the generated code...
+2025-12-05 13:34:02 [INFO] Executing code: import pandas as pd
+sql = """
+SELECT COUNT(DISTINCT WasteContainerIsleId) AS unique_containers
+FROM table_from_bytes;
+"""
+df = execute_sql_query(sql)
+unique_containers = int(df['unique_containers'].iloc[0])
+result = {'type': 'number', 'value': unique_containers}
+2025-12-05 13:34:02 [INFO] Response generated successfully.
