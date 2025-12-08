@@ -138,6 +138,7 @@ def retrieve_context(query: str):
 
 #Langchain tool Wrappers > This is needed so that the functions can be called seperately. Langchain does not allow that if it is a @tool.
 
+#TODO: is this even a tool?
 @tool
 def select_relevant_dataset_tool(user_input: str) -> dict:
     """
@@ -148,6 +149,7 @@ def select_relevant_dataset_tool(user_input: str) -> dict:
     dict_result = select_relevant_dataset(user_input)
     return dict_result
 
+#TODO: Maybe the pandasai needs more context about the dataset, like what the column names mean and how to interpret them.
 @tool
 def auto_analyse_question_tool(user_input: str) -> str:
     """
