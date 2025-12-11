@@ -19,7 +19,7 @@ from globals_space import _VECTOR_STORE, _RETRIEVER, _DATA_FOLDER, _DATASET_META
 
 SYS_PROMPT = """
 You are a chatbot agent for the company Waste Vision. This company is specializing in the development of sustainable solutions for waste management.
-Your task is to assist users by answering their questions based on the available waste management data.
+Your task is to assist user, which are clients of Waste Vision, by answering their questions based on the available waste management data of that specific client.
 The datasets describe containers, locations, devices, routes and operational events in the form of .CSV files. These datasets together describe the real-world waste collection process, linking physical assets (containers, devices, locations) with operational events (collections, maintatanance and sensor readings). 
 Your role as the LLM agent is to use the available tools to analyze, explain, and answer questions about container usage, fill levels, and factual sources.
 Available tools:
@@ -50,7 +50,7 @@ AGENT_MODEL = langchain_ollama.ChatOllama(
     temperature=0.3
 )
 # Amount of context chunks the agent will recieve from vector database
-CONTEXT_AMOUNT = 1
+CONTEXT_AMOUNT = 5
 
 
 
@@ -74,43 +74,12 @@ def rag():    # Pre-load data or perform any necessary setup here
     print("Building vector store...")
     _VECTOR_STORE = build_vector_store(chunks, EMBEDDING_MODEL, VECTOR_STORE_PATH)
 
-    _RETRIEVER = _VECTOR_STORE.as_retriever(search_kwargs={"k": 3})
+    _RETRIEVER = _VECTOR_STORE.as_retriever(search_kwargs={"k": CONTEXT_AMOUNT})
 
     return _VECTOR_STORE
 
-def final_chatbot_run():
-    print("Final Chatbot running:...")
-
-    # Check if vector store is present in file system
-    if os.path.exists(VECTOR_STORE_PATH):
-        print(f"Vector store found at {VECTOR_STORE_PATH}\n")
-        globals_space._VECTOR_STORE = Chroma(
-            persist_directory=VECTOR_STORE_PATH, 
-            embedding_function=EMBEDDING_MODEL,
-            collection_name="location_summaries")
-    else:
-        print(f"Vector store not found at {VECTOR_STORE_PATH}. Building new vector store...")
-        VECTOR_STORE = rag()
-
-    globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, CONTEXT_AMOUNT)
-        
-
-    while(True):
-        user_input = input("\nEnter your prompt: ").strip()
-        if not user_input:
-            continue
-        if user_input.lower() == "exit":
-            print("Exiting.")
-            break
-        
-        response = LLM_AGENT.invoke(
-            {"messages": [{"role": "user", "content": user_input}]}
-        )
-
-        print(response)
-
 def LLM_agent_run(user_input: str) -> str:
-    print("Final Chatbot running:...")
+    print("\nFinal Chatbot running:...\n")
 
     if os.path.exists(VECTOR_STORE_PATH):
         print(f"Vector store found at {VECTOR_STORE_PATH}\n")
@@ -181,7 +150,7 @@ def main():
      
     # build_dataset_metadata()
     
-    # select_relevant_dataset("what isle is container vo308 located in?")
+    # select_relevant_dataset("how many container isles are located in the city of hilversum?")
     
     # auto_analyse_question("How many unique containers are listed in the designated location export?")
 

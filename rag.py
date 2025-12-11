@@ -348,7 +348,7 @@ def build_vector_store(summary_chunks: List[Dict], embedding_model, persist_path
     return vector_store
 
 
-def get_retriever(vector_store: Chroma, k: int = 3):
+def get_retriever(vector_store: Chroma, k: int):
     """
     Get a retriever from a Chroma vector store.
     

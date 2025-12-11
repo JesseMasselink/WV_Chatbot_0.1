@@ -66,25 +66,43 @@ def select_relevant_dataset(user_input: str) -> dict:
     global _DATASET_METADATA
     if not _DATASET_METADATA:
         build_dataset_metadata()
-
-    tokens = set(user_input.lower().split())
+    
     best_match = None
     best_score = -1
-    # Deside what metadata to send
-    for meta in _DATASET_METADATA.values():
-        score = sum(1 for t in tokens if t in meta["columns"] or t in meta["filename"].lower())
-        if score > best_score:
-            best_score = score
+    text = user_input.lower()
+    
+    # First check for mention of filename in the user input
+    for filename, meta in _DATASET_METADATA.items():
+        name_no_ext = filename.lower().replace(".csv", "")
+        if name_no_ext in text:
+            print("\n[EXPLICIT DATASET MATCH FOUND]\n")
             best_match = meta
+            best_score = 9999   # High score for explicit match
+            break
+    
+    # Otherwise, do keyword matching
+    if best_match is None:
+        tokens = set(user_input.lower().split())
+        # Deside what metadata to send
+        for meta in _DATASET_METADATA.values():
+            score = sum(1 for t in tokens if t in meta["columns"] or t in meta["filename"].lower())
+            if score > best_score:
+                best_score = score
+                best_match = meta
 
     if best_match:
         print("\nResult of select_relevant_dataset_tool:\n")
+        print(f"Best matching dataset for the question: '{user_input}'\n")
         print(f"Filename: {best_match['filename']}")
         print(f"Path: {best_match['path']}")
         print(f"Columns: {best_match['columns']}")
         print(f"Shape: {best_match['shape']}")
         print(f"Preview: \n{best_match['preview']}\n")
-    return best_match or {}
+        return best_match
+    else:
+        print("No relevant dataset found.")
+        return {}
+    
 
 
 def auto_analyse_question(user_input: str) -> str:
@@ -157,7 +175,7 @@ def auto_analyse_question_tool(user_input: str) -> str:
     Returns a summary and the analysis result.
     """
     result = auto_analyse_question(user_input)
-    print("\nResult of auto_analyse_question: ", result, "\n")
+    print("\nResult of auto_analyse_question_tool: ", result, "\n")
     return result
 
 @tool
@@ -167,5 +185,5 @@ def retrieve_context_tool(user_input: str):
     Returns formatted text that can be used to answer the users query.
     """
     result = retrieve_context(user_input)
-    print("\nResult of auto_analyse_question: ", result, "\n")
+    print("\nResult of retrieve_context_tool: ", result, "\n")
     return result
