@@ -1,7 +1,7 @@
 import pandas as pd
 import pandasai as pai
 from pandasai_litellm.litellm import LiteLLM
-from pandasai.smart_dataframe import SmartDataframe
+from pandasai import SmartDatalake
 
 from langchain.tools import tool
 
@@ -56,7 +56,7 @@ def build_dataset_metadata():
             continue
 
 
-def select_relevant_dataset(user_input: str) -> dict:
+def select_relevant_datasets(user_input: str) -> dict:
     """
     Given a user's question, suggest the CSV file most likely to contain the answer.
     Scores are computed by keyword overlap between the question and column names.
@@ -77,7 +77,7 @@ def select_relevant_dataset(user_input: str) -> dict:
         if name_no_ext in text:
             print("\n[EXPLICIT DATASET MATCH FOUND]\n")
             best_match = meta
-            best_score = 9999   # High score for explicit match
+            best_score = 9999   # High score for filename match
             break
     
     # Otherwise, do keyword matching
@@ -111,7 +111,7 @@ def auto_analyse_question(user_input: str) -> str:
     Returns a summary and the analysis result.
     """
     print("\nTEST: auto_analyse_question function called!\n")
-    meta = select_relevant_dataset(user_input)
+    meta = select_relevant_datasets(user_input)
     if not meta:
         return "No relevant dataset found."
     df = pai.read_csv(meta["path"])
@@ -164,7 +164,7 @@ def select_relevant_dataset_tool(user_input: str) -> dict:
     Scores are computed by keyword overlap between the question and column names.
     Returns a dict with filename and summary metadata.
     """
-    dict_result = select_relevant_dataset(user_input)
+    dict_result = select_relevant_datasets(user_input)
     return dict_result
 
 #TODO: Maybe the pandasai needs more context about the dataset, like what the column names mean and how to interpret them.

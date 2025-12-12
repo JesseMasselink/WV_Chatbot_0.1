@@ -12,7 +12,7 @@ import streamlit as st
 
 # import tools
 from rag import load_csvs_from_folder, clean_id_column, normalize_id_series, clean_dataframes_ids, load_all_csvs, build_summary_chunks, build_vector_store, get_retriever
-from tools import retrieve_context_tool, auto_analyse_question_tool, select_relevant_dataset_tool, retrieve_context, auto_analyse_question, select_relevant_dataset, build_dataset_metadata
+from tools import retrieve_context_tool, auto_analyse_question_tool, select_relevant_dataset_tool, retrieve_context, auto_analyse_question, select_relevant_datasets, build_dataset_metadata
 
 import globals_space
 from globals_space import _VECTOR_STORE, _RETRIEVER, _DATA_FOLDER, _DATASET_METADATA
