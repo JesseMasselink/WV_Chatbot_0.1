@@ -1,6 +1,6 @@
 # User Manual for Chatbot Application
 ## Overview
-This guide will walk you through setting up and running the chatbot application. The app is built using Python 3.11 and runs inside a virtual environment called WVenv (Waste Vision Environment) to manage all the required libraries and dependencies. Follow the steps below to get started.
+This guide will walk you through setting up and running the chatbot application. The app is built using Python 3.11 and runs inside a virtual environment called WVenv (Waste Vision Environment) to manage all the required libraries and dependencies. Follow the steps below to get started. Instruction on how to use the chatbot are described at the bottom of this document.
 
 ## Step 1: Install Python 3.11
 Before running the application, make sure Python 3.11 is installed on your system.
@@ -106,3 +106,39 @@ deactivate
 If you encounter issues with installing Python or setting up the virtual environment, ensure that you have the correct permissions and try running commands with sudo (on Linux) or Run as Administrator (on Windows).
 
 If the virtual environment doesn't activate or gives errors, try deleting the WVenv folder and following the steps again.
+
+
+# How to Formulate User Input
+
+To get the best results from the chatbot, follow these guidelines when formulating your questions:
+
+---
+
+## 1. Using Filenames
+
+If you want the chatbot to answer your question about a specific file in the database, mention the file name in your user input. The chatbot will automatically select the correct file for analysis. For example:
+```
+How many orders are there in orders_export?
+```
+---
+
+## 2. Add Context to Your Question
+
+Provide as much context as possible when asking your questions. For example, instead of asking something vague like "isles in Hilversum," ask:  
+```
+How many total container isles are present in the city of Hilversum?
+```
+Adding more details helps the chatbot understand exactly what you're looking for. If you already have an idea of how SQL code could generate your answer, or if you are searching for a specific value, feel free to include that information as well.
+
+---
+
+## 3. Be Specific
+
+The more specific your question is, the better the chatbot can respond. For example, if you're asking about how many of something exist in a particular area, clearly state that you're asking for unique values in that area. This makes it easier for the chatbot to reason about the exact information you need.
+
+For example, instead of asking "How many waste containers are in the system?", ask:  
+```
+How many unique waste containers are present in the whole system?
+```
+Being specific will lead to more accurate and relevant answers.
+
