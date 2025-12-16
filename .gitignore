@@ -6,6 +6,8 @@ WVenv/
 GAD2/
 device_fill_level/
 tardif_data/
+.vscode/
+__pycache__/
 
 # Ignore large files
 *.so
