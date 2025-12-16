@@ -87,6 +87,15 @@ pip install -r requirements.txt
 
 This will download and install all the necessary libraries to run the chatbot.
 
+## Step 5: Place the Data Folder in the Repository
+Before running the application, make sure that the **data** containing the dataset files is placed in the root directory of the repository.
+
+1. Locate the **data** folder in the repository
+2. Copy the entire dataset you want to use into this folder. Nested folders are allowed.
+3. Ensure the folder now contains all the nessasary files for the chatbot to analyse.
+
+This step will allow the chatbot to access the data when it needs to perform data analysis and generate responses based on the available information.
+
 ## Step 5: Run the Chatbot Application
 With everything set up, you can now run the chatbot application. Simply execute the following command while the virtual environment is active:
 
@@ -103,7 +112,7 @@ deactivate
 ```
 
 ## Troubleshooting
-If you encounter issues with installing Python or setting up the virtual environment, ensure that you have the correct permissions and try running commands with sudo (on Linux) or Run as Administrator (on Windows).
+If you encounter issues with installing Python or setting up the virtual environment, ensure that you have the correct permissions and try running commands with 'sudo' (on Linux) or 'Run as Administrator' (on Windows).
 
 If the virtual environment doesn't activate or gives errors, try deleting the WVenv folder and following the steps again.
 
