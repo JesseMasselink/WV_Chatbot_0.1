@@ -6,8 +6,12 @@ WVenv/
 GAD2/
 device_fill_level/
 tardif_data/
+
+# Ignore IDE settings
 .vscode/
 __pycache__/
+
+pandasai.log
 
 # Ignore large files
 *.so
