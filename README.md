@@ -1,6 +1,6 @@
 # User Manual for Chatbot Application
 ## Overview
-This guide will walk you through setting up and running the chatbot application. The app is built using Python 3.11 and runs inside a virtual environment called WVenv (Waste Vision Environment) to manage all the required libraries and dependencies. Follow the steps below to get started. Instruction on how to use the chatbot are described at the bottom of this document.
+This guide will walk you through setting up and running the chatbot application. The app is built using Python 3.11 and runs inside a virtual environment called WVenv (Waste Vision Environment) to manage all the required libraries and dependencies. Follow the steps below to get started. Tips on on how to query the chatbot are described at the bottom of this document.
 
 ## Step 1: Install Python 3.11
 Before running the application, make sure Python 3.11 is installed on your system.
@@ -87,7 +87,46 @@ pip install -r requirements.txt
 
 This will download and install all the necessary libraries to run the chatbot.
 
-## Step 5: Place the Data Folder in the Repository
+## Step 5: Install the AI Models
+To run the chatbot locally, you need to install the necessary AI models through Ollama. These models will allow the system to use its AI capabilities.
+
+1. Ollama 0.13.0 or higher is required. Verify if ollama was succesfully installed in the last step with command:
+   ```bash
+   ollama -v
+   ```
+
+   If for some reason ollama was not succesfully installed, please do so with command:
+   
+   **Linux**
+   ```bash
+   pip3 install ollama
+   ```
+   **Windows**
+   ```bash
+   pip install ollama
+   ```
+
+3. Once Ollama is sucessfully installed, you need to download the following models:
+   - **mxbai-embed-large:335m**: An embedding model for creating the vector database.
+   - **gpt-oss:20b**: The LLM that controls the chatbot agent.
+   - **codellama:7b**: A code-based LLM that performs data analysis.
+
+   To install these models, run the following commands in your terminal (ensure that Ollama is running and the environment is set up):
+
+   ```bash
+   ollama pull mxbai-embed-large:335m
+   ollama pull gpt-oss:20b
+   ollama pull codellama:7b
+   ```
+
+4. After installation, verify that you installed the models correctly by running the following command:
+   ```bash
+   ollama models list
+   ```
+  
+  This will display a list of all installed models. Ensure that **mxbai-embed-large:335m**, **gpt-oss:20b** and **codellama:7b** are in that list.
+
+## Step 6: Place the Data Folder in the Repository
 Before running the application, make sure that the **data** containing the dataset files is placed in the root directory of the repository.
 
 1. Locate the **data** folder in the repository
@@ -96,7 +135,7 @@ Before running the application, make sure that the **data** containing the datas
 
 This step will allow the chatbot to access the data when it needs to perform data analysis and generate responses based on the available information.
 
-## Step 5: Run the Chatbot Application
+## Step 7: Run the Chatbot Application
 With everything set up, you can now run the chatbot application. Simply execute the following command while the virtual environment is active:
 
 ```bash
@@ -105,7 +144,7 @@ streamlit run ./main.py
 
 This will start the chatbot on addres localhost:8501. Open this in your browser to access the chatbot interface.
 
-## Step 6: Deactivate the Virtual Environment
+## Step 8: Deactivate the Virtual Environment
 Once you’re done, you can deactivate the virtual environment by running:
 ```bash
 deactivate
@@ -116,33 +155,27 @@ If you encounter issues with installing Python or setting up the virtual environ
 
 If the virtual environment doesn't activate or gives errors, try deleting the WVenv folder and following the steps again.
 
+---
 
 # How to Formulate User Input
 
 To get the best results from the chatbot, follow these guidelines when formulating your questions:
 
----
 
 ## 1. Using Filenames
-
 If you want the chatbot to answer your question about a specific file in the database, mention the file name in your user input. The chatbot will automatically select the correct file for analysis. For example:
 ```
 How many orders are there in orders_export?
 ```
----
 
 ## 2. Add Context to Your Question
-
 Provide as much context as possible when asking your questions. For example, instead of asking something vague like "isles in Hilversum," ask:  
 ```
 How many total container isles are present in the city of Hilversum?
 ```
 Adding more details helps the chatbot understand exactly what you're looking for. If you already have an idea of how SQL code could generate your answer, or if you are searching for a specific value, feel free to include that information as well.
 
----
-
 ## 3. Be Specific
-
 The more specific your question is, the better the chatbot can respond. For example, if you're asking about how many of something exist in a particular area, clearly state that you're asking for unique values in that area. This makes it easier for the chatbot to reason about the exact information you need.
 
 For example, instead of asking "How many waste containers are in the system?", ask:  
