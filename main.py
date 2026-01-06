@@ -1,107 +1,131 @@
+# main.py
+"""
+MAIN APPLICATION (Streamlit UI + LLM Agent Runner)
+
+This file is the entry point of the application.
+It does three main things:
+
+1) Defines the "system prompt" (rules + role) for the chatbot.
+2) Runs the LLM agent (the model + tool calling logic).
+3) Creates the Streamlit UI so users can chat in a browser.
+
+High-level flow:
+User types a question -> LLM_agent_run() -> agent may call a tool -> agent returns final answer -> Streamlit displays it.
+"""
+
+# Standard libraries
 import os
-import pathlib
-import langchain
-# from langchain_ollama import ChatOllama
-# from langchain.tools import tool
+
+# Langchain and Ollama for LLM and agent creation
 from langchain.agents import create_agent
-import langchain_ollama
-import langchain_community
 from langchain_chroma import Chroma
 
+# Streamlit for UI
 import streamlit as st
 
-# import tools
-from rag import load_csvs_from_folder, clean_id_column, normalize_id_series, clean_dataframes_ids, load_all_csvs, build_summary_chunks, build_vector_store, get_retriever
-from tools import retrieve_context_tool, auto_analyse_question_tool, select_relevant_dataset_tool, retrieve_context, auto_analyse_question, select_relevant_datasets, build_dataset_metadata
-
+# Import tools
+from rag import load_all_csvs, build_summary_chunks, build_vector_store, get_retriever
+from tools import retrieve_context_tool, auto_analyse_tool, build_dataset_metadata
 import globals_space
-from globals_space import _VECTOR_STORE, _RETRIEVER, _DATA_FOLDER, _DATASET_METADATA
 
+
+# System prompt for the Waste Vision Chatbot agent
+# It defines the instruction text that the LLM agent will follow when answering user queries.
 SYS_PROMPT = """
-You are a chatbot agent for the company Waste Vision. This company is specializing in the development of sustainable solutions for waste management.
-Your task is to assist user, which are clients of Waste Vision, by answering their questions based on the available waste management data of that specific client.
-The datasets describe containers, locations, devices, routes and operational events in the form of .CSV files. These datasets together describe the real-world waste collection process, linking physical assets (containers, devices, locations) with operational events (collections, maintatanance and sensor readings). 
-Your role as the LLM agent is to use the available tools to analyze, explain, and answer questions about container usage, fill levels, and factual sources.
-Available tools:
-- 'retrieve_context_tool': 
-    Retrieval Augmented Generation context provider that searches a vector database of .CSV files, based on the user's input to retrieve contextual information. Use `retrieve_context` for descriptive facts about containers. 
-- 'auto_analyze_question_tool':  
-   Use this tool when the user is asking for data exploration, counts, trends, or statistics based on raw CSV data.  
-   This tool will automatically select the correct dataset and run Python code (via PandasAI) to answer the question.  
-   Do not use this tool for high-level container descriptions — use the Retrieval Augmented Generation tool for that instead.
-Always only choose the tool that best fits the question.
-When answering questions, ensure that you:
-1. Read the question carefully.
-2. Choose one tool that provides you the best context to answer the question.
-3. Use the provided context from the tool to answer the question.
-4. If the information is not available to you or you are not sure. Don't halucinate, but explain that you don't know.
-5. Maintain a proffessional and helpful tone.
+You are a chatbot agent for the company Waste Vision. Waste Vision specializes in developing sustainable solutions for waste management.
+Your task is to assist users (clients of Waste Vision) by answering their questions based on the available waste management data of that specific client.
+The client datasets describe containers, locations, devices, routes, and operational events in the form of .CSV files. Together, these datasets describe the real-world waste collection process by linking physical assets (containers, devices, locations) with operational events (collections, maintenance, and sensor readings).
+
+You must use the available tools to analyze, explain, and answer questions about container usage, fill levels, and factual sources.
+- retrieve_context_tool: Retrieval Augmented Generation (RAG) context provider that searches a vector database of .CSV files based on the user's input. Use retrieve_context for descriptive facts about containers (high-level descriptions).
+- auto_analyse_tool: Use this tool when the user asks for data exploration, counts, trends, or statistics based on raw CSV data.
+This tool will automatically select the correct dataset and run Python code (via PandasAI) to answer the question. Do not use this tool for high-level container descriptions, use the RAG tool for that instead.
+
+Tool selection rule:
+Always choose only one tool per user question, and only if it is needed. Pick the tool that best matches the question:
+- Descriptive / explanatory container facts → retrieve_context_tool
+- Numeric analysis / trends / statistics → auto_analyse_tool
+
+Answering procedure:
+When answering questions, you must:
+- Read the question carefully and identify whether it needs descriptive context or data analysis.
+- Choose one tool that provides the best context for the question (or no tool if not needed).
+- Use the tool output as the basis of your answer.
+- If the information is not available or you are not sure, do not hallucinate. Clearly say you do not know based on the available information.
+- Maintain a professional and helpful tone.
 """
-# - 'retrieve_context_tool': Retrieval Augmented Generation context provider that searches a vector database of the .CSV files, based on the user's input to retrieve contextual information.
-#  Use `retrieve_context` for descriptive facts about container (for now)
 
-# Set definitions
-EMBEDDING_MODEL = langchain_ollama.OllamaEmbeddings(model="mxbai-embed-large:335m")
-VECTOR_STORE_PATH = "./chroma_location_embeddings"
-
-AGENT_MODEL = langchain_ollama.ChatOllama(
-    model="gpt-oss:20b",
-    validate_model=True,
-    temperature=0.3
-)
-# Amount of context chunks the agent will recieve from vector database
-CONTEXT_AMOUNT = 5
-
-
-
+# Create the LLM agent with the specified model, system prompt, and tools
 LLM_AGENT = create_agent(
-    model = AGENT_MODEL,
+    model = globals_space._AGENT_MODEL,
     system_prompt = SYS_PROMPT, #TODO: include sys prompt
-    tools=[retrieve_context_tool, auto_analyse_question_tool]   #TODO: include tools ->>     retrieve_context_tool
+    tools=[retrieve_context_tool, auto_analyse_tool]   #TODO: include tools ->>     retrieve_context_tool
 )
 
+# Function to build the vector store
+def build_vector_store():
+    """Build the vector store from the waste management CSV dataset."""
+    globals_space.logger.info("Build_vector_store function called.\n")
 
-def rag():    # Pre-load data or perform any necessary setup here
-    global _VECTOR_STORE
-    global _RETRIEVER
-
-    print("Pre-processing: Loading waste management data...")
-    df = load_all_csvs(_DATA_FOLDER)
+    # Load and merge all CSV data into one Dataframe
+    globals_space.logger.info("Pre-processing: Loading waste management data...")
+    df = load_all_csvs(globals_space._DATA_FOLDER)
     
-    print("Building summary chunks...")
+    # Convert each container row into a readable text chunk
+    globals_space.logger.info("Building summary chunks...")
     chunks = build_summary_chunks(df)
 
-    print("Building vector store...")
-    _VECTOR_STORE = build_vector_store(chunks, EMBEDDING_MODEL, VECTOR_STORE_PATH)
+    # Build and persist the vector store from those chunks
+    globals_space.logger.info("Building vector store...")
+    globals_space._VECTOR_STORE = build_vector_store(chunks, globals_space._EMBEDDING_MODEL, globals_space._VECTOR_STORE_PATH)
 
-    _RETRIEVER = _VECTOR_STORE.as_retriever(search_kwargs={"k": CONTEXT_AMOUNT})
+    # Create a retriever so its possible to ask: "find top-k relevant chunks for this query"
+    globals_space._RETRIEVER = globals_space._VECTOR_STORE.as_retriever(search_kwargs={"k": globals_space._CONTEXT_AMOUNT})
 
-    return _VECTOR_STORE
+    return globals_space._VECTOR_STORE
 
+# Function to run the LLM agent
 def LLM_agent_run(user_input: str) -> str:
-    print("\nFinal Chatbot running:...\n")
+    """
+    Runs the agent on a singe user question and returns the response.
+    """
+    globals_space.logger.info("\nChatbot running:...\n")
 
-    if os.path.exists(VECTOR_STORE_PATH):
-        print(f"Vector store found at {VECTOR_STORE_PATH}\n")
+    # If the vector store folder exists, load it (fast startup).
+    # Otherwise, build it (slower because embeddings must be generated).
+    if os.path.exists(globals_space._VECTOR_STORE_PATH):
+        print(f"Vector store found at {globals_space._VECTOR_STORE_PATH}\n")
         globals_space._VECTOR_STORE = Chroma(
-            persist_directory=VECTOR_STORE_PATH, 
-            embedding_function=EMBEDDING_MODEL,
+            persist_directory=globals_space._VECTOR_STORE_PATH, 
+            embedding_function=globals_space._EMBEDDING_MODEL,
             collection_name="location_summaries")
     else:
-        print(f"Vector store not found at {VECTOR_STORE_PATH}. Building new vector store...")
-        VECTOR_STORE = rag()
+        globals_space.logger.info(f"Vector store not found at {globals_space._VECTOR_STORE_PATH}. Building new vector store...")
+        globals_space._VECTOR_STORE = build_vector_store()
 
-    globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, CONTEXT_AMOUNT)
+    # Create retriever from the vector store, amount of chunks is defined in globals_space
+    globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
 
-    agent_result = LLM_AGENT.invoke(
-        {"messages": [{"role": "user", "content": user_input}]}
-    )
+    # Run the agent. The agent may call a tool depending on the question.
+    try:
+        agent_result = LLM_AGENT.invoke(
+            {"messages": [{"role": "user", "content": user_input}]}
+        )
+    except Exception as e:
+        # Running the agent can fail if Ollama is not reachable or the model is not installed.
+        return (
+            "Sorry, I could not reach the local language model selected in the configuration. "
+            "Please ensure that Ollama is running and the required model is installed. "
+            "Error details: " + str(e)
+            )
 
+    # LangChain returns a message list, this gets the last message as the response
     ai_message = agent_result["messages"][-1]
     response = ai_message.content
 
     return response
 
+# Streamlit UI configuration
 def configure_page() -> None:
     """Configure the Streamlit page settings."""
     st.set_page_config(
@@ -111,12 +135,22 @@ def configure_page() -> None:
         initial_sidebar_state="expanded",
     )
 
-
+# Streamlit chatbot application loop
 def streamlit_chatbot():
     """Run the Streamlit chatbot application."""
     configure_page()
     st.title("Waste Vision Chatbot 🤖")
 
+    # Build dataset metadata used by the auto_analyse tool
+    if "metadata_ready" not in st.session_state:
+        try:
+            build_dataset_metadata()
+            st.session_state["metadata_ready"] = True
+        except Exception as e:
+            st.error(f"Error building dataset metadata: {e}")
+            return
+
+    # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
@@ -134,29 +168,15 @@ def streamlit_chatbot():
 
         # Simulate bot response (replace with actual chatbot logic)
         response = LLM_agent_run(prompt)
-        st.session_state.messages.append({"role": "assistant", "content": response.title()})
-        with st.chat_message("assistant"):
-            st.markdown(response)
+        st.session_state.messages.append({"role": "assistant", "content": response})
 
+        # Display chatbot response in chat
+        with st.chat_message("assistant"):
+            st.markdown(response.title())
+
+# Main entry point
 def main():
     streamlit_chatbot()
-    #rag()
-    #pandas_chatbot_run()
-    #rag_chatbot_run()
-    #build_dataset_metadata()
-    # result = auto_analyse_question("How many container locations are listed in the designated location export?")
-    # print(result)
-    # pandasai_test("Which container isle had the most recent WasteContainerChangedTimeStamp?")
-     
-    # build_dataset_metadata()
-    
-    # select_relevant_dataset("how many container isles are located in the city of hilversum?")
-    
-    # auto_analyse_question("How many unique containers are listed in the designated location export?")
-
-    # pandasai_test2("Which container isle had the most recent WasteContainerChangedTimeStamp?")
-
-    #final_chatbot_run()
 
 if __name__ == "__main__":
     main()

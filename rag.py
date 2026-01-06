@@ -1,21 +1,32 @@
+# rag.py
+"""
+RAG (Retrieval Augmented Generation) PREPROCESSING
+
+This file is responsible for:
+1) Loading many CSV files from a folder
+2) Cleaning and normalizing ID columns so merges work better
+3) Merging key tables into one container dataset
+4) Creating readable text "summaries" of each container
+5) Storing those summaries in a vector store (Chroma) for semantic search
+
+The vector store is then used by retrieve_context_tool (RAG tool).
+"""
+
 import pandas as pd
 from pathlib import Path
 from langchain.tools import tool
 from typing import Tuple, List, Dict
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
+import globals_space
 
 def load_csvs_from_folder(folder: Path) -> Dict[str, pd.DataFrame]:
     """
     Read all CSVs under folder into a dict keyed by file stem (lowercase).
     Skips empty DataFrames and adds '_source_file' column to each.
-    
-    Args:
-        folder: Path to folder containing CSV files
-        
-    Returns:
-        Dict mapping {stem_name: DataFrame}
     """
+    globals_space.logger.info("load_csvs_from_folder function called.\n")
+
     folder = Path(folder)   
     if not folder.exists():
         raise FileNotFoundError(f"Data folder not found: {folder}")
@@ -26,7 +37,7 @@ def load_csvs_from_folder(folder: Path) -> Dict[str, pd.DataFrame]:
             df = pd.read_csv(file)
             # Check if DataFrame is empty
             if df.empty or df.shape[1] == 0:
-                print(f"Warning: {file.name} is empty and will be skipped.")
+                globals_space.logger.info(f"Warning: {file.name} is empty and will be skipped.")
                 continue
             df["_source_file"] = file.name
             dataframes[file.stem.lower()] = df
@@ -38,15 +49,13 @@ def load_csvs_from_folder(folder: Path) -> Dict[str, pd.DataFrame]:
 
 def clean_id_column(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
     """
-    Clean an ID column by standardizing data types and handling nulls consistently.
-    
-    Args:
-        df: DataFrame containing the column to clean
-        column_name: Name of the column to clean
-        
-    Returns:
-        DataFrame with cleaned column
+    Clean an ID column to reduce merge issues:
+    - Convert to string
+    - Strip whitespace
+    - Replace missing values with empty strings
     """
+    globals_space.logger.info(f"clean_id_column function called for column: {column_name}\n")
+
     if df is None or df.empty:
         return df
     if column_name not in df.columns:
@@ -64,21 +73,15 @@ def clean_id_column(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
 
 def normalize_id_series(s: pd.Series) -> pd.Series:
     """
-    Normalize an ID-looking Series to a consistent string form while preserving missingness.
+    Normalize ID values so that:
+    - "123.0" becomes "123"
+    - empty/None becomes <NA>
+    - strings remain strings
 
-    Rules:
-    - Trim whitespace
-    - Treat empty strings / 'None' as missing (pd.NA)
-    - If value looks numeric and is integer-valued (e.g. 123.0), convert to '123'
-    - Preserve non-numeric strings as-is (after strip)
-    - Return pandas StringDtype to keep <NA> semantics
-    
-    Args:
-        s: pandas Series (typically of ID values)
-        
-    Returns:
-        Normalized Series with StringDtype
+    This helps when IDs are stored inconsistently across CSV files.
     """
+    globals_space.logger.info("normalize_id_series function called.\n")
+
     if s is None or s.empty:
         return s
         
@@ -119,14 +122,9 @@ def normalize_id_series(s: pd.Series) -> pd.Series:
 def clean_dataframes_ids(dataframes: Dict[str, pd.DataFrame], id_columns_config: Dict[str, List[str]]) -> Dict[str, pd.DataFrame]:
     """
     Apply ID cleaning and normalization to specified columns in a dict of DataFrames.
-    
-    Args:
-        dataframes: Dict of DataFrames keyed by name
-        id_columns_config: Dict mapping {df_name: [list of column names to clean]}
-        
-    Returns:
-        Dict of cleaned DataFrames (modifies in place)
     """
+    globals_space.logger.info("clean_dataframes_ids function called.\n")
+
     for df_name, columns in id_columns_config.items():
         if df_name not in dataframes:
             print(f"Warning: {df_name} not found in dataframes dict. Skipping.")
@@ -151,19 +149,24 @@ def load_all_csvs(folder: Path) -> pd.DataFrame:
     """
     Load all CSVs, clean ID columns, and merge container-related tables.
     
-    Args:
-        folder: Path to folder containing CSV files
-        
-    Returns:
-        Merged container DataFrame with isle, fraction, and model details
+    Create one Dataframe that contains:
+    - container ID + name
+    - location info (street/city)
+    - waste fraction
+    - container model details
+    - filling level + last emptied date (if present)
+
+    This merged data is later converted to summary text chunks.
     """
-    # Step 1: Load raw CSVs
+    globals_space.logger.info("load_all_csvs function called.\n")
+
+    # Load raw CSV files from the data folder
     dataframes = load_csvs_from_folder(folder)
     
     if not dataframes:
         raise RuntimeError("No CSVs loaded from folder")
 
-    # Step 2: Define which columns to clean in which DataFrames
+    # Which columns should be cleaned for each dataset
     id_columns_to_clean = {
         "wastecontainer_export": ["DesignatedLocationId", "WasteContainerModelId", "FractionId"],
         "wastecontainerisle_export": ["Id"],
@@ -177,10 +180,10 @@ def load_all_csvs(folder: Path) -> pd.DataFrame:
         "orders_export": ["Id"],
     }
 
-    # Step 3: Apply cleaning to all specified columns
+    # Apply cleaning to all specified columns
     dataframes = clean_dataframes_ids(dataframes, id_columns_to_clean)
 
-    # Step 4: Ensure required DataFrames exist (or create empty ones)
+    # Ensure required DataFrames exist (or create empty ones)
     def safe_get(key: str) -> pd.DataFrame:
         return dataframes.get(key, pd.DataFrame())
 
@@ -192,7 +195,7 @@ def load_all_csvs(folder: Path) -> pd.DataFrame:
     if wastecontainer_export.empty:
         raise RuntimeError("wastecontainer_export is required but not found or empty")
 
-    # Step 5: Perform merges (left joins to keep all containers)
+    #  Merge multiple tables into one wide table (left join keeps all containers)
     container_merged = (
         wastecontainer_export
         .merge(
@@ -223,8 +226,9 @@ def load_all_csvs(folder: Path) -> pd.DataFrame:
 
 def build_summary_chunks(df: pd.DataFrame) -> List[Dict]:
     """
-    Produce a list of {'content', 'metadata'} chunks from merged container dataframe.
+    Produce a list of chunks from merged container dataframe.
     """
+    globals_space.logger.info("Build_summary_chunks function called.\n")
 
     def format_date(date_str):
         """Format date string or return 'unknown date' if invalid"""
@@ -245,8 +249,7 @@ def build_summary_chunks(df: pd.DataFrame) -> List[Dict]:
             return "unknown"
 
     def to_summary(row):
-        """Generate a natural language summary of a container's details"""
-        # Container core info
+        # Extract values with safe fallbacks so missing data does not crash the pipeline
         container_id = row.get('Number', 'Unknown ID')
         display_name = f" ({row['DisplayName']})" if pd.notna(row.get('DisplayName')) else ""
         
@@ -270,14 +273,16 @@ def build_summary_chunks(df: pd.DataFrame) -> List[Dict]:
             model_name = 'unknown model'
         
         # Capacity
-        capacity_val = row.get('Statistics_CapacityM3') or row.get('Capacity')
-        if pd.notna(capacity_val):
+        capacity_val = row.get('Capacity')
+        if capacity_val is None or pd.isna(capacity_val):
+            capacity = "unknown capacity"
+        else:
             try:
-                capacity = f"{float(capacity_val):.1f}m³".rstrip('0').rstrip('.')
+                capacity_num = float(capacity_val)
+                capacity_str = f"{capacity_num:.1f}".rstrip('0').rstrip('.')
+                capacity = f"{capacity_str} m3"
             except:
                 capacity = "unknown capacity"
-        else:
-            capacity = "unknown capacity"
         
         # Filling level
         filling = format_filling(row.get('FillingLevel'))
@@ -288,6 +293,7 @@ def build_summary_chunks(df: pd.DataFrame) -> List[Dict]:
         # Status
         status = "under maintenance" if row.get('IsUnderMaintenance') == True else "operational"
         
+        # This is the text summary for one container that will be stored in the vector store
         return (
             f"Container {container_id}{display_name} is located at "
             f"{street}, {city}. "
@@ -319,17 +325,12 @@ def build_summary_chunks(df: pd.DataFrame) -> List[Dict]:
 
 def build_vector_store(summary_chunks: List[Dict], embedding_model, persist_path: str = "./chroma_location_embeddings", collection_name: str = "location_summaries") -> Chroma:
     """
-    Create a Chroma vector store and add texts+metadatas.
-    
-    Args:
-        summary_chunks: List of {'content', 'metadata'} dicts
-        embedding_model: Embedding function (e.g. OllamaEmbeddings)
-        persist_path: Directory to persist the vector store
-        collection_name: Name of the Chroma collection
-        
-    Returns:
-        Chroma vector store object
+    Create a Chroma vector store and add texts + metadata.
+    - "texts" are the container summaries
+    - "metadatas" are extra fields we store for filtering/debugging
     """
+    globals_space.logger.info("build_vector_store function called.\n")
+
     vector_store = Chroma(
         collection_name=collection_name,
         embedding_function=embedding_model,
@@ -351,12 +352,8 @@ def build_vector_store(summary_chunks: List[Dict], embedding_model, persist_path
 def get_retriever(vector_store: Chroma, k: int):
     """
     Get a retriever from a Chroma vector store.
-    
-    Args:
-        vector_store: Chroma vector store object
-        k: Number of top results to retrieve
-        
-    Returns:
-        Retriever object
+    - k = how many top relevant chunks are retrieved per query
     """
+    globals_space.logger.info("get_retriever function called.\n")
+
     return vector_store.as_retriever(search_kwargs={"k": k})

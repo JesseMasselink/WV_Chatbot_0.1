@@ -135,6 +135,12 @@ Before running the application, make sure that the **data** containing the datas
 
 This step will allow the chatbot to access the data when it needs to perform data analysis and generate responses based on the available information.
 
+### Changing datasets
+If you want to change datasets, make sure to remove any previous files that are in the **data** directory before adding new ones.
+Also make sure to remove any generated vector store files in the root directory of the respository as this will make the system ignore the new files.
+
+Restart the application as described in Step 7 and the system will automatically generate a new vector store based on the new dataset.
+
 ## Step 7: Run the Chatbot Application
 With everything set up, you can now run the chatbot application. Simply execute the following command while the virtual environment is active:
 
