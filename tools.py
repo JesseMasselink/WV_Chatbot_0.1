@@ -34,7 +34,8 @@ def build_dataset_metadata():
 
     folder = Path(globals_space._DATA_FOLDER)
     if not folder.exists():
-        raise FileNotFoundError(f"Data folder not found: {folder}")
+        globals_space.logger.warning(f"Data folder not found: {folder}")
+        return
 
     for file in folder.rglob("*.csv"):
         try:
@@ -60,9 +61,14 @@ def select_relevant_datasets(user_input: str) -> dict:
     """
     globals_space.logger.info("\nselect_relevant_dataset function called!\n")
 
-    # Ensure metadata exists
+    # Ensure metadata is built
     if not globals_space._DATASET_METADATA:
         build_dataset_metadata()
+
+    # If still no metadata after attempting to build, return empty dict
+    if not globals_space._DATASET_METADATA:
+        return {}
+
     
     best_match = None
     best_score = -1
@@ -98,9 +104,8 @@ def select_relevant_datasets(user_input: str) -> dict:
         globals_space.logger.info(f"Preview: \n{best_match['preview']}\n")
         return best_match
     else:
-        print("No relevant dataset found.")
-        return {}
-    
+        globals_space.logger.info("No relevant dataset found.")
+        return "No dataset is available for analysis. The chatbot can still help you with general questions, but data-driven analysis is not possible at this time."    
 
 
 def auto_analyse(user_input: str) -> str:
@@ -144,7 +149,7 @@ def retrieve_context(query: str):
     
     docs = globals_space._RETRIEVER.invoke(query)
     if not docs:
-        return "No relevant context was found in the dataset for this question."
+        return "No dataset is available for context retrieval. However, I can still assist you with general questions about waste management."
 
     context_texts = []
     globals_space.logger.info("Retrieved context:\n")

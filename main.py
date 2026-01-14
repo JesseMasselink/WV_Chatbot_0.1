@@ -92,16 +92,29 @@ def LLM_agent_run(conversation: str, user_input: str) -> str:
     globals_space.logger.info("\nChatbot running:...\n")
 
     # If the vector store folder exists, load it (fast startup).
-    # Otherwise, build it (slower because embeddings must be generated).
+    # Otherwise, try to build it (slower because embeddings must be generated).
+    # If both fail, continue without RAG capabilities.
     if os.path.exists(globals_space._VECTOR_STORE_PATH):
-        print(f"Vector store found at {globals_space._VECTOR_STORE_PATH}\n")
-        globals_space._VECTOR_STORE = Chroma(
-            persist_directory=globals_space._VECTOR_STORE_PATH, 
-            embedding_function=globals_space._EMBEDDING_MODEL,
-            collection_name="location_summaries")
+        try:
+            print(f"Vector store found at {globals_space._VECTOR_STORE_PATH}\n")
+            globals_space._VECTOR_STORE = Chroma(
+                persist_directory=globals_space._VECTOR_STORE_PATH, 
+                embedding_function=globals_space._EMBEDDING_MODEL,
+                collection_name="location_summaries")
+            globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
+        except Exception as e:
+            globals_space.logger.warning(f"Could not load vector store: {e}. Continuing without RAG.")
+            globals_space._VECTOR_STORE = None
+            globals_space._RETRIEVER = None
     else:
-        globals_space.logger.info(f"Vector store not found at {globals_space._VECTOR_STORE_PATH}. Building new vector store...")
-        globals_space._VECTOR_STORE = build_vector_store()
+        try:
+            globals_space.logger.info(f"Vector store not found at {globals_space._VECTOR_STORE_PATH}. Building new vector store...")
+            globals_space._VECTOR_STORE = build_vector_store()
+            globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
+        except Exception as e:
+            globals_space.logger.warning(f"Could not build vector store: {e}. Continuing without RAG.")
+            globals_space._VECTOR_STORE = None
+            globals_space._RETRIEVER = None
 
     # Create retriever from the vector store, amount of chunks is defined in globals_space
     globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
@@ -147,7 +160,9 @@ def streamlit_chatbot():
             build_dataset_metadata()
             st.session_state["metadata_ready"] = True
         except Exception as e:
-            st.error(f"Error building dataset metadata: {e}")
+            globals_space.logger.warning("Warning: Could not build dataset metadata: {e}")
+            st.warning(f" Dataset not available: {e}")
+            st.session_state["metadata_ready"] = True
             return
 
     # Initialize chat history
