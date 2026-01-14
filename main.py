@@ -24,7 +24,7 @@ from langchain_chroma import Chroma
 import streamlit as st
 
 # Import tools
-from rag import load_all_csvs, build_summary_chunks, build_vector_store, get_retriever
+from rag import load_all_csvs, build_summary_chunks, build_chroma_vector_store, get_retriever
 from tools import retrieve_context_tool, auto_analyse_tool, build_dataset_metadata
 import globals_space
 
@@ -77,7 +77,7 @@ def build_vector_store():
 
     # Build and persist the vector store from those chunks
     globals_space.logger.info("Building vector store...")
-    globals_space._VECTOR_STORE = build_vector_store(chunks, globals_space._EMBEDDING_MODEL, globals_space._VECTOR_STORE_PATH)
+    globals_space._VECTOR_STORE = build_chroma_vector_store(chunks, globals_space._EMBEDDING_MODEL, globals_space._VECTOR_STORE_PATH)
 
     # Create a retriever so its possible to ask: "find top-k relevant chunks for this query"
     globals_space._RETRIEVER = globals_space._VECTOR_STORE.as_retriever(search_kwargs={"k": globals_space._CONTEXT_AMOUNT})
@@ -85,7 +85,7 @@ def build_vector_store():
     return globals_space._VECTOR_STORE
 
 # Function to run the LLM agent
-def LLM_agent_run(user_input: str) -> str:
+def LLM_agent_run(conversation: str, user_input: str) -> str:
     """
     Runs the agent on a singe user question and returns the response.
     """
@@ -109,7 +109,7 @@ def LLM_agent_run(user_input: str) -> str:
     # Run the agent. The agent may call a tool depending on the question.
     try:
         agent_result = LLM_AGENT.invoke(
-            {"messages": [{"role": "user", "content": user_input}]}
+            {"messages": conversation [{"role": "user", "content": user_input}]}
         )
     except Exception as e:
         # Running the agent can fail if Ollama is not reachable or the model is not installed.
@@ -166,8 +166,8 @@ def streamlit_chatbot():
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        # Simulate bot response (replace with actual chatbot logic)
-        response = LLM_agent_run(prompt)
+        # Get chatbot response from LLM agent
+        response = LLM_agent_run(st.session_state.messages, prompt)
         st.session_state.messages.append({"role": "assistant", "content": response})
 
         # Display chatbot response in chat

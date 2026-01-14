@@ -323,7 +323,7 @@ def build_summary_chunks(df: pd.DataFrame) -> List[Dict]:
     return summary_chunks
 
 
-def build_vector_store(summary_chunks: List[Dict], embedding_model, persist_path: str = "./chroma_location_embeddings", collection_name: str = "location_summaries") -> Chroma:
+def build_chroma_vector_store(summary_chunks: List[Dict], embedding_model, persist_path: str = "./chroma_location_embeddings", collection_name: str = "location_summaries") -> Chroma:
     """
     Create a Chroma vector store and add texts + metadata.
     - "texts" are the container summaries
