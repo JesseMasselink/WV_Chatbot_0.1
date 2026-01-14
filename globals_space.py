@@ -23,7 +23,7 @@ _VECTOR_STORE = None    # Will hold the vector store object
 _RETRIEVER = None       # Will hold the retriever object from the vector store
 
 # Location of the data folder, change this to your data path if needed
-_DATA_FOLDER = pathlib.Path(r"./Data")
+_DATA_FOLDER = pathlib.Path(r"./data")
 
 # Dataset metadata dictionary used by the auto_analyse tool
 _DATASET_METADATA = {}
@@ -56,7 +56,9 @@ _AUTO_ANALYSE_MODEL = LiteLLM(
 )
 
 # Embedding model (creates vectors from text) used for the vector database (RAG)
-_EMBEDDING_MODEL = langchain_ollama.OllamaEmbeddings(model="mxbai-embed-large:335m")
+_EMBEDDING_MODEL = langchain_ollama.OllamaEmbeddings(
+    model="mxbai-embed-large:335m"
+)
 
 # Folder where Chroma stores the vector store
 _VECTOR_STORE_PATH = "./chroma_location_embeddings"

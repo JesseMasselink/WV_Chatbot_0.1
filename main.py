@@ -36,7 +36,7 @@ You are a chatbot agent for the company Waste Vision. Waste Vision specializes i
 Your task is to assist users (clients of Waste Vision) by answering their questions based on the available waste management data of that specific client.
 The client datasets describe containers, locations, devices, routes, and operational events in the form of .CSV files. Together, these datasets describe the real-world waste collection process by linking physical assets (containers, devices, locations) with operational events (collections, maintenance, and sensor readings).
 
-You must use the available tools to analyze, explain, and answer questions about container usage, fill levels, and factual sources.
+If the query requires external information to answer the question, you must use the available tools to analyze, explain, and answer questions about container usage, fill levels, and factual sources.
 - retrieve_context_tool: Retrieval Augmented Generation (RAG) context provider that searches a vector database of .CSV files based on the user's input. Use retrieve_context for descriptive facts about containers (high-level descriptions).
 - auto_analyse_tool: Use this tool when the user asks for data exploration, counts, trends, or statistics based on raw CSV data.
 This tool will automatically select the correct dataset and run Python code (via PandasAI) to answer the question. Do not use this tool for high-level container descriptions, use the RAG tool for that instead.
@@ -45,6 +45,11 @@ Tool selection rule:
 Always choose only one tool per user question, and only if it is needed. Pick the tool that best matches the question:
 - Descriptive / explanatory container facts → retrieve_context_tool
 - Numeric analysis / trends / statistics → auto_analyse_tool
+
+You also have access to the full conversation history. When answering questions:
+- If the user asks a similar or related question again, refer to your previous answer or analysis if it's relevant
+- Use context from earlier messages to provide consistent and coherent responses
+- If the current question relates to a previous topic, acknowledge that connection and build upon it
 
 Answering procedure:
 When answering questions, you must:
@@ -58,8 +63,8 @@ When answering questions, you must:
 # Create the LLM agent with the specified model, system prompt, and tools
 LLM_AGENT = create_agent(
     model = globals_space._AGENT_MODEL,
-    system_prompt = SYS_PROMPT, #TODO: include sys prompt
-    tools=[retrieve_context_tool, auto_analyse_tool]   #TODO: include tools ->>     retrieve_context_tool
+    system_prompt = SYS_PROMPT,
+    tools=[retrieve_context_tool, auto_analyse_tool]
 )
 
 # Function to build the vector store
@@ -116,14 +121,24 @@ def LLM_agent_run(conversation: str, user_input: str) -> str:
             globals_space._VECTOR_STORE = None
             globals_space._RETRIEVER = None
 
-    # Create retriever from the vector store, amount of chunks is defined in globals_space
-    globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
-
     # Run the agent. The agent may call a tool depending on the question.
     try:
-        agent_result = LLM_AGENT.invoke(
-            {"messages": conversation [{"role": "user", "content": user_input}]}
-        )
+        # Build conversation context from interaction history
+        conversation_context = ""
+        if conversation:
+            conversation_context = "Previous conversation (use this as context if needed):\n"
+            for msg in conversation:
+                role = msg["role"].upper()
+                content = msg["content"]
+                conversation_context += f"{role}: {content}\n"
+            conversation_context += "\n---\n\n"
+        
+        # Combine context with current question
+        full_input = conversation_context + f"Current question to answer: {user_input}"
+        
+        # Invoke agent with the combined input
+        agent_result = LLM_AGENT.invoke({"messages": {"role": "user", "content": full_input}})
+
     except Exception as e:
         # Running the agent can fail if Ollama is not reachable or the model is not installed.
         return (
