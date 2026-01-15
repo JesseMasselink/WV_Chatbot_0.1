@@ -46,6 +46,7 @@ def check_vector_store():
                 collection_name="location_summaries")
             # Check if vector store is functional
             globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
+            globals_space.logger.info("Vectorstore is succesfully located!")
         except Exception as e:
             globals_space.logger.warning(f"Could not load vector store: {e}. For now, continuing without retrieval function.")
             globals_space._VECTOR_STORE = None
@@ -55,6 +56,7 @@ def check_vector_store():
             globals_space.logger.info(f"Vector store not found at {globals_space._VECTOR_STORE_PATH}. Building new vector store...")
             globals_space._VECTOR_STORE = build_vector_store()
             globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
+            globals_space.logger.info("Vectorstore is succesfully built!")
         except Exception as e:
             globals_space.logger.warning(f"Could not build vector store: {e}. For now, continuing without retrieval function.")
             globals_space._VECTOR_STORE = None
@@ -108,6 +110,8 @@ def build_dataset_metadata():
             globals_space.logger.warning(f"Warning reading {file}: {e}")
             continue
 
+    globals_space.logger.info("Metadata is succesfully generated!.")
+
 
 def select_relevant_datasets(user_input: str) -> dict:
     """
@@ -132,7 +136,7 @@ def select_relevant_datasets(user_input: str) -> dict:
     for filename, meta in globals_space._DATASET_METADATA.items():
         name_no_ext = filename.lower().replace(".csv", "")
         if name_no_ext in text:
-            globals_space.logger.info("\n[EXPLICIT DATASET MATCH FOUND]\n")
+            globals_space.logger.info("\n[EXPLICIT DATASET MATCH FOUND]")
             best_match = meta
             best_score = 9999   # High score for filename match
             break
@@ -149,8 +153,8 @@ def select_relevant_datasets(user_input: str) -> dict:
 
     if best_match:
         # Logging the best match details for debugging
-        globals_space.logger.info("\nResult of select_relevant_dataset_tool:\n")
-        globals_space.logger.info(f"Best matching dataset for the question: '{user_input}'\n")
+        globals_space.logger.info("\nResult of select_relevant_dataset_tool:")
+        globals_space.logger.info(f"Best matching dataset for the question: '{user_input}'")
         globals_space.logger.info(f"Filename: {best_match['filename']}")
         globals_space.logger.info(f"Path: {best_match['path']}")
         globals_space.logger.info(f"Columns: {best_match['columns']}")
