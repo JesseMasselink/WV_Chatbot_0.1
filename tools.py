@@ -12,12 +12,16 @@ Important:
 - The @tool wrappers are required by LangChain so the agent can call these functions.
 - Under the hood, these tools use globals_space._RETRIEVER and globals_space._DATASET_METADATA.
 """
+# Standard libraries
+import os
 
 import pandas as pd
 
 import pandasai as pai
 from langchain.tools import tool
+from langchain_chroma import Chroma
 
+from rag import load_all_csvs, build_summary_chunks, build_chroma_vector_store, get_retriever
 import globals_space
 from pathlib import Path
 
@@ -27,10 +31,60 @@ pai.config.set({
     "verbose": True,
 })
 
+# Function to build the vector store
+def check_vector_store():
+    """Check if vector store is already built."""
+    # If the vector store folder exists, load it (fast startup).
+    # Otherwise, try to build it (slower because embeddings must be generated).
+    # If both fail, continue without RAG capabilities.
+    if os.path.exists(globals_space._VECTOR_STORE_PATH):
+        try:
+            # Initialise _VECTOR_STORE with globals_space settings
+            globals_space._VECTOR_STORE = Chroma(
+                persist_directory=globals_space._VECTOR_STORE_PATH, 
+                embedding_function=globals_space._EMBEDDING_MODEL,
+                collection_name="location_summaries")
+            # Check if vector store is functional
+            globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
+        except Exception as e:
+            globals_space.logger.warning(f"Could not load vector store: {e}. For now, continuing without retrieval function.")
+            globals_space._VECTOR_STORE = None
+            globals_space._RETRIEVER = None
+    else:
+        try:
+            globals_space.logger.info(f"Vector store not found at {globals_space._VECTOR_STORE_PATH}. Building new vector store...")
+            globals_space._VECTOR_STORE = build_vector_store()
+            globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
+        except Exception as e:
+            globals_space.logger.warning(f"Could not build vector store: {e}. For now, continuing without retrieval function.")
+            globals_space._VECTOR_STORE = None
+            globals_space._RETRIEVER = None
+
+def build_vector_store():
+    """Build the vector store from the waste management CSV dataset."""
+    # Load and merge all CSV data into one Dataframe
+    globals_space.logger.info("Build_vector_store function called.\n")
+
+    globals_space.logger.info("Pre-processing: Loading waste management data...")
+    df = load_all_csvs(globals_space._DATA_FOLDER)
+    
+    # Convert each container row into a readable text chunk
+    globals_space.logger.info("Building summary chunks...")
+    chunks = build_summary_chunks(df)
+
+    # Build and persist the vector store from those chunks
+    globals_space.logger.info("Building vector store...")
+    globals_space._VECTOR_STORE = build_chroma_vector_store(chunks, globals_space._EMBEDDING_MODEL, globals_space._VECTOR_STORE_PATH)
+
+    # Create a retriever so its possible to ask: "find top-k relevant chunks for this query"
+    globals_space._RETRIEVER = globals_space._VECTOR_STORE.as_retriever(search_kwargs={"k": globals_space._CONTEXT_AMOUNT})
+
+    return globals_space._VECTOR_STORE
+
 # Metadata building for dataset selection
 def build_dataset_metadata():
     """Populate the DATASET_METADATA dict by scanning all available CSV files"""
-    globals_space.logger.info("\nBuild_dataset_metadata function called!\n")
+    globals_space.logger.info("Build_dataset_metadata function called!\n")
 
     folder = Path(globals_space._DATA_FOLDER)
     if not folder.exists():
@@ -49,9 +103,9 @@ def build_dataset_metadata():
                 "preview": df.head().to_string(index=False)
             }
             globals_space._DATASET_METADATA[file.name] = meta
-            print("Dataset metadata generated of file:", file.name)
+            globals_space.logger.info(f"Dataset metadata generated of file: {file.name}")
         except Exception as e:
-            print(f"ERROR reading {file}: {e}")
+            globals_space.logger.warning(f"Warning reading {file}: {e}")
             continue
 
 
@@ -78,7 +132,7 @@ def select_relevant_datasets(user_input: str) -> dict:
     for filename, meta in globals_space._DATASET_METADATA.items():
         name_no_ext = filename.lower().replace(".csv", "")
         if name_no_ext in text:
-            print("\n[EXPLICIT DATASET MATCH FOUND]\n")
+            globals_space.logger.info("\n[EXPLICIT DATASET MATCH FOUND]\n")
             best_match = meta
             best_score = 9999   # High score for filename match
             break
@@ -130,7 +184,7 @@ def auto_analyse(user_input: str) -> str:
     )
     try:
         answer = df.chat(user_input)    # PandasAI generates analysis code
-        globals_space.logger.info("\nResult of auto_analyse:\nSummary:\n", summary,"\nAnswer:\n", answer, "\n")
+        globals_space.logger.info(f"\nResult of auto_analyse:\nSummary:\n{summary}\nAnswer:\n{answer}\n")
         return summary + "\nAnalysis Result:\n" + str(answer)
     except Exception as e:
         # If PandasAI fails, retrurn the error message instead of crashing the application
@@ -155,8 +209,8 @@ def retrieve_context(query: str):
     globals_space.logger.info("Retrieved context:\n")
     for doc in docs:
         # doc.page_content is the text chunk, doc.metadata descrbes its origin
-        globals_space.logger.info("→", doc.page_content)
-        globals_space.logger.info("Metadata:", doc.metadata)
+        globals_space.logger.info(f"→ {doc.page_content}")
+        globals_space.logger.info(f"Metadata: {doc.metadata}")
         context_texts.append(
             f"{doc.page_content}\n(Metadata: {doc.metadata})"
         )
@@ -171,7 +225,7 @@ def auto_analyse_tool(user_input: str) -> str:
     Automatically pick the best dataset and use PandasAI to answer a question. Returns a summary and the analysis result.
     """
     result = auto_analyse(user_input)
-    globals_space.logger.info("\nResult of auto_analyse: ", result, "\n")
+    globals_space.logger.info(f"\nResult of auto_analyse: {result}\n")
     return result
 
 @tool
@@ -180,5 +234,5 @@ def retrieve_context_tool(user_input: str):
     Retrieve relevant context from the RAG vectorstore. Returns formatted text that can be used to answer the users query.
     """
     result = retrieve_context(user_input)
-    globals_space.logger.info("\nResult of retrieve_context_tool: ", result, "\n")
+    globals_space.logger.info(f"\nResult of retrieve_context_tool: {result}\n")
     return result

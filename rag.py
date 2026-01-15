@@ -42,7 +42,7 @@ def load_csvs_from_folder(folder: Path) -> Dict[str, pd.DataFrame]:
             df["_source_file"] = file.name
             dataframes[file.stem.lower()] = df
         except Exception as e:
-            print(f"Error reading {file.name}: {e}")
+            globals_space.logger.warning(f"Warning reading {file.name}: {e}")
 
     return dataframes
 
@@ -127,13 +127,13 @@ def clean_dataframes_ids(dataframes: Dict[str, pd.DataFrame], id_columns_config:
 
     for df_name, columns in id_columns_config.items():
         if df_name not in dataframes:
-            print(f"Warning: {df_name} not found in dataframes dict. Skipping.")
+            globals_space.logger.warning(f"Warning: {df_name} not found in dataframes dict. Skipping.")
             continue
         
         df = dataframes[df_name]
         for col in columns:
             if col not in df.columns:
-                print(f"Warning: {col} not found in {df_name}. Skipping.")
+                globals_space.logger.warning(f"Warning: {col} not found in {df_name}. Skipping.")
                 continue
             
             # First clean, then normalize
@@ -316,9 +316,9 @@ def build_summary_chunks(df: pd.DataFrame) -> List[Dict]:
         summary_chunks.append({"content": content, "metadata": metadata})
 
     if not summary_chunks:
-        print("No summary chunks were created.")
+        globals_space.logger.info("No summary chunks were created.\n")
     else:
-        print(f"Created {len(summary_chunks)} summary chunks.")    
+        globals_space.logger.info(f"Created {len(summary_chunks)} summary chunks.")    
 
     return summary_chunks
 
@@ -338,7 +338,7 @@ def build_chroma_vector_store(summary_chunks: List[Dict], embedding_model, persi
     )
 
     if not summary_chunks:
-        print("No chunks to add to vector store.")
+        globals_space.logger.warning("No chunks to add to vector store.")
         return vector_store
 
     # Use add_texts to avoid Document API mismatches

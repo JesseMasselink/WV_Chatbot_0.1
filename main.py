@@ -13,20 +13,16 @@ High-level flow:
 User types a question -> LLM_agent_run() -> agent may call a tool -> agent returns final answer -> Streamlit displays it.
 """
 
-# Standard libraries
-import os
-
-# Langchain and Ollama for LLM and agent creation
+# Langchain for LLM and agent creation
 from langchain.agents import create_agent
-from langchain_chroma import Chroma
 
 # Streamlit for UI
 import streamlit as st
 
 # Import tools
-from rag import load_all_csvs, build_summary_chunks, build_chroma_vector_store, get_retriever
-from tools import retrieve_context_tool, auto_analyse_tool, build_dataset_metadata
+from tools import retrieve_context_tool, auto_analyse_tool, build_dataset_metadata, check_vector_store
 import globals_space
+globals_space.configure_logger()
 
 
 # System prompt for the Waste Vision Chatbot agent
@@ -67,59 +63,12 @@ LLM_AGENT = create_agent(
     tools=[retrieve_context_tool, auto_analyse_tool]
 )
 
-# Function to build the vector store
-def build_vector_store():
-    """Build the vector store from the waste management CSV dataset."""
-    globals_space.logger.info("Build_vector_store function called.\n")
-
-    # Load and merge all CSV data into one Dataframe
-    globals_space.logger.info("Pre-processing: Loading waste management data...")
-    df = load_all_csvs(globals_space._DATA_FOLDER)
-    
-    # Convert each container row into a readable text chunk
-    globals_space.logger.info("Building summary chunks...")
-    chunks = build_summary_chunks(df)
-
-    # Build and persist the vector store from those chunks
-    globals_space.logger.info("Building vector store...")
-    globals_space._VECTOR_STORE = build_chroma_vector_store(chunks, globals_space._EMBEDDING_MODEL, globals_space._VECTOR_STORE_PATH)
-
-    # Create a retriever so its possible to ask: "find top-k relevant chunks for this query"
-    globals_space._RETRIEVER = globals_space._VECTOR_STORE.as_retriever(search_kwargs={"k": globals_space._CONTEXT_AMOUNT})
-
-    return globals_space._VECTOR_STORE
-
 # Function to run the LLM agent
 def LLM_agent_run(conversation: str, user_input: str) -> str:
     """
     Runs the agent on a singe user question and returns the response.
     """
-    globals_space.logger.info("\nChatbot running:...\n")
-
-    # If the vector store folder exists, load it (fast startup).
-    # Otherwise, try to build it (slower because embeddings must be generated).
-    # If both fail, continue without RAG capabilities.
-    if os.path.exists(globals_space._VECTOR_STORE_PATH):
-        try:
-            print(f"Vector store found at {globals_space._VECTOR_STORE_PATH}\n")
-            globals_space._VECTOR_STORE = Chroma(
-                persist_directory=globals_space._VECTOR_STORE_PATH, 
-                embedding_function=globals_space._EMBEDDING_MODEL,
-                collection_name="location_summaries")
-            globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
-        except Exception as e:
-            globals_space.logger.warning(f"Could not load vector store: {e}. Continuing without RAG.")
-            globals_space._VECTOR_STORE = None
-            globals_space._RETRIEVER = None
-    else:
-        try:
-            globals_space.logger.info(f"Vector store not found at {globals_space._VECTOR_STORE_PATH}. Building new vector store...")
-            globals_space._VECTOR_STORE = build_vector_store()
-            globals_space._RETRIEVER = get_retriever(globals_space._VECTOR_STORE, globals_space._CONTEXT_AMOUNT)
-        except Exception as e:
-            globals_space.logger.warning(f"Could not build vector store: {e}. Continuing without RAG.")
-            globals_space._VECTOR_STORE = None
-            globals_space._RETRIEVER = None
+    globals_space.logger.info(f"\nLLM Agent running with query: {user_input}\n")
 
     # Run the agent. The agent may call a tool depending on the question.
     try:
@@ -150,7 +99,7 @@ def LLM_agent_run(conversation: str, user_input: str) -> str:
     # LangChain returns a message list, this gets the last message as the response
     ai_message = agent_result["messages"][-1]
     response = ai_message.content
-
+    globals_space.logger.info(f"\nLLM Agent Response: {response}\n")
     return response
 
 # Streamlit UI configuration
@@ -175,9 +124,19 @@ def streamlit_chatbot():
             build_dataset_metadata()
             st.session_state["metadata_ready"] = True
         except Exception as e:
-            globals_space.logger.warning("Warning: Could not build dataset metadata: {e}")
+            globals_space.logger.warning(f"Warning: Could not build dataset metadata: {e}")
             st.warning(f" Dataset not available: {e}")
             st.session_state["metadata_ready"] = True
+            return
+        
+    if "vectorstore_ready" not in st.session_state:
+        try:
+            check_vector_store()
+            st.session_state["vectorstore_ready"] = True
+        except Exception as e:
+            globals_space.logger.warning(f"Warning: Could not vectorstore: {e}")
+            st.warning(f" Vectorstore not available: {e}")
+            st.session_state["vectorstore_ready"] = True
             return
 
     # Initialize chat history
