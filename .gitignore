@@ -21,5 +21,9 @@ pandasai.log
 *.pkl
 *.parquet
 
-# Ignore vector store
+# Ignore ChromaDB embeddings
 chroma_location_embeddings/
+
+# Ignore temp files
+*.tmp
+temp/
